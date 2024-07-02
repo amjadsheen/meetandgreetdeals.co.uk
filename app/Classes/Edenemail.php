@@ -228,21 +228,22 @@ class Edenemail
 
 
         if ($bk_detail->bk_discount_offer_coupon<>""){ // if promotional discount applied
-            $amount_detail .= "<tr><td>Total amount</td><td> $bk_detail->cur_symbol ".number_format($bk_detail->bk_total_amount, 2, '.', '')."</td></tr>";
+            //$amount_detail .= "<tr><td>Total amount</td><td> $bk_detail->cur_symbol ".number_format($bk_detail->bk_total_amount, 2, '.', '')."</td></tr>";
             $amount_detail .= "<tr><td>Promotional discount amount ($bk_detail->bk_discount_offer_value %)</td><td> $bk_detail->cur_symbol ".number_format($bk_detail->bk_discount_offer_amount, 2, '.', '')."</td></tr>";
 
             //$amount_detail = "$amount_detail <strong>TOTAL PAYABLE AMOUNT: $bk_detail->cur_symbol ".number_format($bk_detail->bk_final_amount, 2, '.', '')."</strong>";
             //$orderamount = 	number_format($bk_detail->bk_final_amount, 2, '.', '');
-            $TOTAL_PAYABLE_AMOUNT = $bk_detail->bk_final_amount + $carwash + $bk_detail->not_working_hours + $bk_detail->last_min_booking + $bk_detail->charging_service_charges + $bk_detail->charging;
-            $amount_detail .= "$amount_detail<tr><td>TOTAL PAYABLE AMOUNT</td><td> $bk_detail->cur_symbol ".number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '')."</td></tr>";
-            $orderamount = 	number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '');
+            //$TOTAL_PAYABLE_AMOUNT = $bk_detail->bk_final_amount + $carwash + $bk_detail->not_working_hours + $bk_detail->last_min_booking + $bk_detail->charging_service_charges + $bk_detail->charging;
+            //$amount_detail .= "$amount_detail<tr><td>TOTAL PAYABLE AMOUNT</td><td> $bk_detail->cur_symbol ".number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '')."</td></tr>";
+            //$orderamount = 	number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '');
         } else {
             //$amount_detail = "$amount_detail <strong>TOTAL PAYABLE AMOUNT: $bk_detail->cur_symbol ".number_format($bk_detail->bk_total_amount, 2, '.', '')."</strong>";
             //$orderamount = 	number_format($bk_detail->bk_total_amount, 2, '.', '');
-            $TOTAL_PAYABLE_AMOUNT = $bk_detail->bk_total_amount + $carwash + $bk_detail->not_working_hours + $bk_detail->last_min_booking + $bk_detail->charging_service_charges + $bk_detail->charging;
-            $amount_detail .= "<tr><td>TOTAL PAYABLE AMOUNT</td><td> $bk_detail->cur_symbol ".number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '')."</td></tr>";
-            $orderamount = 	number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '');
+            
         }
+        $TOTAL_PAYABLE_AMOUNT = $bk_detail->bk_total_amount + $carwash + $bk_detail->not_working_hours + $bk_detail->last_min_booking + $bk_detail->charging_service_charges + $bk_detail->charging;
+        $amount_detail .= "<tr><td>TOTAL PAYABLE AMOUNT</td><td> $bk_detail->cur_symbol ".number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '')."</td></tr>";
+        $orderamount = 	number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '');
 
         $amount_detail .= "<tr><td colspan='2'>(The price paid is non-refundable in the case of a no show or booking cancellation within 24 hours of departure.)</td></tr>";
         $data['amount_detail'] = $amount_detail;

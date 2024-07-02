@@ -6,7 +6,7 @@
 @section('title', $domain->website_name)
 @section('logoheader')
 <a href="/">
-    <img src="/storage/uploads/{{$domain->website_logo}}" alt="logo {{$domain->website_name}}" class="img-responsive" />
+    <img style="background: linear-gradient(#dc3545ed, #c6890f) !important;" src="/storage/uploads/{{$domain->website_logo}}" alt="logo {{$domain->website_name}}" class="img-responsive" />
 </a>
 @stop
 

@@ -393,14 +393,15 @@ class CustomersController extends Controller
                 $booking->days_left = $hour;
                 $carwash = $booking->carwash_in_and_out + $booking->carwash_out_only + $booking->carwash_in_only;
 
-                if ($booking->bk_discount_offer_coupon <> "") {
-                    $TOTAL_PAYABLE_AMOUNT = $booking->bk_final_amount + $carwash + $booking->not_working_hours + $booking->charging_service_charges + $booking->charging;;
-                    $total_price_html = "" . $booking->cur_symbol . " " . number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '') . "";
+                // if ($booking->bk_discount_offer_coupon <> "") {
+                //     $TOTAL_PAYABLE_AMOUNT = $booking->bk_final_amount + $carwash + $booking->not_working_hours + $booking->charging_service_charges + $booking->charging;;
+                //     $total_price_html = "" . $booking->cur_symbol . " " . number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '') . "";
 
-                } else {
-                    $TOTAL_PAYABLE_AMOUNT = $booking->bk_total_amount + $carwash + $booking->not_working_hours + $booking->charging_service_charges + $booking->charging;;
-                    $total_price_html = "" . $booking->cur_symbol . " " . number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '') . "";
-                }
+                // } else {
+                    
+                // }
+                $TOTAL_PAYABLE_AMOUNT = $booking->bk_total_amount + $carwash + $booking->not_working_hours + $booking->charging_service_charges + $booking->charging;;
+                $total_price_html = "" . $booking->cur_symbol . " " . number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '') . "";
                 $booking->total_amount_special = $total_price_html;
             }
 

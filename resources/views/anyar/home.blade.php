@@ -486,7 +486,10 @@
       font-size: 12px;
     }
   }
-
+  .icon { font-size: 2rem; }
+    .step-icon { font-size: 2rem; color: #6c757d; }
+    .step-box { text-align: center; padding: 20px; }
+    .bg-purple { background-color: #6f42c1; }
 </style>
 
 <!-- Booking Form Wrapper -->
@@ -498,7 +501,7 @@
             <div class="container" style="margin-bottom: 12px">
                     <div class="row" data-aos="zoom-in">
                         <div class="col-md-4">
-                        <img style="margin-top: -8px;" src="{{ asset('anyar/assets/img/am.gif')}}" alt="" class="img-fluid">
+                        <img style="margin-top: -36px;" src="{{ asset('anyar/assets/img/am.gif')}}" alt="" class="img-fluid">
                         </div>
                         <div class="col-md-8">
                         @if(!empty($homepromo))
@@ -660,7 +663,52 @@
 
 
 
-
+<div class="container py-5">
+        <div class="text-center mb-5">
+            <h1 class="text-warning">Why Choose Us?</h1>
+            <p>Choosing the right airport parking for your holiday or business travel is crucial for peace of mind. At Meet and Greet Deals, we provide reliable, affordable, and convenient parking solutions across the UK. Our facilities are meticulously maintained and highly secure, ensuring your vehicle remains safe throughout your trip. Strategically located near major airports, our parking sites offer easy access, helping you avoid the stress of missing your flight. We are dedicated to delivering exceptional customer service, guaranteeing a seamless and worry-free parking experience every time.</p>
+        </div>
+        
+        <div class="text-center mb-5">
+            <h2 class="text-warning">Easy 4-Step Booking Process</h2>
+            <p>Booking with us is simple and straightforward. Just follow these steps:</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-3">
+                <div class="step-box border">
+                    <div class="step-icon mb-3">🔍</div>
+                    <h4>Search</h4>
+                    <p>Choose your airport and enter your travel dates. Click "Find Parking" to view premium car parking options tailored to your needs.</p>
+                    <a href="#" class="btn btn-warning">Get a Quote</a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="step-box border">
+                    <div class="step-icon mb-3">🔄</div>
+                    <h4>Compare Options</h4>
+                    <p>Review prices, facilities, amenities, and other features. Compare options to find the best fit for your travel requirements.</p>
+                    <a href="#" class="btn btn-warning">Compare Now</a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="step-box border">
+                    <div class="step-icon mb-3">👉</div>
+                    <h4>Select Parking</h4>
+                    <p>Choose the best parking option for your needs. Click "Book Now" to proceed to the final step of the booking process.</p>
+                    <a href="#" class="btn btn-warning">Select Parking Now</a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="step-box border">
+                    <div class="step-icon mb-3">✅</div>
+                    <h4>Booking</h4>
+                    <p>Enter your details for a smooth parking experience. Provide your card information and click "Book Now" to confirm your booking and receive a confirmation email.</p>
+                    <a href="#" class="btn btn-warning">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 <div class="custom-popup" data-aos="zoom-out">

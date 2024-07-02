@@ -491,15 +491,16 @@
                                                 if ($booking->bk_amount_b4_update != 0){
                                                     $pricecolor = "orangered";
                                                 }
-                                                if ($booking->bk_discount_offer_value == 0){
+                                                // if ($booking->bk_discount_offer_value == 0){
 
-                                                    $bk_final_amount = $booking->bk_total_amount + $carwash + $booking->not_working_hours +  $booking->last_min_booking + $booking->charging_service_charges + $booking->charging;
-                                                    echo '<span style="background: '.$pricecolor.'; color:#fff; padding: 4px 4px;">'.$booking->cur_symbol." ".number_format($bk_final_amount, 2, '.', '') . ' ' . $ipntag .' </span>';
-                                                }
-                                                else{
-                                                    $bk_final_amount = $booking->bk_final_amount  + $carwash + $booking->not_working_hours +  $booking->last_min_booking + $booking->charging_service_charges + $booking->charging;
-                                                    echo '<span style="background: '.$pricecolor.';  color:#fff; padding: 4px 4px;">'.$booking->cur_symbol." ".number_format($bk_final_amount, 2, '.', '') . ' '.  $ipntag  .' </span>';;
-                                                }
+                                                //     $bk_final_amount = $booking->bk_total_amount + $carwash + $booking->not_working_hours +  $booking->last_min_booking + $booking->charging_service_charges + $booking->charging;
+                                                //     echo '<span style="background: '.$pricecolor.'; color:#fff; padding: 4px 4px;">'.$booking->cur_symbol." ".number_format($bk_final_amount, 2, '.', '') . ' ' . $ipntag .' </span>';
+                                                // }
+                                                // else{
+                                                    
+                                                // }
+                                                $bk_final_amount = $booking->bk_total_amount + $carwash + $booking->not_working_hours +  $booking->last_min_booking + $booking->charging_service_charges + $booking->charging;
+                                                echo '<span style="background: '.$pricecolor.'; color:#fff; padding: 4px 4px;">'.$booking->cur_symbol." ".number_format($bk_final_amount, 2, '.', '') . ' ' . $ipntag .' </span>';
                                                 ?>
                                         </td>
                                         <td>

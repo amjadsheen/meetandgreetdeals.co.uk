@@ -3093,15 +3093,16 @@ class BookingController extends Controller
                 //$html .= "<p><strong> Service Charge </strong>: <span>" . $bk_detail->cur_symbol . " " . number_format($bk_detail->charging_service_charges, 2, '.', '') . "</span></p>";
             }
             if ($bk_detail->bk_discount_offer_coupon <> "") {
-                $TOTAL_PAYABLE_AMOUNT = $bk_detail->bk_final_amount + $carwash + $bk_detail->not_working_hours  + $bk_detail->last_min_booking + $bk_detail->charging_service_charges + $bk_detail->charging;
+                //$TOTAL_PAYABLE_AMOUNT = $bk_detail->bk_final_amount + $carwash + $bk_detail->not_working_hours  + $bk_detail->last_min_booking + $bk_detail->charging_service_charges + $bk_detail->charging;
                 //$html .= "<p><strong><strong>Total Amount</strong>: <span>" . $bk_detail->cur_symbol . " " . number_format($bk_detail->bk_total_amount + $carwash + $bk_detail->not_working_hours, 2, '.', '') . "</span></strong></p>";
-               // $html .= "<p><span style='color:green;'>Promotional discount offered ($bk_detail->bk_discount_offer_value %): " . $bk_detail->cur_symbol . " " . number_format($bk_detail->bk_discount_offer_amount, 2, '.', '') . "</span></p>";
-                $html .= "<br><strong class='totalclass' > <h3>TOTAL PAYABLE AMOUNT: <span>" . $bk_detail->cur_symbol . " " . number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '') . "</span></h3></strong>";
+                $html .= "<p><span style='color:green;'>Promotional discount offered ($bk_detail->bk_discount_offer_value %): " . $bk_detail->cur_symbol . " " . number_format($bk_detail->bk_discount_offer_amount, 2, '.', '') . "</span></p>";
+                //$html .= "<br><strong class='totalclass' > <h3>TOTAL PAYABLE AMOUNT: <span>" . $bk_detail->cur_symbol . " " . number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '') . "</span></h3></strong>";
 
             } else {
-                $TOTAL_PAYABLE_AMOUNT = $bk_detail->bk_total_amount + $carwash  + $bk_detail->not_working_hours + $bk_detail->last_min_booking + $bk_detail->charging_service_charges + $bk_detail->charging;
-                $html .= "<br><strong class='totalclass'><h3 style='color:#da0909 !important'>TOTAL PAYABLE AMOUNT: <span>" . $bk_detail->cur_symbol . " " . number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '') . "</span></h3></strong>";
+                
             }
+            $TOTAL_PAYABLE_AMOUNT = $bk_detail->bk_total_amount + $carwash  + $bk_detail->not_working_hours + $bk_detail->last_min_booking + $bk_detail->charging_service_charges + $bk_detail->charging;
+                $html .= "<br><strong class='totalclass'><h3 style='color:#da0909 !important'>TOTAL PAYABLE AMOUNT: <span>" . $bk_detail->cur_symbol . " " . number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '') . "</span></h3></strong>";
             /*if ($pcdone == 1) {
                 $html .= "<strong style='color:green;'>CONGRATULATIONS !</strong> Promotion code verified...<br /><br />";
             } elseif ($pcdone == 2) {
