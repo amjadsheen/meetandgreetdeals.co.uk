@@ -675,8 +675,8 @@ a.btn.btn-success.book-btn {
     @foreach($services_terminals_prices as $service)
             <div class="col-md-3 mb-4">
                 <div class="card card-custom" style="background: {{ $service['bg_color'] }};">
-                    <div class="card-header">
-                        <div><img src="https://www.a2zairportparking.co.uk/assets/images/products/bee-parking-heathorw.png" class="card-img-top" alt="Service Logo" style="width: 50px;">
+                    <div class="card-header" style="max-height: 106px; min-height: 106px;">
+                        <div><img src="/storage/uploads/{{$service['website_logo']}}" class="card-img-top" alt="Service Logo" style="width: 150px;">
                         <span class="badge badge-sec-text">{{ $service['website_name'] }}</span></div>
                         <div style="text-align:center;margin-top: 5px;"><span class="badge badge-primary">{{ $service['service_name'] }}</span></div>
                         
@@ -696,6 +696,7 @@ a.btn.btn-success.book-btn {
     </div>
   </div>
 </section>
+</div>
 <!-- /End Services Section -->
 
 <div class="custom-popup" data-aos="zoom-out">

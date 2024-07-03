@@ -506,6 +506,7 @@ class BookingController extends Controller
                                 "bg_color" => $bg_color,
                                 "sort"  => $sort,
                                 "website_name" => $c_website->website_name,
+                                "website_logo" => $c_website->website_logo,
                                 "terminal_name" => $terminal->ter_name,
                                 "terminal_id" => $terminal->id,
                                 "service_name" => $service_name,
@@ -520,6 +521,7 @@ class BookingController extends Controller
                                     "bg_color" => $bg_color,
                                     "sort"  => $sort,
                                     "website_name" => $c_website->website_name,
+                                    "website_logo" => $c_website->website_logo,
                                     "terminal_name" => $terminal->ter_name,
                                     "terminal_id" => $terminal->id,
                                     "service_name" => $service_name,
@@ -1268,7 +1270,7 @@ class BookingController extends Controller
                                 $querystring = '';
 
                                 //$PayPal_Email_Address = $this->get_global_settings('st_paypal_email');
-                                $PayPal_Email_Address = 'amjadsheenali-facilitator@gmail.com';
+                                $PayPal_Email_Address = 'extraenterprise@hotmail.com';
                                 $querystring .= "?business=$PayPal_Email_Address&";
                                 $querystring .= "cmd=_xclick&";
                                 $querystring .= "item_name=$booking_update->refrence_num_common&";
@@ -1277,8 +1279,8 @@ class BookingController extends Controller
                                 $querystring .= "return=$return&";
                                 $querystring .= "notify_url=$notify_url&";
                                 $querystring .= "cancel_return=$cancel_return";
-                                // $paypallink = "https://www.paypal.com/cgi-bin/webscr".$querystring;
-                                $redirect = "https://www.sandbox.paypal.com/cgi-bin/webscr" . $querystring;
+                                $paypallink = "https://www.paypal.com/cgi-bin/webscr".$querystring;
+                                //$redirect = "https://www.sandbox.paypal.com/cgi-bin/webscr" . $querystring;
                             } elseif ($payment_option == 3) {
                                 $querystring = '';
                                 $querystring .= "?instId=1152063&";

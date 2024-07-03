@@ -452,7 +452,9 @@
   small.white {
     color: #fff;
   }
-
+  #step_1{
+      margin-top: 35px;
+    }
   @media (max-width: 991px) {
     .price-box {
       margin-bottom: 20px;
