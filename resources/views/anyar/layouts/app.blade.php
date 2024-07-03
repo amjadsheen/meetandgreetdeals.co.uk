@@ -229,7 +229,7 @@ label.input-group-text {
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-info">
-            <h3>About Heathrow Meetandgreet Parking</h3>
+            <h3>About </h3>
             <p> {{ $domain->address}}</p>
             <div class="social-links mt-3">
               <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
