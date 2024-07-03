@@ -118,7 +118,7 @@ class PromotionOfferController extends Controller
         $column_name = $request->name;
         $column_value = $request->value;
         $filter_website = $request->website;
-        if ($request->name && $request->value) {
+        if ($request->name) {
             //offer_special
             //offer_home
             if ($column_name == 'offer_home' && $column_value == 1) {
