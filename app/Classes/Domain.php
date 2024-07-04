@@ -8,6 +8,9 @@
 
 namespace App\Classes;
 use Illuminate\Support\Facades\DB;
+use App\Airport;
+use App\Terminal;
+use App\Services;
 use App\Website;
 use App\NotWorkingHours;
 use Carbon\Carbon;
@@ -25,10 +28,24 @@ class Domain
 
     }
 
-     static public function GetDomianById($id) {
+    static public function GetAirportNameById($id) {
+        $Airport = Airport::where('id', $id)->first();
+        return $Airport->airport_name;
+    }
+
+    static public function GetTerminalNameById($id) {
+        $Terminal = Terminal::where('id', $id)->first();
+        return $Terminal->ter_name;
+    }
+    static public function GetServiceNameById($id) {
+        $Service = Services::where('id', $id)->first();
+        return $Service->service_name;
+    }
+    static public function GetDomianById($id) {
         $website = Website::where('id', $id)->first();
         return $website;
     }
+   
 
     static public function get_booking_id($id) {
         return Domain::eden_simple_crypt($id,'d');

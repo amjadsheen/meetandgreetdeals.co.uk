@@ -2942,10 +2942,17 @@ class BookingController extends Controller
             
 
             $html .= "<p><strong>Booking Type</strong>: " . $bk_type . '</p>';
-            $html .= "<p><strong>Airport</strong>: " . $prepared_session_data['airport1'] . '</p>';
-            $html .= "<p><strong>Outbound terminal</strong>: " . $prepared_session_data['terminal'] . '</p>';
-            $html .= "<p><strong>Service</strong>: " . $prepared_session_data['service'] . '</p>';
-            foreach($cart_data as $veh){
+            $html .= "<p><strong>Airport</strong>: " . Domain::GetAirportNameById($prepared_session_data['airport1']) . '</p>';
+            $html .= "<p><strong>Outbound terminal</strong>: " . Domain::GetTerminalNameById($prepared_session_data['terminal']) . '</p>';
+            $html .= "<p><strong>Service</strong>: " . Domain::GetServiceNameById($prepared_session_data['service']) . '</p>';
+            
+            foreach($cart_data as $key => $veh){
+                $html .= "<hr>";
+                if(count($prepared_session_data['vehicles']) > 1){
+                    $html .= "<p><strong>Vechical ($key) </strong></p>";
+                    
+                }
+
                 if (trim($prepared_session_data['carwash_in_and_out']) != 0) {
                     $carwash_title = 'ADD FULL CAR WASH (IN AND OUT) ';
                 } elseif (trim($prepared_session_data['carwash_out_only']) != 0) {
@@ -2956,7 +2963,8 @@ class BookingController extends Controller
                     $carwash_title = 'Car Wash ';
                 }
 
-                $html .= "<hr>";
+                
+                
                 $html .= "<p><strong>Departure date/time</strong>: " . $veh['bk_from_date'] . '</p>';
                 $html .= "<p><strong>Landing date/time</strong>: " . $veh['bk_to_date'] . '</p>';
                 $html .= "<p><strong>Booking interval</strong>: " . $veh['days'] . " Days</p>";
@@ -2978,9 +2986,10 @@ class BookingController extends Controller
             }
             
         }
-        $TOTAL_PAYABLE_AMOUNT = $totalBookingPrice;
+        
         $html .= "<hr>";
-        $html .= "<br><span class='price small'>TOTAL PAYABLE AMOUNT: " . $cur_symbol . " " . number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '') . "</span>";
+        $TOTAL_PAYABLE_AMOUNT = $totalBookingPrice;
+        $html .= "<br><p class='price small'>TOTAL PAYABLE AMOUNT: <span style='color: #da0909 !important;'>" . $cur_symbol . " " . number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '') . "</span></p>";
         
         return array(
             'mini_cart'=> $cur_symbol . " " . number_format($totalBookingPrice, 2, '.', ''),

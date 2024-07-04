@@ -61,7 +61,7 @@
     margin: 15px 0 6px;
     font-weight: 900;
     text-align: center;
-    color: #000;
+    color: #da0909;
 }
 .price.small{
     font-size: 22px;
@@ -693,7 +693,7 @@
 
     .single-sidebar {
         padding-top: 14px;
-        box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
         background: #cccccc1a;
         margin-top: 15px;
         /* padding: 20px 10px; */
@@ -733,10 +733,19 @@
     background: orangered;
     color: #fff;
 }
+#mcart{
+    padding: 0 50px;
+}
 @media (max-width: 575px) {
     .luggage-lable{
         width: 100%;
     }
+    #mcart{
+    padding: 0 20px;
+}
+    .price.small {
+    font-size: 17px;
+}
 }
 </style>
 <!--== FAQ Area Start ==-->
@@ -1385,16 +1394,16 @@
                 </form>
 
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-4" id="mcart">
 
                 <div class="sidebar-content-wrap m-t-50">
                     <!-- Single Sidebar Start -->
                     <div class="single-sidebar" style="background: #fff; padding: 20px;">
-                        <h3 style="font-weight: 800">Your Booking Summary</h3>
+                        <h3 style="font-weight: 800; text-align:center;">Your Booking Summary</h3>
                         <div class="sidebar-body">
                             <figure class="clearfix">
-                                <div class="card">
-                                    <img class="middle-item" src="/storage/uploads/{{$comparison_website->website_logo}}" alt="{{$comparison_website->website_name}}">
+                                <div class="card" style="text-align:center;">
+                                    <img style="margin: 0 auto;" class="middle-item" src="/storage/uploads/{{$comparison_website->website_logo}}" alt="{{$comparison_website->website_name}}">
                                 </div>
                                 <div class="card">
                                     <p class="box-title">{{$comparison_website->website_name}}</p>
