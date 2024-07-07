@@ -70,7 +70,7 @@
 <body>
     <div class="container">
         <div class="header">
-        <img style="width:25%;" src="{{$website_logo}}" alt="Logo">
+        <img style="width:50%; background: linear-gradient(#dc3545ed, #c6890f) !important;" src="{{$website_logo}}" alt="Logo">
         </div>
         <div class="content">
             <table>
