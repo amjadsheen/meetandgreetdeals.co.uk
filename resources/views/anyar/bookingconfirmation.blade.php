@@ -75,7 +75,7 @@
            <?php }else { ?>
                 <h2>BOOKING CONFIRMATION</h2>
             <?php } ?>
-            <span class="title-line"><img src="/storage/uploads/{{$domain->website_logo}}"  class="img-responsive" style="width:50%" /></span>
+            <span class="title-line"><img style="background: linear-gradient(#dc3545ed, #c6890f) !important;" src="/storage/uploads/{{$domain->website_logo}}"  class="img-responsive" style="width:50%" /></span>
         </div>
         <img style="width: 100px;" src="/storage/qrcodes/{{$bk_details->id}}.png" align="right"  alt="{{$domain->website_name}}">
 
