@@ -17,7 +17,7 @@ class Edenemail
 
     static public function send_booking_email($bk_id_c) {
 
-
+        $domain = Domain::get_domain_id(1);
         $PayPal_Email_Address = Edenemail::get_email_settings('st_paypal_email');
         $bk_detail = DB::table("bookings as bb")
             ->join("websites as ww", "ww.id", "=", "bb.website_id")
@@ -114,7 +114,7 @@ class Edenemail
         $data['current_booking_status'] = $current_booking_status;
         $data['txn_payment_status'] = $txn_payment_status;
 
-        $data['directions']  = $bk_detail->website_url ."/".$bk_detail->airport_directions;
+        $data['directions']  = $domain->website_url ."/".$bk_detail->airport_directions;
 
         if(!empty($data['website_logo'])){
             $site_log = $data['website_logo'];
@@ -163,21 +163,14 @@ class Edenemail
         //$data['website_email_banner'] = $bk_detail->website_url.'/uploads/'.$email_banner;
         
         
-        if(!in_array($bk_detail->website_url, array('eden'))) {
-            
-            $data['website_logo'] = $bk_detail->website_url.'/storage/uploads/'.$site_log;
-            $data['website_email_banner'] = $bk_detail->website_url.'/storage/uploads/'.$email_banner;
-        }else{
-            
-            $data['website_logo'] = $bk_detail->website_url.'/storage/uploads/'.$site_log;
-            $data['website_email_banner'] = $bk_detail->website_url.'/storage/uploads/'.$email_banner;
-        }
+        $data['website_logo'] = $domain->website_url.'/storage/uploads/'.$site_log;
+        $data['website_email_banner'] = $domain->website_url.'/storage/uploads/'.$email_banner;
         
-        $data['image_right'] = $bk_detail->website_url.'/storage/uploads/email/image_right.png';
-        $data['image_left'] = $bk_detail->website_url.'/storage/uploads/email/image_left.png';
-        $data['qr_com'] = $bk_detail->website_url.'/storage/uploads/email/qr-eden-com.png';
-        $data['qr_co_uk']= $bk_detail->website_url.'/storage/uploads/email/qr-eden-co-uk.png';
-        $data['booking_qr_code']= $bk_detail->website_url.'/storage/uploads/qrcodes/'.$bk_id_c.'.png';
+        $data['image_right'] = $domain->website_url.'/storage/uploads/email/image_right.png';
+        $data['image_left'] = $domain->website_url.'/storage/uploads/email/image_left.png';
+        $data['qr_com'] = $domain->website_url.'/storage/uploads/email/qr-eden-com.png';
+        $data['qr_co_uk']= $domain->website_url.'/storage/uploads/email/qr-eden-co-uk.png';
+        $data['booking_qr_code']= $domain->website_url.'/storage/uploads/qrcodes/'.$bk_id_c.'.png';
         $data['special_promo'] = $special_promo;
         $data['homepromo'] = $homepromo;
 
@@ -251,7 +244,7 @@ class Edenemail
         $payment_links = "";
         if(empty($payment_reciever)){
             ///$notify_url = $bk_detail->website_url
-            $notify_url = $bk_detail->website_url . "/api/ipnn";
+            $notify_url = $domain->website_url . "/api/ipnn";
             $paypal_link = "https://www.paypal.com/cgi-bin/webscr?currency_code=$bk_detail->cur_code&cmd=_xclick&business=$PayPal_Email_Address&amount=$orderamount&item_name=$bk_detail->bk_ref&notify_url=$notify_url";
             //$worldpay_link = "https://secure.worldpay.com/wcc/purchase?instId=1152063&cartId=$bk_id_c&currency=$bk_detail->cur_code&amount=$orderamount&desc=$bk_detail->bk_ref&testMode=0";
             $payment_links = "<br />";
