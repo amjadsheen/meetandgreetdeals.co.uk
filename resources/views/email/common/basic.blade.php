@@ -126,7 +126,7 @@
                     <td style="padding: 0;" colspan="4">&nbsp;</h2></td>
                 </tr>
                 <tr>
-                <td><img style="width:50%;" src="{{$website_logo}}" alt="Logo"></td>
+                <td><img style="width: 100%; background: linear-gradient(#dc3545ed, #c6890f) !important;" src="{{$website_logo}}" alt="Logo"></td>
                 <td colspan="3">
                     {{ $website_name }} <br>Parking is a trading name of Extra Enterprise Ltd. Registration Number 13317269
                     <a href="{{$directions}}" target="_blank">directions</a><br>
