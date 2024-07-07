@@ -30,7 +30,7 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-                            <form method="post" action="{{ route('websites.update', $id) }}"
+                            <form method="post" action="{{ route('camparsionwebsites.update', $id) }}"
                                   enctype="multipart/form-data">
                             @csrf
                             {{ method_field('PUT')}}

@@ -891,7 +891,12 @@ $("#login-customer").click(function (e) {
             data: { username: username, passwrd: passwrd },
             success: function (response) {
                 //alert(redirect)
-                window.location.href = "/" + redirect;
+                if(redirect == 'samepage'){
+                    window.location.reload();
+                }else{
+                    window.location.href = "/" + redirect;
+                }
+                
             },
             error: function (response) {
                 var error = "Username / Password not found";

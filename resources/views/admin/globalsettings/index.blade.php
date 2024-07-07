@@ -112,7 +112,7 @@
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label for="inputEmail3" class=" left col-sm-6 control-label">Admin Email</label>
+                                                            <label for="inputEmail3" class=" left col-sm-6 control-label">Admin Email [New Booking]</label>
                                                             <div class="col-sm-12">
                                                                 <?php $st_admin_email = ""; ?>
                                                                 @isset($settings_array['st_admin_email'])
@@ -122,7 +122,7 @@
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label for="inputEmail3" class=" left col-sm-6 control-label">Notification Emails ( use ; as separator for multiple email )</label>
+                                                            <label for="inputEmail3" class=" left col-sm-6 control-label">Notification Emails ( use ; as separator for multiple email ) [after booking confirmation]</label>
                                                             <div class="col-sm-12">
                                                                 <?php $st_notification_email = ""; ?>
                                                                 @isset($settings_array['st_notification_email'])

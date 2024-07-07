@@ -1153,8 +1153,6 @@ class BookingController extends Controller
                 $Email_Template = "email.common";
                 /* -------------- /@new enail template ---------------- */
 
-            
-
                 /*======================== GET EMAIL CONTENT ===========================*/
                 $data = Edenemail::send_booking_email($insert_id);
                 $st_admin_name = Edenemail::get_email_settings('st_admin_name');
@@ -1164,43 +1162,50 @@ class BookingController extends Controller
                 $email_subject = Edenemail::get_email_settings('st_new_booking_subject');
                 /*======================== /GET EMAIL CONTENT ===========================*/
 
-                if (!in_array($domain->website_templete, array('eden'))) { // if not eden dont use eden
-                    $email_subject = str_replace("Eden", $domain->website_name, $email_subject);
-                    $st_admin_name =  str_replace("Eden", $domain->website_name, $st_admin_name);
-                }
-
-                /*======================== EMAIL TO CUSTOMER ===========================*/
                 if ($payment_option == 1) { // SEND EMAIL TO CUSTOMER IN CASE PAYLATER
-                    /*$to_email = $data['cus_email'];
-                    $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
-                    Mail::send($Email_Template . '.bookingmail', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
-                        $message->to($to_email, $to_name)->subject($email_subject);
-                        $message->from($st_admin_from_email, $st_admin_name);
-                    });*/
+                    /*======================== EMAIL TO CUSTOMER ===========================*/
+                    if(!empty($data['cus_email'])){
+                        $to_email = $data['cus_email'];
+                        $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
+                        //basic
+                        Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
+                            $message->to($to_email, $to_name)->subject($email_subject);
+                            $message->from($st_admin_from_email, $st_admin_name);
+                        });
+                    }
+                    if(!empty($data['alternate_email'])){
+                        $to_email = $data['alternate_email'];
+                        $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
+                        //basic
+                        Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
+                            $message->to($to_email, $to_name)->subject($email_subject);
+                            $message->from($st_admin_from_email, $st_admin_name);
+                        });
+                    }
+                    /*======================== /EMAIL TO CUSTOMER ===========================*/
                 }
-                /*======================== /EMAIL TO CUSTOMER ===========================*/
 
                 /*============== TO ADMIN ============*/
-                /*$to_email = $st_admin_email;
+                $to_email = $st_admin_email;
                 $to_name = $st_admin_name;
-                Mail::send($Email_Template . '.bookingmail', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
-                    $message->to($to_email, $to_name)->subject($email_subject);
-                    $message->from($st_admin_from_email, $st_admin_name);
-                });*/
-                /*============== TO ADMIN ============*/
-
-                
-                /*============== Notifications Emails ============*/
-                /*============== TO amjad ============*/
-            
-                $to_email = "amjadalisheen@gmail.com";
-                $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
+                //detailed
                 Mail::send($Email_Template . '.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
                     $message->to($to_email, $to_name)->subject($email_subject);
                     $message->from($st_admin_from_email, $st_admin_name);
                 });
-                Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
-                    $message->to($to_email, $to_name)->subject($email_subject);
+                /*============== TO ADMIN ============*/
+                
+                
+                /*============== TO amjad  both detailed and basic ============*/
+                $to_email = "amjadalisheen@gmail.com";
+                $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
+                $email_subject_amjad = $email_subject . ' amjad';
+                Mail::send($Email_Template . '.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_amjad, $to_email, $to_name) {
+                    $message->to($to_email, $to_name)->subject($email_subject_amjad);
+                    $message->from($st_admin_from_email, $st_admin_name);
+                });
+                Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_amjad, $to_email, $to_name) {
+                    $message->to($to_email, $to_name)->subject($email_subject_amjad);
                     $message->from($st_admin_from_email, $st_admin_name);
                 });
                 /*============== TO amjad ============*/  
@@ -3743,11 +3748,9 @@ class BookingController extends Controller
         $st_notification_email = Edenemail::get_email_settings('st_notification_email');
 
 
-        /* -------------- @new enail template ---------------- */
+        /* -------------- @new email template ---------------- */
         $Email_Template = "email.common";
-        $email_subject = str_replace("Eden", $data['website_name'], $email_subject);
-        $st_admin_name =  str_replace("Eden", $data['website_name'], $st_admin_name);
-        /* -------------- /@new enail template ---------------- */
+        /* -------------- /@new email template ---------------- */
         $email_subject = str_replace("New", "Confirmation", $email_subject);
         $email_subject = str_replace("Confirmation Booking details", "Booking Confirmation details", $email_subject);
 
@@ -3760,9 +3763,14 @@ class BookingController extends Controller
      
         /*============== TO amjad ============*/
         $to_email = "amjadalisheen@gmail.com";
+        $email_subject_amjad = $email_subject . ' amjad';
         $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
-        Mail::send($Email_Template . '.bookingmail', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
-            $message->to($to_email, $to_name)->subject($email_subject);
+        Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_amjad, $to_email, $to_name) {
+            $message->to($to_email, $to_name)->subject($email_subject_amjad);
+            $message->from($st_admin_from_email, $st_admin_name);
+        });
+        Mail::send($Email_Template . '.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_amjad, $to_email, $to_name) {
+            $message->to($to_email, $to_name)->subject($email_subject_amjad);
             $message->from($st_admin_from_email, $st_admin_name);
         });
         /*============== TO amjad ============*/
@@ -3771,7 +3779,7 @@ class BookingController extends Controller
         if (!empty($st_notification_email)) {
             $email_to = explode(";", $st_notification_email);
             for ($x = 0; $x < count($email_to); $x++) {
-                Mail::send($Email_Template . '.bookingmail', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $email_to, $to_name) {
+                Mail::send($Email_Template . '.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $email_to, $to_name) {
                     $message->to($email_to, $to_name)->subject($email_subject);
                     $message->from($st_admin_from_email, $st_admin_name);
                 });
@@ -3781,13 +3789,42 @@ class BookingController extends Controller
         /*============== TO ADMIN ============*/
 
         /*============== TO CUSTOMER ============*/
-        $to_email = $data['cus_email'];
-        $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
-        Mail::send($Email_Template . '.bookingmail', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
-            $message->to($to_email, $to_name)->subject($email_subject);
-            $message->from($st_admin_from_email, $st_admin_name);
-        });
+        if(!empty($data['email'])){
+            $to_email = $data['cus_email'];
+            $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
+            Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
+                $message->to($to_email, $to_name)->subject($email_subject);
+                $message->from($st_admin_from_email, $st_admin_name);
+            });
+        }
+        if(!empty($data['cus_email_1'])){
+            $to_email = $data['cus_email_1'];
+            $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
+            Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
+                $message->to($to_email, $to_name)->subject($email_subject);
+                $message->from($st_admin_from_email, $st_admin_name);
+            });
+        }
         /*============== TO CUSTOMER ============*/
+
+        /*============== TO COMPARE WEBSITE ============*/
+        if(!empty($data['email'])){
+            $to_email = $data['email'];
+            $to_name = $data['website_name'];
+            Mail::send($Email_Template . '.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
+                $message->to($to_email, $to_name)->subject($email_subject);
+                $message->from($st_admin_from_email, $st_admin_name);
+            });
+        }
+        if(!empty($data['alternate_email'])){
+            $to_email = $data['alternate_email'];
+            $to_name = $data['website_name'];
+            Mail::send($Email_Template . '.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
+                $message->to($to_email, $to_name)->subject($email_subject);
+                $message->from($st_admin_from_email, $st_admin_name);
+            });
+        }
+        /*============== /TO COMPARE WEBSITE ============*/
 
 
         

@@ -162,7 +162,7 @@
                                         </td> -->
 
                                         <td>
-                                            <a href="{{action('Admin\WebsiteController@edit',$website->id)}}" class="btn btn-primary">Edit</a>
+                                            <a href="{{action('Admin\CamparsionWebsiteController@edit',$website->id)}}" class="btn btn-primary">Edit</a>
                                             @if($website->id == 99)
                                             <button class="deleteRecord btn btn-danger btn-flat" data-url="{{route('websites/delete', ['id'=>$website->id])}}" data-id="{{ $website->id }}" >Delete</button>
                                             @endif

@@ -954,7 +954,7 @@
 
                                                 <!-- Popular Cars Content Wrapper Start -->
                                                 <div class="login-form">
-                                                    <input type="hidden" name="redirect" id="redirect" value="booking">
+                                                    <input type="hidden" name="redirect" id="redirect" value="samepage">
                                                     <div class="username">
                                                         <input type="text" class="input-text form-control" name="username" id="username" placeholder="Email or Username">
                                                         <span id="error-username" class="error"></span>
