@@ -811,7 +811,7 @@ class BookingController extends Controller
                 if ($add_customers == 1) {
                     $customer_id = DB::getPdo()->lastInsertId();
                     //print_r($customer_id); exit;
-                    $booking_partial->customer_id = $customer_id;
+                    //$booking_partial->customer_id = $customer_id;
 
                     $encripted_customer_id = Domain::set_encripted_ids($customer_id);
                     setcookie("cus_id", $encripted_customer_id, time() + 3600 * 24 * 100, "/");
