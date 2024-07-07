@@ -1306,7 +1306,7 @@
                                         </label>
                                     </div>
 
-                                    <div class="frb frb-success" style="position:relative">
+                                    <div class="frb frb-success" style="position:relative; display:none;">
                                         <input type="radio" id="radio-button-3" name="payment_option" value="1" class="validate[required] radio">
                                         <label for="radio-button-3" onclick="showspaylater();">
                                             <span class="frb-title">Pay Later</span>
@@ -1317,7 +1317,7 @@
                                         <div class="row">
                                             <div class="col-lg-12 form-group">
                                                 <label>Account Number</label>
-                                                <input autocomplete="off" class="input-text form-control validate[required]" size="20" type="text" id="account_num" value="232323" name="account_num">
+                                                <input autocomplete="off" class="input-text form-control validate[required]" size="20" type="text" id="account_num" value="" name="account_num">
                                                 <div class="alert alert-danger" style="display:none" id="paylaterexceptionmsg"></div>
                                             </div>
                                         </div>
