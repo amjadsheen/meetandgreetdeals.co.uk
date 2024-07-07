@@ -116,13 +116,13 @@ class Edenemail
 
         $data['directions']  = $domain->website_url ."/".$bk_detail->airport_directions;
 
-        if(!empty($data['website_logo'])){
-            $site_log = $data['website_logo'];
+        if(!empty($domain->website_logo)){
+            $site_log = $domain->website_logo;
         }else{
-            $site_log = 'edenlogo.jpg';
+            $site_log = '';
         }
-        if(!empty($data['website_email_banner'])){
-            $email_banner = $data['website_email_banner'];
+        if(!empty($domain->website_email_banner)){
+            $email_banner = $domain->website_email_banner;
         }else{
             $email_banner = 'website_email_banner.png';
         }
