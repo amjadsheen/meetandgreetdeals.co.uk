@@ -1284,8 +1284,8 @@ class BookingController extends Controller
                                 $querystring .= "return=$return&";
                                 $querystring .= "notify_url=$notify_url&";
                                 $querystring .= "cancel_return=$cancel_return";
-                                $paypallink = "https://www.paypal.com/cgi-bin/webscr".$querystring;
-                                //$redirect = "https://www.sandbox.paypal.com/cgi-bin/webscr" . $querystring;
+                                //$paypallink = "https://www.paypal.com/cgi-bin/webscr".$querystring;
+                                $redirect = "https://www.paypal.com/cgi-bin/webscr" . $querystring;
                             } elseif ($payment_option == 3) {
                                 $querystring = '';
                                 $querystring .= "?instId=1152063&";
