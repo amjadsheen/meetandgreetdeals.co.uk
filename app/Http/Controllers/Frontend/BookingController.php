@@ -1278,7 +1278,7 @@ class BookingController extends Controller
                                 $PayPal_Email_Address = 'extraenterprise@hotmail.com';
                                 $querystring .= "?business=$PayPal_Email_Address&";
                                 $querystring .= "cmd=_xclick&";
-                                $querystring .= "item_name=$booking_update->refrence_num_common&";
+                                $querystring .= "item_name=$booking_exists_for_customer->refrence_num_common&";
                                 $querystring .= "currency_code=$booking_currency&";
                                 $querystring .= "amount=$all_vehical_final_total&";
                                 $querystring .= "return=$return&";
