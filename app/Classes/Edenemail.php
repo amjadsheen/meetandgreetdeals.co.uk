@@ -162,7 +162,7 @@ class Edenemail
         //$data['website_logo'] = $bk_detail->website_url.'/uploads/'.$site_log;
         //$data['website_email_banner'] = $bk_detail->website_url.'/uploads/'.$email_banner;
         
-        
+        $data['website_name_compare'] = $domain->website_name;
         $data['website_logo'] = $domain->website_url.'/storage/uploads/'.$site_log;
         $data['website_email_banner'] = $domain->website_url.'/storage/uploads/'.$email_banner;
         
