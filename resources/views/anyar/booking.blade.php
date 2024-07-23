@@ -64,7 +64,7 @@
     color: #da0909;
 }
 .price.small{
-    font-size: 22px;
+    font-size: 20px;
 }
     .section-title{
         text-align:left;
@@ -777,11 +777,9 @@
                                     <div class="choose-content-wrap">
                                         <!-- Choose Area Tab Menu -->
                                         <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                            
                                             <li class="nav-item" role="presentation">
-                                                <button class="nav-link active" id="one_off_tab-tab" data-bs-toggle="tab" data-bs-target="#shared_tab_content" type="button" role="tab" aria-controls="shared_tab_content" aria-selected="true">One Off Booking</button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link" id="sign-in-tab" data-bs-toggle="tab" data-bs-target="#sign_in_tab_content" type="button" role="tab" aria-controls="sign_in_tab_content" aria-selected="false">Sign In</button>
+                                                <button class="nav-link active" id="sign-in-tab" data-bs-toggle="tab" data-bs-target="#sign_in_tab_content" type="button" role="tab" aria-controls="sign_in_tab_content" aria-selected="false">Sign In</button>
                                             </li>
                                             <li class="nav-item" role="presentation">
                                                 <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#shared_tab_content" type="button" role="tab" aria-controls="shared_tab_content" aria-selected="false">Register</button>
@@ -796,7 +794,7 @@
                                         <div class="tab-content" id="myTabContent">
 
                                             <!-- Newest Cars Tab Start -->
-                                            <div class="tab-pane fade show active" id="shared_tab_content" role="tabpanel" aria-labelledby="one_off_tab-tab">
+                                            <div class="tab-pane fade" id="shared_tab_content" role="tabpanel" aria-labelledby="one_off_tab-tab">
                                                 <!-- Newest Cars Content Wrapper Start -->
 
                                                 <div class="login-form">
@@ -950,7 +948,7 @@
                                             <!-- Newest Cars Tab End -->
 
                                             <!-- Popular Cars Tab Start -->
-                                            <div class="tab-pane fade" id="sign_in_tab_content" role="tabpanel" aria-labelledby="sign-in-tab">
+                                            <div class="tab-pane fade show active" id="sign_in_tab_content" role="tabpanel" aria-labelledby="sign-in-tab">
 
                                                 <!-- Popular Cars Content Wrapper Start -->
                                                 <div class="login-form">

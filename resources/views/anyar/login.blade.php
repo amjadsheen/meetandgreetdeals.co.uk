@@ -106,9 +106,9 @@
                                 <button   id="login-customer" type="submit"><i class="fa fa-sign-in"></i> Log In</button>
                             </div>
                         <div id="loginerror" style="text-align: center">&nbsp;</div>
-                        <div class="create-ac">
-                            <a href="#" style="color: orangered" data-target="#pwdModal" data-toggle="modal">Forgot My password?</a>
-                        </div>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                        Forgot My password?
+                        </button>
                     </div>
                     <div class="create-ac">
                         <p>Don't have an account? <a href="/sign-up">Sign Up</a></p>
@@ -120,5 +120,42 @@
 
         </div>
     </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="text-center">Forget My Password?</h6>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="text-center">
+                                    <p style="margin-bottom: 20px;">If you have forgotten your password you can reset it here.</p>
+                                    <div class="panel-body">
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <input class="form-control input-lg" placeholder="E-mail Address" name="email" id="email" type="email">
+                                                <span id="error-email" class="error"></span>
+                                            </div>
+                                            <br>
+                                            <input style="cursor: pointer;" id="reset-pass" class="btn btn-lg btn-success btn-block" value="Send My Password" type="submit">
+                                        </fieldset>
+                                        <div id="reseterror" style="text-align: center; margin-top: 20px">&nbsp;</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-md-12">
+                        <!--<button style="cursor: pointer;" class="btn  btn-warning" data-dismiss="modal" aria-hidden="true">Cancel</button>-->
+                    </div>
+                </div>
+            </div>
+</div>
 </div>
 @endsection

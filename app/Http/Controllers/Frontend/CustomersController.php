@@ -237,7 +237,7 @@ class CustomersController extends Controller
             $email_subject ="EdenParking: Forget Password";
             $to_email = $customer_exists->cus_email;
             $to_name = $customer_exists->cus_title . ' ' . $customer_exists->cus_name;
-            Mail::send('email.forgertpassmail', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
+            Mail::send('email.common.forgertpassmail', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
                 $message->to($to_email, $to_name)->subject($email_subject);
                 $message->from($st_admin_from_email, $st_admin_name);
             });

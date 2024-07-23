@@ -64,23 +64,7 @@
   color: red;
 }
 
-.custom-popup-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-.custom-popup-header h3 {
- font-size: 18px;
-}
-.custom-popup-header h6 {
- color:#000;
-}
-.custom-warning-icon {
-  font-size: 20px;
-  margin-right: 5px;
-  color:red;
-}
+
 
 .custom-description {
   /* display: none; */
@@ -280,7 +264,11 @@
     background: #cccccc1a;
     box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
   }
-
+  .card.card-custom {
+    /* box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px; */
+    /* box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px; */
+    box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+}
   .shadow-box {
     box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
     background: #cccccc1a;
@@ -417,7 +405,7 @@
     display: none !important;
 }
   .icon-boxes {
-    padding-top: 87px;
+    padding-top: 100px;
   }
   @media (max-width: 991px) {
     .price-box {
@@ -673,12 +661,13 @@ a.btn.btn-success.book-btn {
     @endforeach -->
 
     @foreach($services_terminals_prices as $service)
-            <div class="col-md-3 mb-4">
+            <div class="col-md-4 mb-4">
                 <div class="card card-custom" style="background: {{ $service['bg_color'] }};">
                     <div class="card-header" style="max-height: 106px; min-height: 106px;">
                         <div><img src="/storage/uploads/{{$service['website_logo']}}" class="card-img-top" alt="Service Logo" style="width: 150px;">
                         <span class="badge badge-sec-text">{{ $service['website_name'] }}</span></div>
                         <div style="text-align:center;margin-top: 5px;"><span class="badge badge-primary">{{ $service['service_name'] }}</span></div>
+                        
                         
                     </div>
                     
@@ -688,6 +677,7 @@ a.btn.btn-success.book-btn {
                         <a href="#" onclick="updatedservice({{ $service['terminal_id'] }}, {{ $service['website_id'] }});" class="btn btn-success book-btn">
                             Select Parking
                         </a>
+                        {!! $service['promo']!!}
                     </div>
                 </div>
             </div>
@@ -699,20 +689,7 @@ a.btn.btn-success.book-btn {
 </div>
 <!-- /End Services Section -->
 
-<div class="custom-popup" data-aos="zoom-out">
-  <div class="custom-popup-content">
-    <span class="custom-close-btn">&times;</span>
-    <div class="custom-popup-header">
-      <h3><span class="custom-warning-icon">&#9888;</span> Check ULZE compliance for you vehicle</h3>
 
-    </div>
-    <div class="custom-description">
-      <p>Londons’s ULZE expanded on 29th August 2023 to operate city-wide
-Up to the M35. Use our ULEZ checker to find out if your car meets emissions standards and
-What fees you may need to pay</p>
-    </div>
-  </div>
-</div>
 <!-- ======= Cta Section ======= -->
 <section id="cta" class="cta">
   <div class="container">
@@ -756,14 +733,5 @@ What fees you may need to pay</p>
     
   }
 </script>
-<script type="text/javascript">
-  document.addEventListener("DOMContentLoaded", function() {
-    const customPopup = document.querySelector(".custom-popup");
-    const customCloseBtn = document.querySelector(".custom-close-btn");
-    const customDescription = document.querySelector(".custom-description");
-    customCloseBtn.addEventListener("click", function() {
-      customPopup.style.display = "none";
-    });
-  });
-</script>
+
 @endsection

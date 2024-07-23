@@ -116,15 +116,18 @@ h6 {
 # Top Bar
 --------------------------------------------------------------*/
 #topbar {
-  height: 30px;
+  height: 60px;
   padding: 0;
-  font-size: 14px;
+  font-size: 18px;
   transition: all 0.5s;
   overflow: hidden;
   color: rgba(255, 255, 255, 0.8);
   z-index: 996;
 }
-
+.icon-boxes .icon-box {
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px !important;
+ border-radius: 0 !important;
+}
 #topbar.topbar-scrolled {
   top: -30px;
 }
@@ -175,7 +178,7 @@ h6 {
   transition: all 0.5s;
   z-index: 997;
   height: 100px;
-  top: 30px;
+  top: 60px;
   border-bottom: 0;
   border-image: linear-gradient(90deg, #ffd000, #03f514 45.82%, #a0157c) 1 0 0;
   border-left: 0;

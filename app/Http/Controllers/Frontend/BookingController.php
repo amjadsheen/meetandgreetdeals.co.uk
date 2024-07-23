@@ -490,7 +490,7 @@ class BookingController extends Controller
                         $bg_color = "#d7dddac4;";
                         $sort = 0;
                         if($selected_termainal == $terminal->id &&  $service->id == $selected_service ){
-                            $bg_color = '#12d07891;';
+                            $bg_color = '';
                             $sort = 1;
                         }
                         $service_name = $this->GetServiceName($service->id);
@@ -516,7 +516,8 @@ class BookingController extends Controller
                                 "cur_symbol" => $cur_symbol
                             );
                         }else{
-                            if($service->id == $selected_service ){
+                            //if($service->id == $selected_service ){
+                                if($selected_termainal == $terminal->id &&  $service->id == $selected_service){
                                 $services_terminals_prices[] = array (
                                     "bg_color" => $bg_color,
                                     "sort"  => $sort,
@@ -528,7 +529,8 @@ class BookingController extends Controller
                                     "price_with_symbol" => $price_with_symbol,
                                     "net_price" => $net_price,
                                     "website_id" => $c_website->id,
-                                    "cur_symbol" => $cur_symbol
+                                    "cur_symbol" => $cur_symbol,
+                                    "promo" => $this->promocomaprepage($c_website->id)
                                 );
                             }
                         }
@@ -3479,6 +3481,23 @@ class BookingController extends Controller
             $prefix = $service->service_prefix;
         }
         return $prefix;
+    }
+
+    public function promocomaprepage($website_id){
+        $date = date("Y-m-d");
+        $promotion = DB::table("promotion_offers")
+        ->where('offer_active', 1)
+        ->where('offer_date1', '<=', $date)
+        ->where('offer_date2', '>=', $date)
+        ->where('website_id', $website_id)
+        ->first();
+        if ($promotion) {
+
+            return '<span class="badge badge-primary" style="background:#6d6008; text-align:center;margin-top: 15px;">Use Promo <span class="badge badge-sec"> "' . $promotion->offer_coupon . '"</span> and get <span class="badge badge-sec">' . $promotion->offer_percentage . '%</span> Discount </span>';
+
+        }else{
+            return  "";
+        }
     }
     public function is_vip_service($id)
     {
