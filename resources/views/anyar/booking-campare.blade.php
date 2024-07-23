@@ -699,11 +699,7 @@ a.btn.btn-success.book-btn {
       <div class="col-lg-9 text-center text-lg-start">
         <h3>Contact Us</h3>
 
-        @isMobile
         <p> Book online or call Customer Service Number <br> {{$domain->working_time}}  <br><br><span><a href="tel:{{$domain->contact_num}}">{{$domain->contact_num}}</a> <br><br> <a href="tel:{{$domain->alternate_contact_num}}">{{$domain->alternate_contact_num}}</a></span> </p> <hr> <p> Email Us at <br><a href="mailto:{{$domain->email}}">{{$domain->email}}</a></span> <br><br>  <a href="mailto:{{$domain->alternate_email}}">{{$domain->alternate_email}}</a></p>
-        @else
-        <p> Book online or call Customer Service Number {{$domain->working_time}}  <span><a href="tel:{{$domain->contact_num}}">{{$domain->contact_num}}</a>  <a href="tel:{{$domain->alternate_contact_num}}">{{$domain->alternate_contact_num}}</a></span> Or <br> Email Us at <a href="mailto:{{$domain->email}}">{{$domain->email}}</a></span> |  <a href="mailto:{{$domain->alternate_email}}">{{$domain->alternate_email}}</a></p>
-        @endisMobile
       </div>
       <div class="col-lg-3 cta-btn-container text-center">
          <a class="cta-btn align-middle" href="/contact-us">Contact Us</a>
