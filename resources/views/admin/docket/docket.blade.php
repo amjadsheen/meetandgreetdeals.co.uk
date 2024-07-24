@@ -426,7 +426,7 @@ $qrcode = $bookings->booking_id;
                                 <td style="width:40%;text-align: right;">
                                     <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
                                         <div style="font-size: 15px;">
-                                            <p style="text-align: center;">Ulze Checked:</p>
+                                            <p style="text-align: center;">Ulez Checked:</p>
                                         </div>
                                     </span>
                                     <span class="<?php echo $print1; ?>" style="line-height: 10px;color:<?php echo $p1c; ?>;">

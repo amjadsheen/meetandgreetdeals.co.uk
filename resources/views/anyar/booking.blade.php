@@ -1031,7 +1031,7 @@
                                     <div class="row mt20">
                                         <div class="col-lg-12 col-md-2">
                                             <div class="form-group">
-                                                <label for="Title">Ulze Checked:
+                                                <label for="Title">Ulez Checked:
                                                     <small class="req text-lowercase"></small>
                                                 </label>
                                             </div>

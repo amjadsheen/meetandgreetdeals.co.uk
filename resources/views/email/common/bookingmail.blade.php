@@ -59,7 +59,7 @@
                         Luggage: {{$luggage}}<br />
                         @endif
                         @if(!empty($ulze))
-                        Ulze Checked: {{$ulze}}<br />
+                        Ulez Checked: {{$ulze}}<br />
                         @endif
                         <h2>Booking detail</h2>
                         

@@ -170,7 +170,7 @@
                     <td>{{$luggage}}</td>
                 </tr>
                 <tr>
-                    <th>Ulze Checked</th>
+                    <th>Ulez Checked</th>
                     <td>{{$ulze}}</td>
                 </tr>
                 

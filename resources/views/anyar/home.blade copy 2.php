@@ -669,11 +669,11 @@
   <div class="custom-popup-content">
     <span class="custom-close-btn">&times;</span>
     <div class="custom-popup-header">
-      <h3><span class="custom-warning-icon">&#9888;</span> Check ULZE compliance for you vehicle</h3>
+      <h3><span class="custom-warning-icon">&#9888;</span> Check ULEZ compliance for you vehicle</h3>
 
     </div>
     <div class="custom-description">
-      <p>Londons’s ULZE expanded on 29th August 2023 to operate city-wide
+      <p>Londons’s ULEZ expanded on 29th August 2023 to operate city-wide
 Up to the M35. Use our ULEZ checker to find out if your car meets emissions standards and
 What fees you may need to pay</p>
     </div>
