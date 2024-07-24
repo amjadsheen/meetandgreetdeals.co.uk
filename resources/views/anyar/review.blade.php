@@ -159,9 +159,9 @@
             </div>
             <div class="col-lg-2">
                 <div class="text-center">
-                    <button style="cursor: pointer;  color: #fff;   background: red;" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                        Create your own Review
-                    </button>
+                <button style="cursor: pointer; color: #fff; background: red;" class="btn btn-primary" type="button" id="toggleButton">
+            Create your own Review
+        </button>
                 </div>
             </div>
             <div class="col-lg-12 col-sm-12">
@@ -289,6 +289,16 @@
     </div>
     </div>
 </section>
+<script>
+        document.getElementById('toggleButton').addEventListener('click', function() {
+            var collapseDiv = document.getElementById('collapseExample');
+            if (collapseDiv.style.display === 'none' || collapseDiv.style.display === '') {
+                collapseDiv.style.display = 'block';
+            } else {
+                collapseDiv.style.display = 'none';
+            }
+        });
+    </script>
 <!--== FAQ Area End ==-->
 @endsection
 
