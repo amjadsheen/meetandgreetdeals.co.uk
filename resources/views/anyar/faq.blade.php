@@ -78,27 +78,23 @@
                         <div class="single-faq-sub-content">
                             <div id="accordion">
 
-
-
-                            @foreach($faqs as $faq)
-                                <!-- Single FAQ Start -->
-                                <div class="card">
-                                    <div class="card-header" id="heading{{$loop->iteration}}">
-                                        <h5 class="mb-0"><button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{$loop->iteration}}" aria-expanded="{{ $loop->iteration === 1 ? "true" : "false" }}" aria-controls="collapseOne">
-                                                <span>{{$faq->question}}</span>
-                                                <i class="fa fa-angle-down"></i>
-                                                <i class="fa fa-angle-up"></i>
-                                            </button></h5>
-                                    </div>
-                                    <div id="collapse{{$loop->iteration}}" class="collapse {{ $loop->iteration === 1 ? "show" : "" }}" aria-labelledby="heading{{$loop->iteration}}" data-parent="#accordion">
-                                        <div class="card-body">
-                                            {{$faq->answer}}
+                                <div class="accordion" id="accordionExample">
+                                    @foreach($faqs as $faq)
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$loop->iteration}}" aria-expanded="true" aria-controls="collapse{{$loop->iteration}}">
+                                        {{$faq->question}}
+                                        </button>
+                                        </h2>
+                                        <div id="collapse{{$loop->iteration}}" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                        {{$faq->answer}}
+                                        </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- Single FAQ End -->
-                                @endforeach
-
+                                    @endforeach
+                                    
+                                    </div>
 
 
                             </div>
