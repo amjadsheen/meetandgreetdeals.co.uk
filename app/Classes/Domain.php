@@ -148,7 +148,7 @@ class Domain
         $return_time_only = date('H:i', strtotime( $return_date));
         $new_return_date_time = $return_date_only .'T'.$return_time_only;
         
-        return $departure_terminal . '-' . $new_departure_satetime . '/' . $return_terminal . '-' . $new_return_date_time;
+        return 'T' . $departure_terminal . '' . $new_departure_satetime . '-T' . $return_terminal . '-' . $new_return_date_time;
         }
     
     static function checkRequestData($request_data) {
