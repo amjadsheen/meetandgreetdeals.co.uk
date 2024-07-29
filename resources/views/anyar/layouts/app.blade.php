@@ -255,7 +255,7 @@ label.input-group-text {
             <ul>
               <li><i class="bx bx-chevron-right"></i> <a href="/services">Services</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="/directions">Directions</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="/faqs">Faqs</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/faq">Faqs</a></li>
 
             </ul>
           </div>

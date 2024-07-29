@@ -61,7 +61,7 @@ class ReviewController extends Controller
               'post_title'=> $request->get('fname') .' '. date('y-m-d H:i:s')
           ]);
           $airport->save();
-          return redirect('/admin/faqs')->with('success', 'Review Added');
+          return redirect('/admin/faq')->with('success', 'Review Added');
     }
 
     public function updateinline(Request $request, $id)
