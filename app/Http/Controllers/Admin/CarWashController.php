@@ -47,7 +47,7 @@ class CarWashController extends Controller
                 ->select("cw.*", "vv.v_name","site.website_name")
                 ->get();
         }
-
+        //dd($carwash);
         return view('admin.carwash.index', compact('carwash', 'vehicaltype', 'websites', 'wash_types', 'title','filter_website'));
     }
 
@@ -83,7 +83,7 @@ class CarWashController extends Controller
         $test = CarWash::find($id);
         $column_name = $request->name;
         $column_value = $request->value;
-        if( $request->name && $request->value) {
+        if( $request->name) {
             $update = CarWash::select()
                 ->where('id', '=', $id)
                 ->update([$column_name => $column_value]);

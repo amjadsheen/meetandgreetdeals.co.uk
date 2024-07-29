@@ -3009,7 +3009,7 @@ class BookingController extends Controller
     {
         $response = array();
         if (CarWash::where('website_id', $wid)->where('vehical_type_id', $tyid)->exists()) {
-            $carwash = CarWash::where('website_id', $wid)->where('vehical_type_id', $tyid)->orderBy('id', 'DESC')->get();
+            $carwash = CarWash::where('website_id', $wid)->where('vehical_type_id', $tyid)->where('status', 1)->orderBy('id', 'DESC')->get();
             foreach ($carwash as $cw) {
                 if ($cw->car_wash_type != 'carwash_spray_only') {
                     if ($cw->status) {

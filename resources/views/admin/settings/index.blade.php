@@ -179,30 +179,30 @@
                                                 <!-- form start -->
                                                 <form class="form-horizontal" method="post" action="{{ route('settings.store') }}">
                                                     @csrf
-                                                    <div class="box-body">
+                                                    <!-- <div class="box-body">
                                                         <div class="form-group">
                                                             <label for="inputEmail3" class=" left col-sm-6 control-label">FULL CAR WASH (IN AND OUT) </label>
                                                             <div class="col-sm-6">
                                                                 <input type="number" min="0" class="form-control speciald"   value="<?php echo $settings_array['carwash_in_and_out']?>" name="option_name[{{$filter_website}}][carwash_in_and_out]" autocomplete="off" >
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="box-body">
+                                                    </div> -->
+                                                    <!-- <div class="box-body">
                                                         <div class="form-group">
                                                             <label for="inputEmail3" class=" left col-sm-6 control-label">CAR WASH (ONLY OUTSIDE)</label>
                                                             <div class="col-sm-6">
                                                                 <input type="number" min="0" class="form-control speciald"   value="<?php echo $settings_array['carwash_out_only']?>" name="option_name[{{$filter_website}}][carwash_out_only]" autocomplete="off" >
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="box-body">
+                                                    </div> -->
+                                                    <!-- <div class="box-body">
                                                         <div class="form-group">
                                                             <label for="inputEmail3" class=" left col-sm-6 control-label">CAR WASH (WATER SPRAY ONLY)</label>
                                                             <div class="col-sm-6">
                                                                 <input type="number" min="0" class="form-control speciald"   value="<?php echo $settings_array['carwash_spray']?>" name="option_name[{{$filter_website}}][carwash_spray]" autocomplete="off" >
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="box-body">
                                                         <div class="form-group">
                                                             <label for="inputEmail3" class=" left col-sm-6 control-label">Show Carwash BOX</label>

@@ -134,6 +134,7 @@
                                     <th>Website</th>
                                     <th>CarWash Type</th>
                                     <th>CarWash Price</th>
+                                    <th>Status</th>
                                 </tr>
                                 @foreach($single_carwash as $single)
                                     <tr id="row-{{$single->id}}">
@@ -152,6 +153,22 @@
                                                data-pk="{{$single->id}}" data-title="change"
                                                data-name="car_wash_price"> {{$single->car_wash_price}}
                                             </a>
+                                        </td>
+
+                                        <td>
+                                            @if($single->status == 1)
+                                                  <a class="testEdit" data-type="select"
+                                                     data-source='[{"value":1,"text":"open"},{"value":0,"text":"close"}]' data-column="status"
+                                                     data-url="{{route('carwash/updateinline', ['id'=>$single->id])}}" data-pk="{{$single->id}}"
+                                                     data-title="change" data-name="status">open
+                                                  </a>
+                                            @else
+                                                 <a class="testEdit" data-type="select"
+                                                 data-source='[{"value":0,"text":"close"},{"value":1,"text":"open"}]' data-column="status"
+                                                 data-url="{{route('carwash/updateinline', ['id'=>$single->id])}}" data-pk="{{$single->id}}"
+                                                 data-title="change" data-name="status">close
+                                                 </a>
+                                            @endif
                                         </td>
 
                                 @endforeach
