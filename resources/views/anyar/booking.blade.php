@@ -777,7 +777,7 @@
                                     <div class="choose-content-wrap">
                                         <!-- Choose Area Tab Menu -->
                                         <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                            
+
                                             <li class="nav-item" role="presentation">
                                                 <button class="nav-link active" id="sign-in-tab" data-bs-toggle="tab" data-bs-target="#sign_in_tab_content" type="button" role="tab" aria-controls="sign_in_tab_content" aria-selected="false">Sign In</button>
                                             </li>
@@ -818,7 +818,7 @@
                                                         </div>
                                                         <div class="col-sm-12 col-md-4">
                                                             <div class="input-group mb-3">
-                                                                <label class="input-group-text" for="name1">First Name</label>
+                                                                <label class="input-group-text" for="name1">First Name <span style='color:red'>*</span></label>
                                                                 <input class="input-text form-control validate[required]" name="name1" id="name1" type="text" value="">
                                                                 <span for="name1" class="bferror"></span>
                                                             </div>
@@ -839,7 +839,7 @@
                                                         <div class="col-sm-12 col-md-4">
                                                             <div class="input-group mb-3">
 
-                                                                <label class="input-group-text" for="email">Email</label>
+                                                                <label class="input-group-text" for="email">Email <span style='color:red'>*</span></label>
                                                                 <input class="input-text form-control validate[required,custom[email]]" type="email" name="email" id="Email" value="">
                                                                 <span for="email" class="bferror"></span>
                                                             </div>
@@ -852,28 +852,28 @@
                                                                 <span for="email_1" class="bferror"></span>
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-12 col-md-4">
+                                                        <!-- <div class="col-sm-12 col-md-4">
                                                             <div class="input-group mb-3">
 
                                                                 <label class="input-group-text" for="company">Company</label>
                                                                 <input type="text" class="input-text form-control" name="company" id="company" value="">
                                                                 <span for="company" class="bferror"></span>
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-sm-12 col-md-4">
+                                                        <!-- <div class="col-sm-12 col-md-4">
                                                             <div class="input-group mb-3">
 
                                                                 <label class="input-group-text" for="tel">Tel Number</label>
                                                                 <input type="text" class="input-text form-control" name="tel" id="tel" value="">
                                                                 <span for="tel" class="bferror"></span>
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                         <div class="col-sm-12 col-md-4">
                                                             <div class="input-group mb-3">
 
-                                                                <label class="input-group-text" for="tel">Mobile Number</label>
+                                                                <label class="input-group-text" for="tel">Mobile Number <span style='color:red'>*</span></label>
                                                                 <input type="text" class="input-text form-control validate[required]" name="cell" id="cell" value="">
                                                                 <span for="cell" class="bferror"></span>
                                                             </div>
@@ -891,7 +891,7 @@
                                                         <div class="col-md-12 mb20">
                                                             <h6><strong>Address Information</strong></h6>
                                                         </div>
-                                                        <div class="col-sm-12 col-md-4">
+                                                        <div class="col-sm-12 col-md-12">
                                                             <div class="input-group mb-3">
 
                                                                 <label class="input-group-text" for="homename">Door Number / House Name</label>
@@ -899,32 +899,32 @@
                                                                 <span for="homename" class="bferror"></span>
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-12 col-md-4">
+                                                        <!-- <div class="col-sm-12 col-md-4">
                                                             <div class="input-group mb-3">
 
                                                                 <label class="input-group-text" for="address">Address</label>
                                                                 <input type="text" class="input-text form-control" name="address" id="address" value="">
                                                                 <span for="address" class="bferror"></span>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-sm-12 col-md-4">
+                                                        </div> -->
+                                                        <!-- <div class="col-sm-12 col-md-4">
                                                             <div class="input-group mb-3">
 
                                                                 <label class="input-group-text" for="town">Town/City</label>
                                                                 <input type="text" class="input-text form-control" name="town" id="town" value="">
                                                                 <span for="town" class="bferror"></span>
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-sm-12 col-md-4">
+                                                        <!-- <div class="col-sm-12 col-md-4">
                                                             <div class="input-group mb-3">
 
                                                                 <label class="input-group-text" for="county">County</label>
                                                                 <input type="text" class="input-text form-control" name="county" id="county" value="">
                                                                 <span for="county" class="bferror"></span>
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                         <div class="col-sm-12 col-md-4">
                                                             <div class="input-group mb-3">
 
@@ -984,75 +984,6 @@
 
 
                                 <div id="bookingStep1" class="active" style="display: block;">
-                                    <!-- contact details start here -->
-                                    <div class="row mt20">
-                                        <div class="col-md-12  section-title">
-                                            <hr>
-               
-                                            <h2 class="section-title__title mb-2">PASSENGER INFORMATION</h2>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-2">
-                                            <div class="form-group">
-                                                <div class="input-group mb-3">
-                                                    <label class="input-group-text" for="date1">Number of Passengers</label>
-                                                    <select class="form-select validate[required]" name="bk_nop" id="bk_nop">
-                                                        <option value="1" {{ $prepared_session_data['bk_nop'] == 1 ? "selected" : "" }}>1 Passenger</option>
-                                                        <option value="2" {{ $prepared_session_data['bk_nop'] == 2 ? "selected" : "" }}>2 Passengers</option>
-                                                        <option value="3" {{ $prepared_session_data['bk_nop'] == 3 ? "selected" : "" }}>3 Passengers</option>
-                                                        <option value="4" {{ $prepared_session_data['bk_nop'] == 4 ? "selected" : "" }}>4 Passengers</option>
-                                                        <option value="5" {{ $prepared_session_data['bk_nop'] == 5 ? "selected" : "" }}>5 Passengers</option>
-                                                        <option value="6" {{ $prepared_session_data['bk_nop'] == 6 ? "selected" : "" }}>6 Passengers</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="row mt20">
-                                        <div class="col-lg-12 col-md-2">
-                                            <div class="form-group">
-                                                <label for="Title">Luggage:<small class="req text-lowercase"></small></label>
-                                            </div>
-                                            <div class="form-group mt20">
-                                                <label class="luggage-lable" for="luggagecollection"><input type="radio" class="input-text-luggage" name="luggage" id="luggagecollection" value="Luggage to collect" {{ $prepared_session_data['luggage'] == "Luggage to collect" ? "checked" : "" }}><span>Luggage to collect</span>
-                                                </label>
-                                                <label class="luggage-lable" for="handcarry"><input type="radio" class="input-text-luggage" name="luggage" id="handcarry" value="Hand carry only" {{ $prepared_session_data['luggage'] == "Hand carry only" ? "checked" : "" }}><span>Hand carry only</span>
-                                                </label>
-                                                <label class="luggage-lable" for="notsure"><input type="radio" class="input-text-luggage" name="luggage" id="notsure" value="Not sure" {{ $prepared_session_data['luggage'] == "Not sure" ? "checked" : "" }}><span>Not sure</span>
-                                                </label>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                    <div class="row mt20">
-                                        <div class="col-lg-12 col-md-2">
-                                            <div class="form-group">
-                                                <label for="Title">Ulez Checked:
-                                                    <small class="req text-lowercase"></small>
-                                                </label>
-                                            </div>
-                                            <div class="form-group mt20">
-                                                <label class="luggage-lable" for="ulze-no"><input type="radio" class="input-text-luggage" name="ulze" id="ulze-no" value="No" {{ $prepared_session_data['ulze'] == "No" ? "checked" : "" }}><span>No</span>
-                                                </label>
-                                                <label class="luggage-lable" for="ulze-yes"><input type="radio" class="input-text-luggage" name="ulze" id="ulze-yes" value="Yes" {{ $prepared_session_data['ulze'] == "Yes" ? "checked" : "" }}><span>Yes</span>
-                                                </label>
-                                                <label class="luggage-lable" for="ulze-notsure"><input type="radio" class="input-text-luggage" name="ulze" id="ulze-notsure" value="Not sure" {{ $prepared_session_data['ulze'] == "Not sure" ? "checked" : "" }}><span>Not sure</span>
-                                                </label>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                    <!-- contact details end here -->
-
-
-
                                     <!-- vehicle details start here -->
                                     <div class="row mt20">
                                         <div class="col-md-12  section-title">
@@ -1088,15 +1019,15 @@
                                         </div>
                                     </div>
                                     <?php
-                                        $bgcolors = ['color1', 'color2'];
-                                        $vehical_count = count($prepared_session_data['vehicles']);
-                                        $required_fileds = "";
-                                        $required_icon = "";
-                                        if ($vehical_count > 1) {
-                                            $required_fileds = "validate[required]";
-                                            $required_icon = "<span style='color:red'>*</span>";
-                                        }
-                                        //dd($prepared_session_data);
+                                    $bgcolors = ['color1', 'color2'];
+                                    $vehical_count = count($prepared_session_data['vehicles']);
+                                    $required_fileds = "";
+                                    $required_icon = "";
+                                    if ($vehical_count > 1) {
+                                        $required_fileds = "validate[required]";
+                                        $required_icon = "<span style='color:red'>*</span>";
+                                    }
+                                    //dd($prepared_session_data);
                                     foreach ($prepared_session_data['vehicles'] as $veh => $veh_data) {?>
                                     <div class="col-md-12 mb20">
                                             <hr>
@@ -1106,7 +1037,7 @@
                                         <div class="col-lg-3 sm-12">
                                             <div class="input-group mb-3">
                                                 <label class="input-group-text " for="bk_re_nu-{{ $veh }}">Vehicle Reg &nbsp;<strong>({{ $veh }})<span style="color:red">*</span></strong> </label>
-                                                <input type="text " name="bk_re_nu[{{ $veh }}]" id="bk_re_nu-{{ $veh }}" class="input-text form-control {{ $required_fileds }}" value="{{ $veh_data['bk_re_nu'] }}" placeholder="">
+                                                <input type="text " name="bk_re_nu[{{ $veh }}]" id="bk_re_nu-{{ $veh }}" class="input-text form-control validate[required]" value="{{ $veh_data['bk_re_nu'] }}" placeholder="">
                                             </div>
                                         </div>
                                         <div class="col-lg-3 sm-12">
@@ -1239,31 +1170,100 @@
                         </div>
                         <!-- Single FAQ Subject End -->
                     </div>
-                    <div class="booking-section travelo-box borderbox">
-                    <div class="row">
-                            <div class="col-lg-12 section-title">
-                                <h2 class="section-title__title mb-2">Terminal Access Fee £<span id="tef"></span></h2>
-                                    <select id="terminal_parking_fee" name="terminal_parking_fee" class="form-select " onchange="GetTef();">
-                                            @foreach($terminal_access_options as $key=>$tso)
-                                                <?php
-                                                if ($key == "P") {
-                                                    $span = "style=color:red";
-                                                } else {
-                                                    $span = "";
-                                                }
-                                                ?>
-                                                <option {{ $span}} value="{{$key}}">{{$tso}}</option>
-                                            @endforeach
-                                        </select>
+                    <div class="faq-details-content require-validation">
+                        <!-- contact details start here -->
+                        <div class="row mt20">
+                            <div class="col-md-12  section-title">
+                                <hr>
+
+                                <h2 class="section-title__title mb-2">PASSENGER INFORMATION</h2>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-2">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <label class="input-group-text" for="date1">Number of Passengers</label>
+                                        <select class="form-select validate[required]" name="bk_nop" id="bk_nop">
+                                            <option value="1" {{ $prepared_session_data['bk_nop'] == 1 ? "selected" : "" }}>1 Passenger</option>
+                                            <option value="2" {{ $prepared_session_data['bk_nop'] == 2 ? "selected" : "" }}>2 Passengers</option>
+                                            <option value="3" {{ $prepared_session_data['bk_nop'] == 3 ? "selected" : "" }}>3 Passengers</option>
+                                            <option value="4" {{ $prepared_session_data['bk_nop'] == 4 ? "selected" : "" }}>4 Passengers</option>
+                                            <option value="5" {{ $prepared_session_data['bk_nop'] == 5 ? "selected" : "" }}>5 Passengers</option>
+                                            <option value="6" {{ $prepared_session_data['bk_nop'] == 6 ? "selected" : "" }}>6 Passengers</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row mt20">
+                            <div class="col-lg-12 col-md-2">
+                                <div class="form-group">
+                                    <label for="Title">Luggage:<small class="req text-lowercase"></small></label>
+                                </div>
+                                <div class="form-group mt20">
+                                    <label class="luggage-lable" for="luggagecollection"><input type="radio" class="input-text-luggage" name="luggage" id="luggagecollection" value="Luggage to collect" {{ $prepared_session_data['luggage'] == "Luggage to collect" ? "checked" : "" }}><span>Luggage to collect</span>
+                                    </label>
+                                    <label class="luggage-lable" for="handcarry"><input type="radio" class="input-text-luggage" name="luggage" id="handcarry" value="Hand carry only" {{ $prepared_session_data['luggage'] == "Hand carry only" ? "checked" : "" }}><span>Hand carry only</span>
+                                    </label>
+                                    <label class="luggage-lable" for="notsure"><input type="radio" class="input-text-luggage" name="luggage" id="notsure" value="Not sure" {{ $prepared_session_data['luggage'] == "Not sure" ? "checked" : "" }}><span>Not sure</span>
+                                    </label>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="row mt20">
+                            <div class="col-lg-12 col-md-2">
+                                <div class="form-group">
+                                    <label for="Title">Ulez Checked:
+                                        <small class="req text-lowercase"></small>
+                                    </label>
+                                </div>
+                                <div class="form-group mt20">
+                                    <label class="luggage-lable" for="ulze-no"><input type="radio" class="input-text-luggage" name="ulze" id="ulze-no" value="No" {{ $prepared_session_data['ulze'] == "No" ? "checked" : "" }}><span>No</span>
+                                    </label>
+                                    <label class="luggage-lable" for="ulze-yes"><input type="radio" class="input-text-luggage" name="ulze" id="ulze-yes" value="Yes" {{ $prepared_session_data['ulze'] == "Yes" ? "checked" : "" }}><span>Yes</span>
+                                    </label>
+                                    <label class="luggage-lable" for="ulze-notsure"><input type="radio" class="input-text-luggage" name="ulze" id="ulze-notsure" value="Not sure" {{ $prepared_session_data['ulze'] == "Not sure" ? "checked" : "" }}><span>Not sure</span>
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
                     </div>
+                    <!-- contact details end here -->
+                    <hr>
+
+                    <div class="booking-section travelo-box borderbox">
+                        <div class="row">
+                                <div class="col-lg-12 section-title">
+                                    <h2 class="section-title__title mb-2">Terminal Access Fee £<span id="tef"></span></h2>
+                                        <select id="terminal_parking_fee" name="terminal_parking_fee" class="form-select " onchange="GetTef();">
+                                                @foreach($terminal_access_options as $key=>$tso)
+                                                    <?php
+                                                    if ($key == "P") {
+                                                        $span = "style=color:red";
+                                                    } else {
+                                                        $span = "";
+                                                    }
+                                                    ?>
+                                                    <option {{ $span}} value="{{$key}}">{{$tso}}</option>
+                                                @endforeach
+                                            </select>
+                                </div>
+                        </div>
                     </div>
 
 
                     <?php
-                    $hide_eden_promo_box = 1;
-                    $hide_eden_promo_box = $settings['eden_promo_box'];
-                    ?>
+                        $hide_eden_promo_box = 1;
+                        $hide_eden_promo_box = $settings['eden_promo_box'];
+                        ?>
                     @if(!$hide_eden_promo_box)
                     <hr>
                     <div class="booking-section travelo-box borderbox">
@@ -1305,21 +1305,20 @@
                                     </div>
 
                                     <div class="frb frb-success" style="position:relative; display:none;">
-                                        <input type="radio" id="radio-button-3" name="payment_option" value="1" class="validate[required] radio">
+                                        <input type="radio" id="radio-button-3" name="payment_option" value="1" class="validate[required] radio" 
                                         <label for="radio-button-3" onclick="showspaylater();">
                                             <span class="frb-title">Pay Later</span>
                                             <span class="frb-description" style="font-size: 16px;"> ACCOUNT HOLDER COMPANIES ONLY</span>
                                         </label>
                                         <div id="paylaterdiv" style="display:none;">
-
-                                        <div class="row">
-                                            <div class="col-lg-12 form-group">
-                                                <label>Account Number</label>
-                                                <input autocomplete="off" class="input-text form-control validate[required]" size="20" type="text" id="account_num" value="" name="account_num">
-                                                <div class="alert alert-danger" style="display:none" id="paylaterexceptionmsg"></div>
+                                            <div class="row">
+                                                <div class="col-lg-12 form-group">
+                                                    <label>Account Number</label>
+                                                    <input autocomplete="off" class="input-text form-control validate[required]" size="20" type="text" id="account_num" value="" name="account_num">
+                                                    <div class="alert alert-danger" style="display:none" id="paylaterexceptionmsg"></div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
                                     </div>
 
 
@@ -1329,7 +1328,7 @@
                                             <span class="frb-title">Pay by Strpie </span>
                                             <span class="frb-description">&nbsp;</span>
                                         </label>
-                                        <div id="stripediv" style="display:none;">
+                                        <div id="stripediv" style="display:none; padding:10px" >
 
                                             <div class="row">
                                                 <div class="col-lg-12 form-group">
@@ -1338,15 +1337,15 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-4 form-group">
+                                                <div class="col-lg-4 form-group" style="padding:10px">
                                                     <label>CVC</label>
                                                     <input autocomplete="off" class="input-text form-control validate[required] card-cvc" placeholder="ex. 311" size="3" type="text" id="cvv" name="cvv">
                                                 </div>
-                                                <div class="col-lg-4 form-group">
+                                                <div class="col-lg-4 form-group" style="padding:10px">
                                                     <label>Expiration month</label>
                                                     <input class="input-text form-control validate[required] card-expiry-month" placeholder="MM" size="2" type="text" id="expiry_month" name="expiry_month">
                                                 </div>
-                                                <div class="col-lg-4 form-group">
+                                                <div class="col-lg-4 form-group" style="padding:10px">
                                                     <label>Expiration year</label>
                                                     <input class="input-text form-control validate[required] card-expiry-year" placeholder="YYYY" size="4" type="text" id="expiry_year" name="expiry_year">
                                                     <input type="hidden" name="stripeToken" id="stripeToken" value="">
@@ -1358,11 +1357,36 @@
                                             </div>
 
                                         </div>
-
                                     </div>
-                                </div>
 
-                            </div>
+                                    <div class="frb frb-success" style="position:relative;">
+                                        <input type="radio" id="radio-button-6" name="payment_option" value="6" class="validate[required] radio">
+                                        <label for="radio-button-6" onclick="showsbanktransfer();">
+                                            <span class="frb-title">Bank Transfer</span>
+                                            <span class="frb-description" style="font-size: 16px;"></span>
+                                        </label>
+                                        <div id="banktransferdiv" style="display:none;">
+                                            <div class="row">
+                                                <div class="col-lg-12 form-group">
+                                                    <div style="padding:10px">
+                                                        <label>EXTRA ENTERPRISE LTD</label><br>
+                                                        <label>Account number: 19494316</label><br>
+                                                        <label>Sort code: 04-06-05</label><br>
+                                                        <br>
+                                                    </div>
+                                                    
+                                                    <div style="padding:10px">
+                                                        <label>Please Enter Bank Transfer Transition Refrernce Number:</label>
+                                                        <input autocomplete="off" class="input-text form-control validate[required]" size="20" type="text" id="bank_transition_refernce" value="" name="bank_transition_refernce">
+                                                        <div class="alert alert-danger" style="display:none" id="paylaterexceptionmsg"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+
+                        </div>
 
                         </div>
                         <div class="row">
@@ -1462,6 +1486,7 @@
         x.style.display = "block";
     }
     hidepaylater();
+    hidebanktransfer()
 }
 function hidestripe(){
     document.getElementById("usestripe").value = 0;
@@ -1478,7 +1503,18 @@ function showspaylater(){
         x.style.display = "block";
     }
     hidestripe()
+    hidebanktransfer()
 }
+function showsbanktransfer(){
+    document.getElementById("usestripe").value = 0;
+    var x = document.getElementById("banktransferdiv");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    }
+    hidestripe()
+    hidepaylater();
+}
+
 function hidepaylater(){
     console.log("hide");
     var x = document.getElementById("paylaterdiv");
@@ -1486,9 +1522,17 @@ function hidepaylater(){
         x.style.display = "none";
     }
 }
+function hidebanktransfer(){
+    console.log("hide");
+    var x = document.getElementById("banktransferdiv");
+    if (x.style.display === "block") {
+        x.style.display = "none";
+    }
+}
 function hidebothpands(){
     hidepaylater();
     hidestripe();
+    hidebanktransfer()
 }
 </script>
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>

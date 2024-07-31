@@ -19,7 +19,7 @@ use App\Terminal;
 use App\Airport;
 use App\Color;
 use App\Customer;
-
+use App\PaymentNotification;
 class BookingsController  extends Controller
 {
         /**
@@ -588,6 +588,137 @@ class BookingsController  extends Controller
             'id' => $id
         ]);
     }
+ 
+    public function GetAllBookingByCommonRefrenceNum($RefrenceNum)
+    {
+        $bookingdata = DB::table("bookings")
+        ->where('refrence_num_common', '=', $RefrenceNum)
+        ->get();
+        return $bookingdata;
+    }
+    
+    public function confirmbookingbanktransfer($bk_id_c){
+        $booking = Booking::find($bk_id_c);
+        if($booking){
+            $all_booking = $this->GetAllBookingByCommonRefrenceNum($booking->refrence_num_common);
+                                                
+            // Debugging: Check if bookings are retrieved correctly
+            if ($all_booking->isEmpty()) {
+                
+            }else{
+                foreach($all_booking as $booking){
+                    
+                    $PaymentNotification = new PaymentNotification([
+                        'booking_id' => $booking->id,
+                        'payment_reciever' => 'banktransfer',
+                        'payment_status' => 'Completed',
+                        'mc_gross' => $booking->all_vehicals_total,
+                        'txn_id' => $booking->bank_transition_refernce,
+                        'item_name' => $booking->refrence_num_common,
+                        'log' => 'none'
+                    ]);
+    
+                    $PaymentNotification->save();
+                    $insert_id = $PaymentNotification->id;
+                    $this->SendConfirmationEmail($booking);
+                }
+            }
+        }
+        
+    }
+
+    public function SendConfirmationEmail($bookingdata)
+    {
+        $bk_id_c = $bookingdata->id;
+        $data = Edenemail::send_booking_email($bk_id_c);
+        $st_admin_name = Edenemail::get_email_settings('st_admin_name');
+        $st_admin_from_email = Edenemail::get_email_settings('st_admin_from_email');
+        $st_admin_email = Edenemail::get_email_settings('st_admin_email');
+        $email_subject = Edenemail::get_email_settings('st_new_booking_subject');
+        $st_notification_email = Edenemail::get_email_settings('st_notification_email');
+
+
+        /* -------------- @new email template ---------------- */
+        $Email_Template = "email.common";
+        /* -------------- /@new email template ---------------- */
+        $email_subject = str_replace("New", "Confirmation", $email_subject);
+        $email_subject = str_replace("Confirmation Booking details", "Booking Confirmation details", $email_subject);
+
+        if (in_array($data['txn_payment_status'], array('Refunded'))) {
+            $email_subject = str_replace("Confirmation", "Cancelled/Refunded", $email_subject);
+        }
+
+        $to_name = $st_admin_name;
+        /*============== TO ADMIN ============*/
+     
+        /*============== TO amjad ============*/
+        $to_email = "amjadalisheen@gmail.com";
+        $email_subject_amjad = $email_subject . ' amjad';
+        $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
+        Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_amjad, $to_email, $to_name) {
+            $message->to($to_email, $to_name)->subject($email_subject_amjad);
+            $message->from($st_admin_from_email, $st_admin_name);
+        });
+        Mail::send($Email_Template . '.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_amjad, $to_email, $to_name) {
+            $message->to($to_email, $to_name)->subject($email_subject_amjad);
+            $message->from($st_admin_from_email, $st_admin_name);
+        });
+        /*============== TO amjad ============*/
+
+        /*============== Notifications Emails ============*/
+        if (!empty($st_notification_email)) {
+            $email_to = explode(";", $st_notification_email);
+            for ($x = 0; $x < count($email_to); $x++) {
+                Mail::send($Email_Template . '.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $email_to, $to_name) {
+                    $message->to($email_to, $to_name)->subject($email_subject);
+                    $message->from($st_admin_from_email, $st_admin_name);
+                });
+            }
+        }
+        /*============== Notifications Emails ============*/
+        /*============== TO ADMIN ============*/
+
+        /*============== TO CUSTOMER ============*/
+        if(!empty($data['email'])){
+            $to_email = $data['cus_email'];
+            $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
+            Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
+                $message->to($to_email, $to_name)->subject($email_subject);
+                $message->from($st_admin_from_email, $st_admin_name);
+            });
+        }
+        if(!empty($data['cus_email_1'])){
+            $to_email = $data['cus_email_1'];
+            $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
+            Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
+                $message->to($to_email, $to_name)->subject($email_subject);
+                $message->from($st_admin_from_email, $st_admin_name);
+            });
+        }
+        /*============== TO CUSTOMER ============*/
+
+        /*============== TO COMPARE WEBSITE ============*/
+        if(!empty($data['email'])){
+            $to_email = $data['email'];
+            $to_name = $data['website_name'];
+            Mail::send($Email_Template . '.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
+                $message->to($to_email, $to_name)->subject($email_subject);
+                $message->from($st_admin_from_email, $st_admin_name);
+            });
+        }
+        if(!empty($data['alternate_email'])){
+            $to_email = $data['alternate_email'];
+            $to_name = $data['website_name'];
+            Mail::send($Email_Template . '.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
+                $message->to($to_email, $to_name)->subject($email_subject);
+                $message->from($st_admin_from_email, $st_admin_name);
+            });
+        }
+        /*============== /TO COMPARE WEBSITE ============*/
+
+
+        
+    }
 
     public function send_email_to_customer($bk_id_c){
 
@@ -600,49 +731,85 @@ class BookingsController  extends Controller
         $st_notification_email = Edenemail::get_email_settings('st_notification_email');
 
         /* -------------- @new enail template ---------------- */
-        $Email_Template = "email.eden"; //@new enail template
-        if(in_array($data['website_templete'], array('eden'))){ // if eden use eden
-            $Email_Template = "email.".$data['website_templete'];
-        }else{
-            $Email_Template = "email.common";
-            $email_subject = str_replace("Eden", $data['website_name'], $email_subject);
-            $st_admin_name =  str_replace("Eden", $data['website_name'], $st_admin_name);
-        }
+        
+        $Email_Template = "email.common";
+        $email_subject = str_replace("Eden", $data['website_name'], $email_subject);
+        $st_admin_name =  str_replace("Eden", $data['website_name'], $st_admin_name);
         /* -------------- /@new enail template ---------------- */
 
         if(in_array($data['txn_payment_status'], array('Refunded'))){
             $email_subject = str_replace("New", "Cancelled/Refunded", $email_subject);
         }
       
-        /*============== TO ADMIN ============*/
-        $to_email = $st_admin_email;
         $to_name = $st_admin_name;
-        Mail::send($Email_Template.'.bookingmail', $data, function($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
-            $message->to($to_email, $to_name)->subject($email_subject);
+        /*============== TO ADMIN ============*/
+     
+        /*============== TO amjad ============*/
+        $to_email = "amjadalisheen@gmail.com";
+        $email_subject_amjad = $email_subject . ' amjad';
+        $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
+        Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_amjad, $to_email, $to_name) {
+            $message->to($to_email, $to_name)->subject($email_subject_amjad);
             $message->from($st_admin_from_email, $st_admin_name);
         });
+        Mail::send($Email_Template . '.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_amjad, $to_email, $to_name) {
+            $message->to($to_email, $to_name)->subject($email_subject_amjad);
+            $message->from($st_admin_from_email, $st_admin_name);
+        });
+        /*============== TO amjad ============*/
 
         /*============== Notifications Emails ============*/
-        //if (!empty($st_notification_email)) {
-            $email_to_array = explode(";", $st_notification_email);
-            //for ($x = 0; $x < count($email_to); $x++) {
-                Mail::send($Email_Template.'.bookingmail', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $email_to_array, $to_name) {
-                    $message->to($email_to_array, $to_name)->subject($email_subject);
+        if (!empty($st_notification_email)) {
+            $email_to = explode(";", $st_notification_email);
+            for ($x = 0; $x < count($email_to); $x++) {
+                Mail::send($Email_Template . '.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $email_to, $to_name) {
+                    $message->to($email_to, $to_name)->subject($email_subject);
                     $message->from($st_admin_from_email, $st_admin_name);
                 });
-            //}
-        //}
+            }
+        }
         /*============== Notifications Emails ============*/
         /*============== TO ADMIN ============*/
 
         /*============== TO CUSTOMER ============*/
-        $to_email = $data['cus_email'];
-        $to_name = $data['cus_title'] .' ' .$data['cus_name'];
-       Mail::send($Email_Template.'.bookingmail', $data, function($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
-            $message->to($to_email, $to_name)->subject($email_subject);
-            $message->from($st_admin_from_email, $st_admin_name);
-        });
+        if(!empty($data['email'])){
+            $to_email = $data['cus_email'];
+            $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
+            Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
+                $message->to($to_email, $to_name)->subject($email_subject);
+                $message->from($st_admin_from_email, $st_admin_name);
+            });
+        }
+        if(!empty($data['cus_email_1'])){
+            $to_email = $data['cus_email_1'];
+            $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
+            Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
+                $message->to($to_email, $to_name)->subject($email_subject);
+                $message->from($st_admin_from_email, $st_admin_name);
+            });
+        }
         /*============== TO CUSTOMER ============*/
+
+        /*============== TO COMPARE WEBSITE ============*/
+        if(!empty($data['email'])){
+            $to_email = $data['email'];
+            $to_name = $data['website_name'];
+            Mail::send($Email_Template . '.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
+                $message->to($to_email, $to_name)->subject($email_subject);
+                $message->from($st_admin_from_email, $st_admin_name);
+            });
+        }
+        if(!empty($data['alternate_email'])){
+            $to_email = $data['alternate_email'];
+            $to_name = $data['website_name'];
+            Mail::send($Email_Template . '.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
+                $message->to($to_email, $to_name)->subject($email_subject);
+                $message->from($st_admin_from_email, $st_admin_name);
+            });
+        }
+        /*============== /TO COMPARE WEBSITE ============*/
+
+        
 
 
 

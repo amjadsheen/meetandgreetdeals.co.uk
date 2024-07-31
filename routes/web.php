@@ -344,6 +344,7 @@ Route::post('/admin/bookings/delete/{id}', ['as' => 'bookings/delete', 'uses' =>
 Route::post('/admin/bookings/purge/{id}', ['as' => 'bookings/purge', 'uses' => 'Admin\BookingsController@purge'])->middleware('admin');
 Route::post('/admin/bookings/undelete/{id}', ['as' => 'bookings/undelete', 'uses' => 'Admin\BookingsController@undelete'])->middleware('admin');
 Route::post('/admin/bookings/send_email_to_customer/{id}', ['as' => 'bookings/send_email_to_customer', 'uses' => 'Admin\BookingsController@send_email_to_customer'])->middleware('admin');
+Route::post('/admin/bookings/confirmbookingbanktransfer/{id}', ['as' => 'bookings/confirmbookingbanktransfer', 'uses' => 'Admin\BookingsController@confirmbookingbanktransfer'])->middleware('admin');
 Route::post('/admin/bookings/send_payment_email/{id}', ['as' => 'bookings/send_payment_email', 'uses' => 'Admin\BookingsController@send_payment_email'])->middleware('admin');
 Route::post('/admin/bookings/printdone/{id}', ['as' => 'bookings/printdone', 'uses' => 'Admin\BookingsController@printdone'])->middleware('admin');
 Route::post('/admin/bookings/search', ['as' => 'bookings/search', 'uses' => 'Admin\BookingsController@index'])->middleware('admin');

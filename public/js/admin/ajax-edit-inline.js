@@ -328,6 +328,45 @@ $(".ResendEmail").click(function(){
 
 });
 
+
+$(".ConfirmBooking").click(function(){
+    var response = prompt("Please Enter your password");
+    var master_password = '1010';
+    if (response == master_password) {
+        var id = $(this).data("id");
+        var url = $(this).data("url");
+        var token = $("meta[name='csrf-token']").attr("content");
+        $.ajax(
+            {
+                url: url,
+                type: 'POST',
+                data: {
+                    "id": id,
+                    "_token": token,
+                },
+                success: function (reponse) {
+                    //console.log(reponse);
+                    if (reponse['error'] == 1) {
+                        alert(reponse['msg']);
+                    } else {
+                        //alert(reponse['success']);
+                        alert("Confirm Successfully and Email sent");
+                       // var id = reponse['id'];
+                        $('#res' + id).show();
+                    }
+
+                }
+            });
+    } else if (response == null) {
+        return false;
+    } else {
+        alert("Password doesn't Match!!! Cannot proceed");
+        // return false;
+    }
+
+
+});
+
 $(".ResendEmailPayment").click(function(){
     var response = prompt("Please Enter your password");
     var master_password = '1010';

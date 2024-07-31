@@ -829,7 +829,13 @@ class BookingController extends Controller
         $carwash_in_only = 0;
         $vehical_type_id = 0;
 
-               
+        if( $payment_option == 6){ // if banktransfer selected
+                
+            $paylater_errors = array();
+            $this->validate($request, [
+                'bank_transition_refernce' => 'required'
+            ]);
+        }      
         if ($err == 0 && !empty($payment_option)) {
             foreach($prepared_session_data['vehicles'] as $key=>$vehical){
                 $var_date1 = $vehical['date1'];
@@ -1138,6 +1144,11 @@ class BookingController extends Controller
                     $booking_update->account_num = $request->account_num;
                 }
 
+                if( $payment_option == 6){ //if bankteranfer is added
+                    $booking_update->bank_transition_refernce = $request->bank_transition_refernce;
+                }
+
+                
                 
 
                 $carwash = $booking_update->carwash_in_and_out + $booking_update->carwash_out_only + $booking_update->carwash_in_only;
@@ -1164,7 +1175,7 @@ class BookingController extends Controller
                 $email_subject = Edenemail::get_email_settings('st_new_booking_subject');
                 /*======================== /GET EMAIL CONTENT ===========================*/
 
-                if ($payment_option == 1) { // SEND EMAIL TO CUSTOMER IN CASE PAYLATER
+                if ($payment_option == 1 || $payment_option == 6) { // SEND EMAIL TO CUSTOMER IN CASE PAYLATER
                     /*======================== EMAIL TO CUSTOMER ===========================*/
                     if(!empty($data['cus_email'])){
                         $to_email = $data['cus_email'];
@@ -1250,6 +1261,9 @@ class BookingController extends Controller
                 }
 
             }
+
+
+            
 
                
 
@@ -1354,13 +1368,17 @@ class BookingController extends Controller
                                     } catch (Exception $e) {
                                         error_log($e->getMessage()); // Log the error message
                                     }
+                            }else if( $payment_option == 6){ //if bank_transition_refernce is added
+                    
+                                $redirect = '/booking-confirmation';
+                                $data = 0;
                             }
                         } else {
                             $redirect = '/booking-compare';
                             $data = 0;
                         }
                 } else {
-                    dd("booking not exists");
+                    
                     $redirect = '/';
                     $data = 0;
                 }

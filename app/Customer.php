@@ -32,3 +32,5 @@ class Customer extends Model
 //ALTER TABLE `customers` ADD `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `cus_status`, ADD `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `created_at`;
 //ALTER TABLE `bookings` ADD `customer_contact` varchar(191) NULL DEFAULT NULL AFTER `customer_id`;
 //ALTER TABLE `car_washes` ADD `status` NOT NULL DEFAULT '1' AFTER `car_wash_price`;
+
+//ALTER TABLE `bookings` ADD `bank_transition_refernce` varchar(191) NULL DEFAULT NULL AFTER `account_num`;

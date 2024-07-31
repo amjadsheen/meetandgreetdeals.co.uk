@@ -539,6 +539,20 @@
                                                data-value="{{$booking->bk_payment_method}}"
                                                data-name="bk_payment_method">{{$payment_method}}
                                             </a>
+                                            <?php if ($booking->bk_payment_method==6){ ?>
+                                            <br>
+                                            Transition Ref No: 
+                                            <a class="testEdit" data-type="text" data-column="bank_transition_refernce"
+                                               data-url="{{route('bookings/updateinline', ['id'=>$booking->booking_id])}}"
+                                               data-pk="{{$booking->booking_id}}"
+                                               {{--data-value="{{$booking->bank_transition_refernce}}"--}}
+                                               data-title="change"
+                                               data-name="bank_transition_refernce">{{$booking->bank_transition_refernce}}
+                                            </a>
+                                            
+                                            <br>
+                                            <a style="cursor: pointer;color: #f19408;" class="ConfirmBooking" data-url="{{route('bookings/confirmbookingbanktransfer', ['id'=>$booking->booking_id])}}"  data-id="{{ $booking->booking_id }}">Confirm Booking</a>
+                                            <?php } ?>
                                             <hr>
                                             <?php
                                             if ($booking->bk_payment_method==1){
@@ -628,7 +642,7 @@
                                                         <i style="color: #2bbe2beb; display: none" id="res{{ $booking->booking_id }}" class="icon fa fa-check"></i>
                                                 @endif
                                                <br>
-                                                <a style="cursor: pointer; color: #f19408;"  class="ResendEmailPayment"  data-url="{{route('bookings/send_payment_email', ['id'=>$booking->booking_id])}}"  data-id="{{ $booking->booking_id }}"  id="res-pay{{ $booking->booking_id }}">Re-Send Payment Email</a>
+                                                <a style="display:none;cursor: pointer; color: #f19408;"  class="ResendEmailPayment"  data-url="{{route('bookings/send_payment_email', ['id'=>$booking->booking_id])}}"  data-id="{{ $booking->booking_id }}"  id="res-pay{{ $booking->booking_id }}">Re-Send Payment Email</a>
                                                 <br>
                                                 <a style="cursor: pointer;color: #f19408;"  class="printdone"  data-url="{{route('bookings/printdone', ['id'=>$booking->booking_id])}}"  data-id="{{ $booking->booking_id }}" >Print Done</a>
                                                 @if($booking->bk_print_flag == 1 )

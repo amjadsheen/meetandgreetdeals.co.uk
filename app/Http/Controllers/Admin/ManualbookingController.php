@@ -355,50 +355,44 @@ class ManualbookingController  extends Controller
                           /*============== TO ADMIN ============*/
                           $to_email = $st_admin_email;
                           $to_name = $st_admin_name;
-                          Mail::send($Email_Template.'.bookingmail', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
+                          Mail::send($Email_Template.'.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
                               $message->to($to_email, $to_name)->subject($email_subject);
                               $message->from($st_admin_from_email, $st_admin_name);
                           });
                           /*============== TO ADMIN ============*/
 
                           /*============== Notifications Emails ============*/
-                          if (!empty($st_notification_email)) {
-                              $email_to_array = explode(";", $st_notification_email);
-                                //for ($x = 0; $x < count($email_to); $x++) {
-                                  Mail::send($Email_Template.'.bookingmail', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $email_to_array, $to_name) {
-                                      $message->to($email_to_array, $to_name)->subject($email_subject);
-                                      $message->from($st_admin_from_email, $st_admin_name);
-                                  });
-                              //}
-                          }
-                          /*============== Notifications Emails ============*/
-
-                          /*============== EMAIL IF AIRPORT IS LUTON ============*/
-                          if ($data['airport_name'] == 'London Luton') {
-                              $email_Luton = 'amjadalisheen@yahoo.com';
-                              Mail::send($Email_Template.'.bookingmail', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $email_Luton, $to_name) {
-                                  $message->to($email_Luton, $to_name)->subject($email_subject);
-                                  $message->from($st_admin_from_email, $st_admin_name);
-                              });
-                              /*
-                              $email_Luton = 'emgparking@gmail.com';
-                              Mail::send($Email_Template.'.bookingmail', $data, function($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $email_Luton, $to_name) {
-                                  $message->to($email_Luton, $to_name)->subject($email_subject);
-                                  $message->from($st_admin_from_email, $st_admin_name);
-                              });*/
-                          }
-                          /*============== EMAIL IF AIRPORT IS LUTON ============*/
-                      }
+                            if (!empty($st_notification_email)) {
+                                $email_to = explode(";", $st_notification_email);
+                                for ($x = 0; $x < count($email_to); $x++) {
+                                    Mail::send($Email_Template . '.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $email_to, $to_name) {
+                                        $message->to($email_to, $to_name)->subject($email_subject);
+                                        $message->from($st_admin_from_email, $st_admin_name);
+                                    });
+                                }
+                            }
+                            /*============== Notifications Emails ============*/
+                    }
 
                       if($email_to_client == 1) {
                           /*============== TO CUSTOMER ============*/
-                          $to_email = $data['cus_email'];
-                          $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
-                          Mail::send($Email_Template.'.bookingmail', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
-                              $message->to($to_email, $to_name)->subject($email_subject);
-                              $message->from($st_admin_from_email, $st_admin_name);
-                          });
-                          /*============== TO CUSTOMER ============*/
+                        if(!empty($data['email'])){
+                            $to_email = $data['cus_email'];
+                            $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
+                            Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
+                                $message->to($to_email, $to_name)->subject($email_subject);
+                                $message->from($st_admin_from_email, $st_admin_name);
+                            });
+                        }
+                        if(!empty($data['cus_email_1'])){
+                            $to_email = $data['cus_email_1'];
+                            $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
+                            Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
+                                $message->to($to_email, $to_name)->subject($email_subject);
+                                $message->from($st_admin_from_email, $st_admin_name);
+                            });
+                        }
+                        /*============== TO CUSTOMER ============*/
                       }
 
 

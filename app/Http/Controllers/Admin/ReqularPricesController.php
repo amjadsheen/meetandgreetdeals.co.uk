@@ -61,7 +61,7 @@ class ReqularPricesController extends Controller
 
         $column_name = $request->name;
         $column_value = $request->value;
-        if ($request->name && $request->value) {
+        if ($request->name ) {
             $update = RegularPrices::select()
                 ->where('id', '=', $id)
                 ->update([$column_name => $column_value]);
