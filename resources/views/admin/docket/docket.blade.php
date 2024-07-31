@@ -200,7 +200,7 @@ $qrcode = $bookings->booking_id;
     <tr>
         <!-- FIRST COLUMN START PAGE 1 -->
         <td width="40%" valign="top" style="position:relative;padding-right: 12px; border-right:thin; border-right-style:dashed; border-color:#A0A0A4;">            <div style="float:left;">
-                <img align="middle" width="140" src="/storage/uploads/{{$bookings->website_logo}}" alt="{{$bookings->website_name}}" />
+                <img align="middle" width="140" src="/storage/uploads/{{$domain->website_logo}}" alt="{{$domain->website_name}}" />
                 <?php if ((isset($_GET["print"]) && ($_GET["print"] == 3)) && (isset($_GET["docket"]) &&  ($_GET["docket"] != 1))) { ?>
                     <span style="padding: 2px 40px;float: right;margin-top: 33px;"><span><?php echo date('d/m/Y', strtotime($bookings->bk_date)); ?></span> ( <span><?php echo $booking_count; ?> ) </span></span>
                 <?php } ?>
@@ -750,7 +750,7 @@ $qrcode = $bookings->booking_id;
         <!--SECOND COLUMN START PAGE 1-->
         <td width="40%" valign="top" style="padding-left:12px; padding-right:12px; border-right:thin; border-right-style:dashed; border-color:#A0A0A4;">
             <div style="float:left;">
-                <img align="middle" width="300" src="/storage/uploads/{{$bookings->website_logo}}" alt="{{$bookings->website_name}}" />
+                <img align="middle" width="300" src="/storage/uploads/{{$domain->website_logo}}" alt="{{$domain->website_name}}" />
             </div>
             <div style="float:right;"><img width="100" class="<?php echo $hideimage; ?>" src="/storage/qrcodes/{{$bookings->booking_id}}.png" />
             </div>

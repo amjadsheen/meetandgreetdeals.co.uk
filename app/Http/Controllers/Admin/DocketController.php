@@ -27,7 +27,7 @@ class DocketController  extends Controller
     {
         //dd('asdasdasd');
 
-
+        $domain = Domain::get_domain_id(1);
         $bookings = DB::table("bookings as bb");
         $bookings =  $bookings->join("countries as country", "country.id", "=", "bb.country_id");
         $bookings =  $bookings->join("websites as ww", "ww.id", "=", "bb.website_id");
@@ -84,15 +84,15 @@ class DocketController  extends Controller
         //dd($booking_count);
         if (request()->has('docket') && (!empty(request()->input('docket'))) && (request()->input('docket') == 5 || request()->input('docket') == 6)) {
             $docket= request()->input('docket');
-            return view('admin.docket.docket-4-5', compact('bookings','docket'));
+            return view('admin.docket.docket-4-5', compact('bookings','docket', 'domain'));
         }else if (request()->has('docket') && (!empty(request()->input('docket'))) && (request()->input('docket') == '22-p' || request()->input('docket') == '22')) {
             $print = $docket= request()->input('print');
             $docket = $docket= request()->input('docket');
-            return view('admin.docket.docket-22', compact('bookings','print','docket','booking_count'));
+            return view('admin.docket.docket-22', compact('bookings','print','docket','booking_count', 'domain'));
         }else{
             $print = $docket= request()->input('print');
             $docket = $docket= request()->input('docket');
-            return view('admin.docket.docket', compact('bookings','print','docket','booking_count'));
+            return view('admin.docket.docket', compact('bookings','print','docket','booking_count', 'domain'));
         }
     }
 

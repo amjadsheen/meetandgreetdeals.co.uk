@@ -197,7 +197,7 @@ $qrcode = $bookings->booking_id;
                 <tr>
                     <td colspan="2">
                         <div style="font-size:16px; text-align:center"><strong>
-                                <span style="margin-left: 2px;"><img align="middle" width="200" src="/storage/uploads/{{$bookings->website_logo}}" alt="{{$bookings->website_name}}" /></span>
+                                <span style="margin-left: 2px;"><img align="middle" width="200" src="/storage/uploads/{{$domain->website_logo}}" alt="{{$bookings->website_name}}" /></span>
                                 <span style="float: righet;">
                                     @if (trim($bookings->whatsapp_num) !== '')
                                     Whats'app Your Details to {{ $bookings->whatsapp_num}}
@@ -570,7 +570,7 @@ $qrcode = $bookings->booking_id;
                 <tr>
                     <td colspan="2">
                         <div style="font-size:16px; text-align:center"><strong>
-                                <span style="margin-left: 2px;"><img align="middle" width="200" src="/storage/uploads/{{$bookings->website_logo}}" alt="{{$bookings->website_name}}" /></span>
+                                <span style="margin-left: 2px;"><img align="middle" width="200" src="/storage/uploads/{{$domain->website_logo}}" alt="{{$bookings->website_name}}" /></span>
                                 <span style="float: righet;">
                                     @if (trim($bookings->whatsapp_num) !== '')
                                     Whats'app Your Details to {{ $bookings->whatsapp_num}}
@@ -591,7 +591,7 @@ $qrcode = $bookings->booking_id;
                 <tr>
                     <td colspan="2">
                         <div style="font-size:16px; text-align:center"><strong>
-                                <span style="margin-left: 2px;"><img align="middle" width="200" src="/storage/uploads/{{$bookings->website_logo}}" alt="{{$bookings->website_name}}" /></span>
+                                <span style="margin-left: 2px;"><img align="middle" width="200" src="/storage/uploads/{{$domain->website_logo}}" alt="{{$bookings->website_name}}" /></span>
                                 <span style="float: righet;">
                                     @if (trim($bookings->whatsapp_num) !== '')
                                     Whats'app Your Details to {{ $bookings->whatsapp_num}}
@@ -965,7 +965,7 @@ $qrcode = $bookings->booking_id;
                 <tr>
                     <td colspan="2">
                         <div style="font-size:16px; text-align:center"><strong>
-                                <span style="margin-left: 2px;"><img align="middle" width="200" src="/storage/uploads/{{$bookings->website_logo}}" alt="{{$bookings->website_name}}" /></span>
+                                <span style="margin-left: 2px;"><img align="middle" width="200" src="/storage/uploads/{{$domain->website_logo}}" alt="{{$bookings->website_name}}" /></span>
                                 <span style="float: righet;">
                                     @if (trim($bookings->whatsapp_num) !== '')
                                     Whats'app Your Details to {{ $bookings->whatsapp_num}}
