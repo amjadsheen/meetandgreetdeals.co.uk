@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
+use App\Classes\Domain;
 use App\Agents;
 use App\Booking;
 use App\Website;
