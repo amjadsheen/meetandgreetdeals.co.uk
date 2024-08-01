@@ -123,7 +123,7 @@ class Edenemail
         }
 
         if(!empty($domain->website_logo)){
-            $campare_site_log = $domain->website_logo;
+            $campare_site_log = $bk_detail->website_logo;
         }else{
             $campare_site_log = '';
         }
