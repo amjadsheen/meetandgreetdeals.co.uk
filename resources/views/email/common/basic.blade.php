@@ -78,13 +78,10 @@
                     <td class="b1" colspan="4">Booking Details</h2></td>
                 </tr>
                 <tr>
-                    <td style="padding: 0;" colspan="4">&nbsp;</h2></td>
-                </tr>
-                <tr>
                     <td class="b3">Booking Code:</td>
                     <td class="b3">{{ $bk_ref }} </td>
-                    <td class="b3">Booking Date:</td>
-                    <td class="b3">{{$bk_date}} </td>
+                    <!-- <td class="b3">Booking Date:</td>
+                    <td class="b3">{{$bk_date}} </td> -->
                 </tr>
                 <tr>
                     <td class="b3">Name:</td>
@@ -106,7 +103,7 @@
                 <tr>
                     <td class="b3">Departure:</td>
                     <td class="b3">{{$bk_from_date}}</td>
-                    <td class="b3">Landing:</td>
+                    <td class="b3">Arrival:</td>
                     <td class="b3">{{$bk_to_date}}</td>
                 </tr>
                 <tr>
@@ -116,21 +113,19 @@
                     <td class="b3">{!! $current_booking_status !!}</td>
                 </tr>
                 
-                <tr>
-                    <td style="padding: 0;" colspan="4">&nbsp;</h2></td>
-                </tr>
+                
                 <tr>
                     <td class="b1" colspan="4">Parking</h2></td>
                 </tr>
+                
                 <tr>
-                    <td style="padding: 0;" colspan="4">&nbsp;</h2></td>
-                </tr>
-                <tr>
-                <td><img style="width: 100%; background: linear-gradient(#dc3545ed, #c6890f) !important;" src="{{$website_logo}}" alt="Logo"></td>
+                <td><img style="width: 100%; background: linear-gradient(#dc3545ed, #c6890f) !important;" src="{{$campare_website_logo}}" alt="Logo"></td>
                 <td colspan="3">
-                    {{ $website_name_compare }} <br>Parking is a trading name of Extra Enterprise Ltd. Registration Number 13317269
-                    <a href="{{$directions}}" target="_blank">directions</a><br>
-                    Opening hours: The car park is always open (24/7)
+                    {{ $website_name_compare }} 
+                    {{ $airport_name }}  <a href="{{$directions}}" target="_blank">directions</a><br>
+                    <p>Attendent keeps the keys</p>
+                    <p><strong>Opening hours:<strong><br> 09:00-05:00 Mon-Fri</p>
+                    <p>Parking is a trading name of Extra Enterprise Ltd. Registration Number 13317269</p>
                 </td>
                 </tr>
             </table>

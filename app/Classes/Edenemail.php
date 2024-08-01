@@ -121,8 +121,15 @@ class Edenemail
         }else{
             $site_log = '';
         }
-        if(!empty($domain->website_email_banner)){
-            $email_banner = $domain->website_email_banner;
+
+        if(!empty($domain->website_logo)){
+            $campare_site_log = $domain->website_logo;
+        }else{
+            $campare_site_log = '';
+        }
+
+        if(!empty($bk_detail->website_email_banner)){
+            $email_banner = $bk_detail->website_email_banner;
         }else{
             $email_banner = 'website_email_banner.png';
         }
@@ -164,6 +171,7 @@ class Edenemail
         
         $data['website_name_compare'] = $domain->website_name;
         $data['website_logo'] = $domain->website_url.'/storage/uploads/'.$site_log;
+        $data['campare_website_logo'] = $domain->website_url.'/storage/uploads/'.$campare_site_log;
         $data['website_email_banner'] = $domain->website_url.'/storage/uploads/'.$email_banner;
         
         $data['image_right'] = $domain->website_url.'/storage/uploads/email/image_right.png';
