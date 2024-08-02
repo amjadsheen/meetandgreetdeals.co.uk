@@ -542,7 +542,7 @@ class BookingController extends Controller
         }
         if(!empty($services_terminals_prices)){
             usort($services_terminals_prices, function($a, $b) {
-                return $b['sort'] - $a['sort'];
+                return $a['net_price'] - $b['net_price'];
             });
         }
         
