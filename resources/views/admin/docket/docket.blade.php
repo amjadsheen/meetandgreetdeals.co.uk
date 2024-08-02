@@ -344,7 +344,7 @@ $qrcode = $bookings->booking_id;
 
                 </tr>
                 <tr height="<?php echo $rh1; ?>">
-                    <td width="40%">
+                    <td width="30%">
                         <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
                             <div style="font-size:15px">COLOUR:</div>
                         </span>
@@ -361,20 +361,37 @@ $qrcode = $bookings->booking_id;
                             </div>
                         </span>
                     </td>
-                    <td width="30%">
-                        <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
-                            <div style="font-size:15px">IN MILEAGE:</div>
+                    
+
+                    <td colspan="2" style="width: 100%;text-align:center;line-height: 17px;">
+                        <span class="<?php echo $print; ?> bbbb" style="color:<?php echo $color ?>;">
+                        <strong>CAR<span style="visibility: hidden">-</span>WASH </strong>
                         </span>
+                        <?php
+                        if (trim($bookings->carwash_in_and_out) != 0) {
+
+                            $title = '<span style="font-weight: 100; font-size: 13px;">FULL CAR WASH (IN AND OUT)</span>';
+                        } elseif (trim($bookings->carwash_out_only) != 0) {
+                            $title = '<span style="font-weight: 100; font-size: 13px;">CAR WASH (ONLY OUTSIDE) </span>';
+                        } elseif (trim($bookings->carwash_in_only) != 0) {
+                            $title = '<span style="font-weight: 100; font-size: 13px;">CAR WASH (ONLY INSIDE)</span>';
+                        } else {
+                            $title = 'CAR WASH';
+                        }
+                        ?>
+
                         <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
-                            <div class="normal">&nbsp;</div>
-                        </span>
-                    </td>
-                    <td width="30%">
-                        <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
-                            <div style="font-size:15px">OUT MILEAGE:</div>
-                        </span>
-                        <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
-                            <div class="normal">&nbsp;</div>
+                            <div class="normal" style="font-size: 23px; margin-top: -2px; padding: 2px;">
+                                <?php
+                                $carwash = $bookings->carwash_in_and_out + $bookings->carwash_out_only + $bookings->carwash_in_only;
+                                if ($carwash != 0) {
+                                    echo $title . ' <span style="font-size:15px" class="hideprint">' . $bookings->cur_symbol . " " . number_format($carwash, 2, '.', '') . '</span>';
+                                } else {
+                                    echo ' ';
+                                }
+                                ?>
+                                &nbsp;
+                            </div>
                         </span>
                     </td>
 
@@ -535,44 +552,31 @@ $qrcode = $bookings->booking_id;
             <!-- CAR WASH  -->
             <table style="font-size:<?php echo $tbl_font; ?>;" width="100%" border="1" cellpadding="2" cellspacing="0" bordercolor="<?php echo $color ?>">
                 <tr height="<?php echo $rh1; ?>">
-                    <td width="1%" rowspan="" style="vertical-align: middle;">
+                    <td style="width: 30%;text-align:center;line-height: 17px;">
                         <span class="<?php echo $print; ?> bbbb" style="color:<?php echo $color ?>;">
-                            CAR<span style="visibility: hidden">-</span>WASH
-                        </span>
+                           <strong>BOOKING DAYS</strong>
+                        </span><br>
+                        <span class="<?php echo $print; ?> bbbb" style="font-size:24px;font-weight: 900; color:<?php echo $color ?>;">
+                        <?php echo $bookings->bk_days; ?> 
+                        </span> Days
                     </td>
-                    <td>
-                        <?php
-                        if (trim($bookings->carwash_in_and_out) != 0) {
-
-                            $title = '<span style="font-weight: 100; font-size: 17px;">ADD FULL CAR WASH (IN AND OUT)</span>';
-                        } elseif (trim($bookings->carwash_out_only) != 0) {
-                            $title = '<span style="font-weight: 100; font-size: 17px;">ADD CAR WASH (ONLY OUTSIDE) </span>';
-                        } elseif (trim($bookings->carwash_in_only) != 0) {
-                            $title = '<span style="font-weight: 100; font-size: 17px;">ADD CAR WASH (ONLY INSIDE)</span>';
-                        } else {
-                            $title = 'CAR WASH';
-                        }
-                        ?>
-
+                    <td width="30%">
+                        <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
+                            <div style="font-size:15px">IN MILEAGE:</div>
+                        </span>
                         <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
-                            <div class="normal" style="font-size: 23px; margin-top: -2px; padding: 2px;">
-                                <?php
-                                $carwash = $bookings->carwash_in_and_out + $bookings->carwash_out_only + $bookings->carwash_in_only;
-                                if ($carwash != 0) {
-                                    echo $title . ' <span class="hideprint">' . $bookings->cur_symbol . " " . number_format($carwash, 2, '.', '') . '</span>';
-                                } else {
-                                    echo 'N/A';
-                                }
-                                ?>
-                                &nbsp;
-                            </div>
+                            <div class="normal">&nbsp;</div>
                         </span>
                     </td>
-
-
+                    <td width="30%">
+                        <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
+                            <div style="font-size:15px">OUT MILEAGE:</div>
+                        </span>
+                        <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
+                            <div class="normal">&nbsp;</div>
+                        </span>
+                    </td>
                 </tr>
-
-
             </table>
             <!-- /CAR WASH  -->
             <div style="margin-bottom: 6px"></div>
