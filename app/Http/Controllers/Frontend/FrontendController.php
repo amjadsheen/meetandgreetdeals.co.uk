@@ -69,6 +69,15 @@ class FrontendController extends Controller
             ->get();
         /* ======= Banners ======= */
 
+
+        /* ======= Banners ======= */
+        $partners = DB::table('websites')
+            ->where('disable', '=', 0)
+            ->where('show_homepage', '=', 1)
+            ->orderByRaw('id ASC')
+            ->get();
+        /* ======= Banners ======= */
+
         /* ======= Banners ======= */
         $directions = DB::table('directions')
             ->where('disable', '=', 0)
@@ -174,12 +183,12 @@ class FrontendController extends Controller
                 //dd($selected_terminals);
                 /* ======= selected terminals ======= */
                 //dd($domain->website_templete);
-                return view($domain->website_templete . '.home', compact('page_title', 'meta_array', 'redirect', 'countries', 'services', 'domain', 'news', 'banners', 'homepromo', 'reviews', 'airports', 'currencies', 'settings', 'booking_edit', 'bk_details', 'selected_airport', 'selected_terminals', 'directions', 'terminal_access_options', 'vehical_selction', 'whyus'));
+                return view($domain->website_templete . '.home', compact('page_title', 'meta_array', 'redirect', 'countries', 'services', 'domain', 'news', 'banners', 'homepromo', 'reviews', 'airports', 'currencies', 'settings', 'booking_edit', 'bk_details', 'selected_airport', 'selected_terminals', 'directions', 'terminal_access_options', 'vehical_selction', 'whyus', 'partners'));
             }else{
-                return view($domain->website_templete . '.home', compact('page_title', 'meta_array', 'redirect', 'countries', 'services', 'domain', 'news', 'banners', 'homepromo', 'reviews', 'airports', 'currencies', 'settings', 'booking_edit', 'directions', 'terminal_access_options', 'vehical_selction', 'whyus'));
+                return view($domain->website_templete . '.home', compact('page_title', 'meta_array', 'redirect', 'countries', 'services', 'domain', 'news', 'banners', 'homepromo', 'reviews', 'airports', 'currencies', 'settings', 'booking_edit', 'directions', 'terminal_access_options', 'vehical_selction', 'whyus', 'partners'));
             }
         } else {
-            return view($domain->website_templete . '.home', compact('page_title', 'meta_array', 'redirect', 'countries', 'services', 'domain', 'news', 'banners', 'homepromo', 'reviews', 'airports', 'currencies', 'settings', 'booking_edit', 'directions', 'terminal_access_options', 'vehical_selction', 'whyus'));
+            return view($domain->website_templete . '.home', compact('page_title', 'meta_array', 'redirect', 'countries', 'services', 'domain', 'news', 'banners', 'homepromo', 'reviews', 'airports', 'currencies', 'settings', 'booking_edit', 'directions', 'terminal_access_options', 'vehical_selction', 'whyus', 'partners'));
         }
     }
 

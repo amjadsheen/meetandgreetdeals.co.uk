@@ -717,7 +717,7 @@
                                 <input name="currency1" id="currency1" type="hidden" value="{{$currency->id}}">
                             @endforeach
                             <input style="border: transparent; background-color: #fff;" class="datetime" id="discount_coupon" name="discount_coupon" type="hidden" value="" readonly>
-                            <input type="hidden" id="terminal_parking_fee" name="terminal_parking_fee" value="Y">
+                            <input type="hidden" id="terminal_parking_fee" name="terminal_parking_fee" value="N">
                             <input type="hidden" id="website_id" name="website_id" value="0">
                             <input type="hidden" id="all_services" name="all_services" value="0">
                             <div class="col-lg-6 col-sm-12">
@@ -818,6 +818,27 @@ What fees you may need to pay</p>
     </div>
   </div>
 </div>
+
+
+<!-- Clients Section -->
+<section id="clients" class="clients section">
+<div class="text-center mb-5">
+  <h1 class="text-warning">Our Partners</h1>
+</div>
+<div class="container">
+
+  <div class="swiper clients-slider init-swiper">
+    <div class="swiper-wrapper  align-items-center">
+    @foreach($partners as $website)
+      <div class="swiper-slide"><a href="{{$website->website_url}}" target="_blank"><img src="/storage/uploads/{{$website->website_logo}}" class="img-fluid" alt=""></a></div>
+    @endforeach
+    </div>
+  </div>
+
+</div>
+
+</section><!-- /Clients Section -->
+
 <!-- ======= Cta Section ======= -->
 <section id="cta" class="cta">
   <div class="container">
@@ -837,6 +858,8 @@ What fees you may need to pay</p>
 
   </div>
 </section><!-- End Cta Section -->
+
+
 
 <!-- ======= Portfoio Section ======= -->
 

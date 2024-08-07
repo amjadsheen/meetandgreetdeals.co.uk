@@ -262,6 +262,7 @@ class BookingController extends Controller
     }
     public function CompareBooking(Request $request)
     {
+       
         $requset_data = $request->all();
         
         if(empty($requset_data)){
@@ -273,7 +274,6 @@ class BookingController extends Controller
         }
        //dd($requset_data);
         //Domain::AddNewFiledToSession('terminal_parking_fee', 'P');
-        $requset_data['terminal_parking_fee'] = 'P';
         $prepared_session_data = Domain::SetSessionData($requset_data);
         //dd($prepared_session_data);
         // Add vehical array to the request data
@@ -292,8 +292,9 @@ class BookingController extends Controller
 
         $terminal_access_options = array(
             // 'N' => 'Pay Yourself Terminal Access fee ( Drop of Chargers) upon Departure and Arrival.',
-            'P' => 'Add Now (Departure & Arrival 25 mins Only)',
             'N' => 'Customer are responsible to pay Terminal fee upon Departure and Arrival(Not Added)',
+            'P' => 'Add Now (Departure & Arrival 25 mins Only)',
+            
 
         );
         $vehical_selction = array(
@@ -1752,6 +1753,7 @@ class BookingController extends Controller
 
     public function Checkout(Request $request)
     {
+    
         Domain::AddNewFiledToSession('website_id',$request['website_id']);
         $prepared_session_data = session('booking_data');
         //dd($prepared_session_data);
@@ -1760,8 +1762,9 @@ class BookingController extends Controller
         $settings = [];
         $terminal_access_options = array(
             // 'N' => 'Pay Yourself Terminal Access fee ( Drop of Chargers) upon Departure and Arrival.',
-            'P' => 'Add Now (Departure & Arrival 25 mins Only)',
             'N' => 'Customer are responsible to pay Terminal fee upon Departure and Arrival(Not Added)',
+            'P' => 'Add Now (Departure & Arrival 25 mins Only)',
+            
 
         );
         if( !empty($prepared_session_data) && count($prepared_session_data) > 5){
@@ -1827,6 +1830,25 @@ class BookingController extends Controller
                 $settings = $this->get_website_settings($prepared_session_data['website_id']);
                 /* ======= /Service ======= */
                 $vehicaltype = VehicalType::all();
+                $vehicaltype_enabled = [];
+
+                foreach ($vehicaltype as $veh) {
+                    $enabled_vehicles = DB::table("car_washes as cw")
+                        ->join("vehical_types as vv", "vv.id", "=", "cw.vehical_type_id")
+                        ->join("websites as site", "site.id", "=", "cw.website_id")
+                        ->where('cw.vehical_type_id', $veh->id)
+                        ->where('cw.status', 1)
+                        ->where('cw.car_wash_type', '!=', 'carwash_spray_only')
+                        ->where('cw.website_id', $prepared_session_data['website_id'])
+                        ->select("vv.*")
+                        ->get()
+                        ->toArray();  // Convert the collection to an array
+
+                    $vehicaltype_enabled = array_merge($vehicaltype_enabled, $enabled_vehicles);
+                }
+
+                $vehicaltype_enabled = array_filter($vehicaltype_enabled);
+                
                 /* ======= Customer ======= */
                 $show_login = 1;
 
@@ -1873,9 +1895,9 @@ class BookingController extends Controller
                 //$carwash_selected = $this->get_carwash_veh_type_price($domain->id, $bk_details->vehical_type_id);
                 $carwash_selected = 0;
                 if(empty($errors)){
-                    return view($domain->website_templete . '.booking', compact('page_title', 'meta_array', 'terminal_access_options', 'services', 'domain', 'html', 'html_price_only', 'colors', 'settings', 'customer', 'show_login', 'prepared_session_data', 'skey', 'vehicaltype', 'carwash_selected', 'totalBookingPrice', 'mini_cart', 'cart', 'comparison_website'));
+                    return view($domain->website_templete . '.booking', compact('page_title', 'meta_array', 'terminal_access_options', 'services', 'domain', 'html', 'html_price_only', 'colors', 'settings', 'customer', 'show_login', 'prepared_session_data', 'skey', 'vehicaltype_enabled', 'carwash_selected', 'totalBookingPrice', 'mini_cart', 'cart', 'comparison_website'));
                 }else{
-                    return view($domain->website_templete . '.booking', compact('page_title', 'meta_array', 'services', 'terminal_access_options', 'domain', 'html', 'html_price_only', 'colors', 'settings', 'customer', 'show_login', 'prepared_session_data', 'skey', 'vehicaltype', 'carwash_selected', 'totalBookingPrice'))->withErrors($errors);
+                    return view($domain->website_templete . '.booking', compact('page_title', 'meta_array', 'services', 'terminal_access_options', 'domain', 'html', 'html_price_only', 'colors', 'settings', 'customer', 'show_login', 'prepared_session_data', 'skey', 'vehicaltype_enabled', 'carwash_selected', 'totalBookingPrice'))->withErrors($errors);
                 }
         }else{
             $query = http_build_query($request);
@@ -3504,6 +3526,7 @@ class BookingController extends Controller
     public function promocomaprepage($website_id){
         $date = date("Y-m-d");
         $promotion = DB::table("promotion_offers")
+        ->where('show_compare_page', 1)
         ->where('offer_active', 1)
         ->where('offer_date1', '<=', $date)
         ->where('offer_date2', '>=', $date)

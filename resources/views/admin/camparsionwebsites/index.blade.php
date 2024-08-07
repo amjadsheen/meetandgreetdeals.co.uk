@@ -93,8 +93,8 @@
                                     <!-- <th>Prefix</th> -->
                                     <th>Logo</th>
                                     <!-- <th>Favicon</th> -->
-                                    <!-- <th>Status</th> -->
-                                    <!-- <th>Template</th> -->
+                                    <th>Status</th>
+                                    <th>Show HomePage</th>
                                     <th>Actions</th>
 
                                 </tr>
@@ -141,7 +141,7 @@
 
 
 
-                                        <!--<td>
+                                        <td>
                                             @if($website->disable == 1)
                                                   <a class="testEdit" data-type="select"
                                                      data-source='[{"value":1,"text":"open"},{"value":0,"text":"close"}]' data-column="disable"
@@ -155,7 +155,23 @@
                                                  data-title="change" data-name="disable">close
                                                  </a>
                                             @endif
-                                        </td>-->
+                                        </td>
+
+                                        <td>
+                                            @if($website->show_homepage == 1)
+                                                  <a class="testEdit" data-type="select"
+                                                     data-source='[{"value":1,"text":"show"},{"value":0,"text":"hide"}]' data-column="show_homepage"
+                                                     data-url="{{route('websites/updateinline', ['id'=>$website->id])}}" data-pk="{{$website->id}}"
+                                                     data-title="change" data-name="show_homepage">show
+                                                  </a>
+                                            @else
+                                                 <a class="testEdit" data-type="select"
+                                                 data-source='[{"value":0,"text":"hide"},{"value":1,"text":"show"}]' data-column="show_homepage"
+                                                 data-url="{{route('websites/updateinline', ['id'=>$website->id])}}" data-pk="{{$website->id}}"
+                                                 data-title="change" data-name="show_homepage">hide
+                                                 </a>
+                                            @endif
+                                        </td>
 
                                         <!-- <td>
                                             {{$website->website_templete}}

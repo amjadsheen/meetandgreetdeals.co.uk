@@ -1101,7 +1101,7 @@
                                     <!-- flight information end here -->
 
 
-                                    @if($settings['carwash_box'] == 1 && ($prepared_session_data['vehical_num'] == 1))
+                                    @if($settings['carwash_box'] == 1 && ($prepared_session_data['vehical_num'] == 1) && !empty($vehicaltype_enabled))
                                     <div class="row">
                                         <div class="col-md-12  section-title">
                                             <hr>
@@ -1119,7 +1119,7 @@
                                             </div>
                                                 <div class="col-sm-12 col-md-4">
                                                     <div class="input-group">
-                                                    <input type="radio" id="ww-0"  class="form-controwl validate[required] ccheck" name="vehical_type_id" onclick="getcarwashhtml()" value="0" {{ $prepared_session_data['vehical_type_id'] == 0 ? "" : "" }}>
+                                                    <input type="radio" id="ww-0"  class="form-controwl  ccheck" name="vehical_type_id" onclick="getcarwashhtml()" checked value="0" {{ $prepared_session_data['vehical_type_id'] == 0 ? "" : "" }}>
                                                         <label class="form-label" style="padding: 18px; font-size: 23px; font-weight: 900;" for="ww-0" class="cclabel {{ $prepared_session_data['vehical_type_id'] == 0 ? "active-nn" : "" }} ">
                                                             No Thanks
                                                         </label>
@@ -1128,7 +1128,7 @@
                                             </div>
                                             <div class="row" id="vehicaldiv" style="background:#cccccc2e; display: {{ $prepared_session_data['vehical_type_id'] == '0' ? "none" : "flex"  }}">
 
-                                                @foreach($vehicaltype as $vtype)
+                                                @foreach($vehicaltype_enabled as $vtype)
 
                                                 <div class="col-lg-4 sm-12">
                                                     <div class="input-group">
@@ -1252,7 +1252,7 @@
                                                         $span = "";
                                                     }
                                                     ?>
-                                                    <option {{ $span}} value="{{$key}}">{{$tso}}</option>
+                                                    <option {{ $span}} {{ $prepared_session_data['terminal_parking_fee'] == $key ? "selected" : "" }} value="{{$key}}">{{$tso}}</option>
                                                 @endforeach
                                             </select>
                                 </div>
@@ -1275,7 +1275,7 @@
                                     <!-- <form onsubmit="javascript:applypromotion();return false;"> -->
                                     <div class="input-group mb-3">
                                         <label class="input-group-text" for="date1">Promo Code</label>
-                                        <input type="text" class="input-text form-control" size="20" name="promotion_code" id="promotion_code" onkeyup="javascript:checkverify();" value="">
+                                        <input type="text" class="input-text form-control" size="20" name="promotion_code" id="promotion_code" onkeyup="javascript:checkverify();" value="{{ $prepared_session_data['discount_coupon'] }}">
                                          <input class="btn-success btn-small btn" type="button" value="VERIFY" name="verify" id="verify" onclick="applypromotion();" disabled="disabled">
                                     </div>
                                     <!-- </form> -->

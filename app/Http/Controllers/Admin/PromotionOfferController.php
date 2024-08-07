@@ -125,6 +125,17 @@ class PromotionOfferController extends Controller
                 // $update_other_rows = PromotionOffer::select()->where($column_name, '=', 1)->where('website_id', $filter_website)->update([$column_name => 0]);
                 $update_other_rows = PromotionOffer::select()->where('offer_home', '=', 1)->update(['offer_home' => 0]);
             }
+            if ($column_name == 'show_compare_page' && $column_value == 1) {
+                $promotionOffer = PromotionOffer::find($id);
+                //if ($promotionOffer) {
+                    // Update other rows for the same website
+                    PromotionOffer::where('website_id', '=', $promotionOffer->website_id)->update(['show_compare_page' => 0]);
+                    // Update the selected row
+                    //$promotionOffer->update([$column_name => $column_value]);
+    
+                    //return response()->json(['success' => 200, 'message' => 'Updated successfully']);
+                //}
+            }
             if ($column_name == 'offer_special' && $column_value == 1) {
                 // $update_other_rows = PromotionOffer::select()->) {
                 // $update_other_rows = PromotionOffer::select()->where($column_name, '=', 1)->where('website_id', $filter_website)->update([$column_name => 0]);

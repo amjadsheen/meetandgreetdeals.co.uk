@@ -118,6 +118,7 @@
                                     <th width="85px">Start Date</th>
                                     <th width="85px">End Date</th>
                                     <th>Home Page</th>
+                                    <th>Campare Page</th>
                                     <th>Special (email)</th>
                                     <th>Status</th>
                                     <th>Auto Deactivate</th>
@@ -195,6 +196,20 @@
                                                    data-name="offer_home">Set
                                                 </a>
                                             @endif
+                                        </td>
+                                        <td>
+                                            @php
+                                                $isSet = $promotion->show_compare_page == 1;
+                                                $text = $isSet ? 'Unset' : 'Set';
+                                                $value = $isSet ? 0 : 1;
+                                            @endphp
+                                            <a class="special" data-type="select" data-column="show_compare_page"
+                                            data-source='[{"value":{{ $value }},"text":"{{ $text }} "}]'
+                                            data-url="{{ route('promotion-offers/updateinline', ['id' => $promotion->id]) }}"
+                                            data-pk="{{ $promotion->id }}" data-title="change"
+                                            data-website="{{ $filter_website }}"
+                                            data-name="show_compare_page">{{ $text }}
+                                            </a>
                                         </td>
                                         <td>
                                             @if($promotion->offer_special == 1)

@@ -34,3 +34,8 @@ class Customer extends Model
 //ALTER TABLE `car_washes` ADD `status` NOT NULL DEFAULT '1' AFTER `car_wash_price`;
 
 //ALTER TABLE `bookings` ADD `bank_transition_refernce` varchar(191) NULL DEFAULT NULL AFTER `account_num`;
+
+
+
+//ALTER TABLE `promotion_offers` ADD `show_compare_page` INT(3) NOT NULL DEFAULT '0' AFTER `offer_home`;
+// ALTER TABLE `websites` ADD `show_homepage` INT(3) NOT NULL DEFAULT '0' AFTER `websites`;
