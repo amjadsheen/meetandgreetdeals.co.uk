@@ -444,7 +444,7 @@ class BookingsController  extends Controller
                 ->first();
 
             if($rs->bk_discount_offer_value > 0){
-                if( $request->name && $request->value) {
+                if( $request->name ) {
                     $bk_final_amount = $column_value - $rs->bk_discount_offer_amount;
                     $update = Booking::select()
                         ->where('id', '=', $id)
@@ -456,7 +456,7 @@ class BookingsController  extends Controller
                 }
 
             }else{
-                if( $request->name && $request->value) {
+                if( $request->name ) {
                     $update = Booking::select()
                         ->where('id', '=', $id)
                         ->update([$column_name => $column_value]);
@@ -483,7 +483,7 @@ class BookingsController  extends Controller
             ->where('id', '=', $id)
             ->update(['bk_ve_pu_dt' => $column_value]);    
         
-        } else if( $column_name == 'cus_email' ||  $column_name == 'cus_email_1' ||  $column_name == 'cus_cell' ){
+        } else if( $column_name == 'cus_name' || $column_name == 'cus_surname' || $column_name == 'cus_email' ||  $column_name == 'cus_email_1' ||  $column_name == 'cus_cell' ){
             $update = Customer::select()
                 ->where('id', '=', $id)
                 ->update([$column_name => $column_value]);
@@ -491,7 +491,7 @@ class BookingsController  extends Controller
             
         }
 
-        if( $request->name && $request->value) {
+        if( $request->name ) {
             $update = Booking::select()
                 ->where('id', '=', $id)
                 ->update([$column_name => $column_value]);
