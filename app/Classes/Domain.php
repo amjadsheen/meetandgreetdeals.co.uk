@@ -141,16 +141,16 @@ class Domain
         //split $departure_date
         $departure_date_only = date('dmy', strtotime( $departure_date));
         $departure_time_only = date('H:i', strtotime( $departure_date));
-        $new_departure_satetime = $departure_date_only .'T'.$departure_time_only;
+        $new_departure_satetime = $departure_date_only .''.$departure_time_only;
     
         //split $return_date
         $return_date_only = date('dmy', strtotime( $return_date));
         $return_time_only = date('H:i', strtotime( $return_date));
-        $new_return_date_time = $return_date_only .'T'.$return_time_only;
+        $new_return_date_time = $return_date_only .''.$return_time_only;
         
         return 'T' . $departure_terminal . '' . $new_departure_satetime . '-T' . $return_terminal . '' . $new_return_date_time;
         }
-    
+        
     static function checkRequestData($request_data) {
         //var_dump($request_data);
         $required_keys_and_types = [
