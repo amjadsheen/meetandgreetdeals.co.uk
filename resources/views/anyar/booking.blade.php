@@ -767,7 +767,7 @@
 
                                 @if($show_login == 1)
                                 <!-- contact details start here -->
-                                <div class="row mt20">
+                                <div class="row mt200">
                                     <div class="col-md-12 section-title">
                                         <hr>
                                         <h2 class="section-title__title mb-2">CUSTOMER INFO</h2>
@@ -799,7 +799,7 @@
 
                                                 <div class="login-form">
                                                     <div class="row">
-                                                        <div class="col-md-12 mb20">
+                                                        <div class="col-md-12 mb200">
                                                             <h6><strong>Personal information</strong></h6>
                                                         </div>
                                                         <div class="col-sm-12 col-md-4">
@@ -833,7 +833,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-md-12 mb20">
+                                                        <div class="col-md-12 mb200">
                                                             <h6><strong>Contact Information</strong></h6>
                                                         </div>
                                                         <div class="col-sm-12 col-md-4">
@@ -888,7 +888,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-md-12 mb20">
+                                                        <div class="col-md-12 mb200">
                                                             <h6><strong>Address Information</strong></h6>
                                                         </div>
                                                         <div class="col-sm-12 col-md-12">
@@ -985,7 +985,7 @@
 
                                 <div id="bookingStep1" class="active" style="display: block;">
                                     <!-- vehicle details start here -->
-                                    <div class="row mt20">
+                                    <div class="row mt200">
                                         <div class="col-md-12  section-title">
                                             <hr>
                                             <h2 class="section-title__title mb-2">FLIGHT DETAIL</h2>
@@ -1012,7 +1012,7 @@
                                     <!-- vehicle details end here -->
 
                                     <!-- flight information start here -->
-                                    <div class="row mt20">
+                                    <div class="row mt200">
                                         <div class="col-md-12  section-title">
                                             <hr>
                                             <h2 class="section-title__title mb-2">VEHICLE DETAIL</h2>
@@ -1029,7 +1029,7 @@
                                     }
                                     //dd($prepared_session_data);
                                     foreach ($prepared_session_data['vehicles'] as $veh => $veh_data) {?>
-                                    <div class="col-md-12 mb20">
+                                    <div class="col-md-12 mb200">
                                             <hr>
                                             <h6>VEHICLE ({{ $veh }}) </h6>
                                         </div>
@@ -1100,7 +1100,7 @@
                                     <?php }?>
                                     <!-- flight information end here -->
 
-
+                                            
                                     @if($settings['carwash_box'] == 1 && ($prepared_session_data['vehical_num'] == 1) && !empty($vehicaltype_enabled))
                                     <div class="row">
                                         <div class="col-md-12  section-title">
@@ -1172,7 +1172,7 @@
                     </div>
                     <div class="faq-details-content require-validation">
                         <!-- contact details start here -->
-                        <div class="row mt20">
+                        <div class="row mt200">
                             <div class="col-md-12  section-title">
                                 <hr>
 
@@ -1198,12 +1198,12 @@
 
                         </div>
 
-                        <div class="row mt20">
+                        <div class="row mt200">
                             <div class="col-lg-12 col-md-2">
-                                <div class="form-group">
-                                    <label for="Title">Luggage:<small class="req text-lowercase"></small></label>
+                                <div class="form-group section-title">
+                                    <h2 class="section-title__title mb-2">Luggage:</h2><small class="req text-lowercase"></small>
                                 </div>
-                                <div class="form-group mt20">
+                                <div class="form-group mt200">
                                     <label class="luggage-lable" for="luggagecollection"><input type="radio" class="input-text-luggage" name="luggage" id="luggagecollection" value="Luggage to collect" {{ $prepared_session_data['luggage'] == "Luggage to collect" ? "checked" : "" }}><span>Luggage to collect</span>
                                     </label>
                                     <label class="luggage-lable" for="handcarry"><input type="radio" class="input-text-luggage" name="luggage" id="handcarry" value="Hand carry only" {{ $prepared_session_data['luggage'] == "Hand carry only" ? "checked" : "" }}><span>Hand carry only</span>
@@ -1217,12 +1217,12 @@
                         </div>
                         <div class="row mt20">
                             <div class="col-lg-12 col-md-2">
-                                <div class="form-group">
-                                    <label for="Title">Ulez Checked:
+                                <div class="form-group section-title">
+                                <h2 class="section-title__title mb-2">Ulez Checked:
                                         <small class="req text-lowercase"></small>
-                                    </label>
+                                    </h2>
                                 </div>
-                                <div class="form-group mt20">
+                                <div class="form-group mt200">
                                     <label class="luggage-lable" for="ulze-no"><input type="radio" class="input-text-luggage" name="ulze" id="ulze-no" value="No" {{ $prepared_session_data['ulze'] == "No" ? "checked" : "" }}><span>No</span>
                                     </label>
                                     <label class="luggage-lable" for="ulze-yes"><input type="radio" class="input-text-luggage" name="ulze" id="ulze-yes" value="Yes" {{ $prepared_session_data['ulze'] == "Yes" ? "checked" : "" }}><span>Yes</span>
@@ -1390,14 +1390,14 @@
 
                         </div>
                         <div class="row">
-                            <div class="col-sm-6 col-md-12 mt20 mb20">
+                            <div class="col-sm-6 col-md-12 mt200 mb200">
                                 <div class="input-submit" style="text-align: center">
                                     <div id="mini-cart" class="price">{!! $mini_cart !!}</div>
                                     <button type="submit" class="btn  btn btn-success btn-xs btn-block " name="continue" id="continue">
                                         Confirm and Checkout now
                                     </button>
                                 </div>
-                                <div class="alert final-notice mt20 " id="final-notice" style="display:none;"></div>
+                                <div class="alert final-notice mt200 " id="final-notice" style="display:none;"></div>
                                 <!-- {!! $html !!} -->
                             </div>
                             @if ($errors->any())

@@ -1846,9 +1846,12 @@ class BookingController extends Controller
 
                     $vehicaltype_enabled = array_merge($vehicaltype_enabled, $enabled_vehicles);
                 }
-
-                $vehicaltype_enabled = array_filter($vehicaltype_enabled);
+                if(!empty($vehicaltype_enabled)){
+                    $vehicaltype_enabled = array_filter($vehicaltype_enabled);
+                    $vehicaltype_enabled = array_map("unserialize", array_unique(array_map("serialize", $vehicaltype_enabled)));
+                }
                 
+
                 /* ======= Customer ======= */
                 $show_login = 1;
 
