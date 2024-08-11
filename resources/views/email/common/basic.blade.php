@@ -70,7 +70,10 @@
 <body>
     <div class="container">
         <div class="header">
-        <img style="width:50%; background: linear-gradient(#dc3545ed, #c6890f) !important;" src="{{$website_logo}}" alt="Logo">
+        <img style="width:50%; background: linear-gradient(#dc3545ed, #c6890f) !important;" src="{{$website_logo}}" alt="Logo"><br>
+        <span class="common"><i class="bi bi-envelope-fill"></i><a href="mailto:{{$email}}">{{$email}}</a>&nbsp;</span>
+          <span class="common"><i class="bi bi-envelope-fill"></i><a href="mailto:{{$alternate_email}}">{{$alternate_email}}</a></span>
+        <p>{{$working_time}}</p>
         </div>
         <div class="content">
             <table>
@@ -78,54 +81,53 @@
                     <td class="b1" colspan="4">Booking Details</h2></td>
                 </tr>
                 <tr>
-                    <td class="b3">Booking Code:</td>
-                    <td class="b3">{{ $bk_ref }} </td>
-                    <!-- <td class="b3">Booking Date:</td>
-                    <td class="b3">{{$bk_date}} </td> -->
+                    <td colspan="4" class="b3">Booking Code: {{ $bk_ref }} </td>
                 </tr>
                 <tr>
-                    <td class="b3">Name:</td>
-                    <td class="b3">{{$cus_title}} {{$cus_surname}}  {{$cus_name}} </td>
-                    <td class="b3">Mobile number:</td>
-                    <td class="b3">
-                        @if($customer_contact)
+                    <td colspan="4" class="b3">Name: {{$cus_title}} {{$cus_surname}}  {{$cus_name}} </td>
+                </tr>
+                <tr>   
+                    <td colspan="4" class="b3">Mobile number:  @if($customer_contact)
                             {{$customer_contact}}
                         @else
                             {{$cus_cell}}
                         @endif   </td>
                 </tr>
                 <tr>
-                    <td class="b3">Registration No:</td>
-                    <td class="b3">{{$bk_re_nu}}</td>
-                    <td class="b3">Vehicle Colour:</td>
-                    <td class="b3">{{$bk_ve_co}}</td>
+                    <td colspan="4" class="b3">Registration No: {{$bk_re_nu}}</td>
                 </tr>
                 <tr>
-                    <td class="b3">Departure:</td>
-                    <td class="b3">{{$bk_from_date}}</td>
-                    <td class="b3">Arrival:</td>
-                    <td class="b3">{{$bk_to_date}}</td>
+                    <td colspan="4" class="b3">Vehicle Colour: </td>
+                </tr>
+                    
+                <tr>
+                    <td colspan="4" class="b3">Departure: {{$bk_from_date}}</td>
+                    </tr>
+                    <tr>
+                    <td colspan="4" class="b3">Arrival: {{$bk_to_date}}</td>
                 </tr>
                 <tr>
-                    <td class="b3">Total Payable Amount:</td>
-                    <td class="b3">{{$total_payable_amount}}</td>
-                    <td class="b3">Booking Status:</td>
-                    <td class="b3">{!! $current_booking_status !!}</td>
+                    <td colspan="4" class="b3">Total Payable Amount: {{$total_payable_amount}}</td>
+                    </tr>
+                    <tr>
+                    <td colspan="4" class="b3">Booking Status: {!! $current_booking_status !!}</td>
+
                 </tr>
                 
                 
                 <tr>
-                    <td class="b1" colspan="4">Parking</h2></td>
+                    <td  colspan="4" class="b1">Parking</h2></td>
                 </tr>
                 
                 <tr>
                 <td><img style="width: 100%; background: linear-gradient(#dc3545ed, #c6890f) !important;" src="{{$campare_website_logo}}" alt="Logo"></td>
                 <td colspan="3">
-                    {{ $website_name_compare }} 
+                    {{ $website_name }}
                     {{ $airport_name }}  <a href="{{$directions}}" target="_blank">directions</a><br>
-                    <p>Attendent keeps the keys</p>
-                    <p><strong>Opening hours:<strong><br> 09:00-05:00 Mon-Fri</p>
-                    <p>Parking is a trading name of Extra Enterprise Ltd. Registration Number 13317269</p>
+                    <p>Upon departure please cal the service provide minutes 40 mins before you arrive to the terminal dropping your car off. </P>
+                    <span><a style="color: #000;" href="tel:{{$contact_num}}">{{$contact_num}}</a> / <a style="color: #000;" href="tel:{{$alternate_contact_num}}">{{$alternate_contact_num}}</a></span>
+                    <p>Upon arrival please call above  numbers to the service provider, first call when you land and the second call when you have collected all your luggage.</p>
+                   
                 </td>
                 </tr>
             </table>

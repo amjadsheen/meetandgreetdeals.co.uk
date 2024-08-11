@@ -85,7 +85,7 @@
                 </tr>
                 <tr>
                     <th>Service</th>
-                    <td>{{$service_name}}</td>
+                    <td>{{ $website_name }} {{$service_name}}</td>
                 </tr>
                 <tr>
                     <th>Departure date/time</th>
@@ -95,6 +95,26 @@
                     <th>Landing date/time</th>
                     <td>{{$bk_to_date}}</td>
                 </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{$cus_email}}</td>
+                </tr> 
+                <tr>
+                    <th>Name</th>
+                    <td>{{$cus_title}} {{$cus_surname}}  {{$cus_name}}</td>
+                </tr>
+                <tr>
+                    <th>Mobile number</th>
+                    <td>
+                        @if($customer_contact)
+                            {{$customer_contact}}
+                        @else
+                            {{$cus_cell}}
+                        @endif    
+                    </td>
+                </tr>
+                
+
                 <tr>
                     <th>Outbound Flight:</th>
                     <td>{{$bk_ou_fl_nu}}</td>
@@ -111,24 +131,7 @@
                     <th>Return Terminal</th>
                     <td>{{$ter_name2}}</td>
                 </tr>
-                <tr>
-                    <th>Name</th>
-                    <td>{{$cus_title}} {{$cus_surname}}  {{$cus_name}}</td>
-                </tr>
-                <tr>
-                    <th>Mobile number</th>
-                    <td>
-                        @if($customer_contact)
-                            {{$customer_contact}}
-                        @else
-                            {{$cus_cell}}
-                        @endif    
-                    </td>
-                </tr>
-                <tr>
-                    <th>Email</th>
-                    <td>{{$cus_email}}</td>
-                </tr>
+                
                 @if($account_num)
                 <tr>
                     <th>Account#</th>
