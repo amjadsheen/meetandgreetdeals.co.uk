@@ -150,7 +150,12 @@ label.input-group-text {
           <li><a class="nav-link scrollto " href="/terms-conditions">Terms & Conditions</a></li>
           <li><a class="nav-link scrollto" href="/contact-us">Contact us</a></li>
           <li><a class="nav-link scrollto" href="/faq">FAQs</a></li>
+          <?php  if (isset($_COOKIE["cus_id"])) { ?>
 
+          <?php } else { ?>
+          <li><a class="nav-link" href="/customer-login">Login</a></li>
+          <li><a class="nav-link" href="/sign-up">Register</a></li>
+          <?php } ?>
           <li class="dropdown"><a href="#"><span>&nbsp;</span> <i class="bi bi-person"></i></a>
             <ul>
               <?php if (isset($_COOKIE["cus_id"])) { ?>
