@@ -142,19 +142,15 @@
 
 
                                         <td>
-                                            @if($website->disable == 1)
-                                                  <a class="testEdit" data-type="select"
-                                                     data-source='[{"value":1,"text":"open"},{"value":0,"text":"close"}]' data-column="disable"
-                                                     data-url="{{route('websites/updateinline', ['id'=>$website->id])}}" data-pk="{{$website->id}}"
-                                                     data-title="change" data-name="disable">open
-                                                  </a>
-                                            @else
-                                                 <a class="testEdit" data-type="select"
-                                                 data-source='[{"value":0,"text":"close"},{"value":1,"text":"open"}]' data-column="disable"
-                                                 data-url="{{route('websites/updateinline', ['id'=>$website->id])}}" data-pk="{{$website->id}}"
-                                                 data-title="change" data-name="disable">close
-                                                 </a>
-                                            @endif
+                                            <a class="testEdit" data-type="select"
+                                            data-source='[{"value":1,"text":"Disable"},{"value":0,"text":"Enable"}]' 
+                                            data-column="disable"
+                                            data-url="{{ route('websites/updateinline', ['id' => $website->id]) }}" 
+                                            data-pk="{{ $website->id }}"
+                                            data-title="Change Status" 
+                                            data-name="disable">
+                                            {{ $website->disable == 1 ? 'Disabled' : 'Enabled' }}
+                                            </a>
                                         </td>
 
                                         <td>
