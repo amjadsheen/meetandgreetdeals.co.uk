@@ -1152,15 +1152,15 @@
                                                         <input type="radio" value="0" id="carwash_in_and_out" onclick="addcarwash();" class="validate[required] radio {{ $prepared_session_data['carwash_in_and_out'] != 0 ? "checked" : "" }}" name="cwash" {{ $prepared_session_data['carwash_in_and_out'] != 0 ? "checked" : "" }}>
                                                         <label class="form-label" for="carwash_in_and_out">FULL CAR WASH (IN AND OUT) ( {{ $settings['currency'] }} {{ $carwash_selected['carwash_in_and_out'] }} )</label>
                                                     </div>
-
-                                                    <div class="funkyradio-success">
-                                                        <input type="radio" value="1" id="carwash_out_only" onclick="addcarwash();" class="validate[required] radio {{ $prepared_session_data['carwash_out_only'] != 0 ? "checked" : "" }}" name="cwash" {{ $prepared_session_data['carwash_out_only'] != 0 ? "checked" : "" }}>
-                                                        <label class="form-label" for="carwash_out_only">CAR WASH (ONLY OUTSIDE) ( {{ $settings['currency'] }} {{ $carwash_selected['carwash_out_only'] }} )</label>
-                                                    </div>
                                                     <div class="funkyradio-success">
                                                         <input type="radio" value="0" id="carwash_in_only" onclick="addcarwash();" class="validate[required] radio {{ $prepared_session_data['carwash_in_only'] != 0 ? "checked" : "" }}" name="cwash" {{ $prepared_session_data['carwash_in_only'] != 0 ? "checked" : "" }}>
                                                         <label class="form-label" for="carwash_in_only">CAR WASH (ONLY INSIDE) ( {{ $settings['currency'] }} {{ $carwash_selected['carwash_in_only'] }} )</label>
                                                     </div>
+                                                    <div class="funkyradio-success">
+                                                        <input type="radio" value="1" id="carwash_out_only" onclick="addcarwash();" class="validate[required] radio {{ $prepared_session_data['carwash_out_only'] != 0 ? "checked" : "" }}" name="cwash" {{ $prepared_session_data['carwash_out_only'] != 0 ? "checked" : "" }}>
+                                                        <label class="form-label" for="carwash_out_only">CAR WASH (ONLY OUTSIDE) ( {{ $settings['currency'] }} {{ $carwash_selected['carwash_out_only'] }} )</label>
+                                                    </div>
+                                                   
 
                                                     @endif
                                                 </div>
@@ -1290,6 +1290,8 @@
                         </div>
                     </div>
                     <hr>
+                    @else
+                    <div id="apc"></div>
                     @endif
                     <div class="booking-section travelo-box borderbox">
                         <div class="row">

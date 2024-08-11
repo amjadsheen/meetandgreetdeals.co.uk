@@ -1893,10 +1893,19 @@ class BookingController extends Controller
                     ->where('clr_disable', '=', 0)
                     ->select("id", "clr_name")
                     ->get();
+                $carwash_selected = [];
+                $rs_cur_rate = DB::table('currencies')
+                ->select('id', 'cur_name', 'cur_code', 'cur_symbol', 'cur_rate')
+                ->where('id', '=', $prepared_session_data['currency1'])
+                ->first();
 
-                $settings['currency'] = $prepared_session_data['currency1'];
-                //$carwash_selected = $this->get_carwash_veh_type_price($domain->id, $bk_details->vehical_type_id);
-                $carwash_selected = 0;
+                $settings['currency'] = $rs_cur_rate->cur_symbol;
+                //$settings['currency'] =  $booking_currency = $this->get_booking_currency($prepared_session_data['currency1']);
+                if(isset($prepared_session_data['vehical_type_id']) && !empty($prepared_session_data['vehical_type_id']) ){
+                    $carwash_selected = $this->get_carwash_veh_type_price($prepared_session_data['website_id'], $prepared_session_data['vehical_type_id']);
+                }
+                
+                
                 if(empty($errors)){
                     return view($domain->website_templete . '.booking', compact('page_title', 'meta_array', 'terminal_access_options', 'services', 'domain', 'html', 'html_price_only', 'colors', 'settings', 'customer', 'show_login', 'prepared_session_data', 'skey', 'vehicaltype_enabled', 'carwash_selected', 'totalBookingPrice', 'mini_cart', 'cart', 'comparison_website'));
                 }else{
