@@ -39,3 +39,8 @@ class Customer extends Model
 
 //ALTER TABLE `promotion_offers` ADD `show_compare_page` INT(3) NOT NULL DEFAULT '0' AFTER `offer_home`;
 // ALTER TABLE `websites` ADD `show_homepage` INT(3) NOT NULL DEFAULT '0' AFTER `websites`;
+// ALTER TABLE `websites` ADD `show_link` INT(3) NOT NULL DEFAULT '0' AFTER `show_homepage`;
+
+
+
+// ALTER TABLE `websites` ADD `show_link` INT(3) NOT NULL DEFAULT '0' AFTER `show_homepage`;

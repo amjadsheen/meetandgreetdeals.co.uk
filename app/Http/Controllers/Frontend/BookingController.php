@@ -507,6 +507,8 @@ class BookingController extends Controller
                                 "bg_color" => $bg_color,
                                 "sort"  => $sort,
                                 "website_name" => $c_website->website_name,
+                                "website_url" => $c_website->website_url,
+                                "show_link" => $c_website->show_link,
                                 "website_logo" => $c_website->website_logo,
                                 "terminal_name" => $terminal->ter_name,
                                 "terminal_id" => $terminal->id,
@@ -524,6 +526,8 @@ class BookingController extends Controller
                                     "sort"  => $sort,
                                     "website_name" => $c_website->website_name,
                                     "website_logo" => $c_website->website_logo,
+                                    "website_url" => $c_website->website_url,
+                                    "show_link" => $c_website->show_link,
                                     "terminal_name" => $terminal->ter_name,
                                     "terminal_id" => $terminal->id,
                                     "service_name" => $service_name,
@@ -546,7 +550,7 @@ class BookingController extends Controller
                 return $a['net_price'] - $b['net_price'];
             });
         }
-        
+        //dd($services_terminals_prices);
         $page_title = 'Booking';
         $meta_array = array(
             'title' =>  strtolower($page_title),
@@ -2959,6 +2963,7 @@ class BookingController extends Controller
                         'bk_to_date' => $vehicle['date2'],
                         'net_price' => $bookingPrice['net_price'],
                         'offer_percentage' => $bookingPrice['offer_percentage'],
+                        'offer_amount' => $bookingPrice['offer_amount'],
                         'car_wash' => $bookingPrice['car_wash'],
                         'days' => $bookingPrice['days'],
                         'gross_price' => $bookingPrice['gross_price'],
@@ -3039,7 +3044,8 @@ class BookingController extends Controller
                 $html .= "<p><strong> Last Minute Booking </strong>: <span>" . $cur_symbol . " " . number_format($veh['last_minutes_booking_values'], 2, '.', '') . "</span></p>";
     
                 if ($veh['offer_percentage'] <> "") {
-                    $html .= "<p><span style='color:green;'>Promotional discount offered (" . $veh['offer_percentage'] . " %): " . $cur_symbol . " " . number_format($veh['offer_percentage'], 2, '.', '') . "</span></p>";
+                    $html .= "<p><strong>Total Amount</strong>: <span>" . $cur_symbol . " " . number_format($totalBookingPrice +  $veh['offer_amount'], 2, '.', '') . "</span></p>";
+                    $html .= "<p><span style='green !important'>Promotional discount offered (" . $veh['offer_percentage'] . " %): " . $cur_symbol . " " . number_format($veh['offer_amount'], 2, '.', '') . "</span></p>";
                 }
                 
             }
@@ -3546,7 +3552,7 @@ class BookingController extends Controller
         ->first();
         if ($promotion) {
 
-            return '<span class="badge badge-primary" style="background:#6d6008; text-align:center;margin-top: 15px;">Use Promo <span class="badge badge-sec"> "' . $promotion->offer_coupon . '"</span> and get <span class="badge badge-sec">' . $promotion->offer_percentage . '%</span> Discount </span>';
+            return '<span class="badge badge-primary" style="background:#6d6008; text-align:center;margin-top: 5px;">Use Promo <span class="badge badge-sec"> "' . $promotion->offer_coupon . '"</span> and get <span class="badge badge-sec">' . $promotion->offer_percentage . '%</span> Discount </span>';
 
         }else{
             return  "";
@@ -3841,7 +3847,7 @@ class BookingController extends Controller
             $message->to($to_email, $to_name)->subject($email_subject_amjad);
             $message->from($st_admin_from_email, $st_admin_name);
         });
-        Mail::send($Email_Template . '.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_amjad, $to_email, $to_name) {
+        Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_amjad, $to_email, $to_name) {
             $message->to($to_email, $to_name)->subject($email_subject_amjad);
             $message->from($st_admin_from_email, $st_admin_name);
         });
@@ -3851,7 +3857,7 @@ class BookingController extends Controller
         if (!empty($st_notification_email)) {
             $email_to = explode(";", $st_notification_email);
             for ($x = 0; $x < count($email_to); $x++) {
-                Mail::send($Email_Template . '.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $email_to, $to_name) {
+                Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $email_to, $to_name) {
                     $message->to($email_to, $to_name)->subject($email_subject);
                     $message->from($st_admin_from_email, $st_admin_name);
                 });
@@ -3883,7 +3889,7 @@ class BookingController extends Controller
         if(!empty($data['email'])){
             $to_email = $data['email'];
             $to_name = $data['website_name'];
-            Mail::send($Email_Template . '.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
+            Mail::send($Email_Template . '.supplier', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
                 $message->to($to_email, $to_name)->subject($email_subject);
                 $message->from($st_admin_from_email, $st_admin_name);
             });
@@ -3891,7 +3897,7 @@ class BookingController extends Controller
         if(!empty($data['alternate_email'])){
             $to_email = $data['alternate_email'];
             $to_name = $data['website_name'];
-            Mail::send($Email_Template . '.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
+            Mail::send($Email_Template . '.supplier', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
                 $message->to($to_email, $to_name)->subject($email_subject);
                 $message->from($st_admin_from_email, $st_admin_name);
             });

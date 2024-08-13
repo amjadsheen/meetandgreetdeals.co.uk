@@ -128,6 +128,26 @@ class Edenemail
             $campare_site_log = '';
         }
 
+        if(!empty($domain->working_time)){
+            $campare_working_time = $domain->working_time;
+        }else{
+            $campare_working_time = '';
+        }
+
+        if(!empty($domain->alternate_email)){
+            $campare_alternate_email = $domain->alternate_email;
+        }else{
+            $campare_alternate_email = '';
+        }
+
+
+        if(!empty($domain->email)){
+            $campare_site_email = $domain->email;
+        }else{
+            $campare_site_email = '';
+        }
+
+
         if(!empty($bk_detail->website_email_banner)){
             $email_banner = $bk_detail->website_email_banner;
         }else{
@@ -172,6 +192,9 @@ class Edenemail
         $data['website_name_compare'] = $domain->website_name;
         $data['website_logo'] = $domain->website_url.'/storage/uploads/'.$site_log;
         $data['campare_website_logo'] = $domain->website_url.'/storage/uploads/'.$campare_site_log;
+        $data['campare_working_time'] = $campare_working_time;
+        $data['campare_alternate_email'] = $campare_alternate_email;
+        $data['campare_site_email'] = $campare_site_email;
         $data['website_email_banner'] = $domain->website_url.'/storage/uploads/'.$email_banner;
         
         $data['image_right'] = $domain->website_url.'/storage/uploads/email/image_right.png';
@@ -227,9 +250,9 @@ class Edenemail
         //$amount_detail = "$amount_detail Customers that book via third parties must pay the terminal access fee.<br />";
         $amount_detail .= "<tr><td>VAT ($bk_detail->bk_vat_value %)</td><td> $bk_detail->cur_symbol ".number_format($bk_detail->bk_vat_amount, 2, '.', '')."</td></tr>";
 
-
+        $TOTAL_PAYABLE_AMOUNT = $bk_detail->bk_total_amount + $carwash + $bk_detail->not_working_hours + $bk_detail->last_min_booking + $bk_detail->charging_service_charges + $bk_detail->charging;
         if ($bk_detail->bk_discount_offer_coupon<>""){ // if promotional discount applied
-            //$amount_detail .= "<tr><td>Total amount</td><td> $bk_detail->cur_symbol ".number_format($bk_detail->bk_total_amount, 2, '.', '')."</td></tr>";
+            $amount_detail .= "<tr><td>Total amount</td><td> $bk_detail->cur_symbol ".number_format($TOTAL_PAYABLE_AMOUNT + $bk_detail->bk_discount_offer_amount, 2, '.', '')."</td></tr>";
             $amount_detail .= "<tr><td>Promotional discount amount ($bk_detail->bk_discount_offer_value %)</td><td> $bk_detail->cur_symbol ".number_format($bk_detail->bk_discount_offer_amount, 2, '.', '')."</td></tr>";
 
             //$amount_detail = "$amount_detail <strong>TOTAL PAYABLE AMOUNT: $bk_detail->cur_symbol ".number_format($bk_detail->bk_final_amount, 2, '.', '')."</strong>";
@@ -242,13 +265,13 @@ class Edenemail
             //$orderamount = 	number_format($bk_detail->bk_total_amount, 2, '.', '');
             
         }
-        $TOTAL_PAYABLE_AMOUNT = $bk_detail->bk_total_amount + $carwash + $bk_detail->not_working_hours + $bk_detail->last_min_booking + $bk_detail->charging_service_charges + $bk_detail->charging;
+        
         $amount_detail .= "<tr><td>TOTAL PAYABLE AMOUNT</td><td> $bk_detail->cur_symbol ".number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '')."</td></tr>";
         $orderamount = 	number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '');
 
         $amount_detail .= "<tr><td colspan='2'>(The price paid is non-refundable in the case of a no show or booking cancellation within 24 hours of departure.)</td></tr>";
         $data['amount_detail'] = $amount_detail;
-        $data['total_payable_amount'] = $TOTAL_PAYABLE_AMOUNT;
+        $data['total_payable_amount'] = $bk_detail->cur_symbol . $TOTAL_PAYABLE_AMOUNT;
         $payment_links = "";
         if(empty($payment_reciever)){
             ///$notify_url = $bk_detail->website_url

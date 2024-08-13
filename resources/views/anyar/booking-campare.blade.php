@@ -34,6 +34,17 @@
 <!--== Slider Area Start ==-->
 
 <style>
+  .weblink{
+    background-color: #385fcf;
+    color: #495057;
+    font-size: 0.85rem;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 11px;
+    margin-top: 10px !important;
+    float:left;
+    margin:0 auto;
+  }
   .custom-popup {
   position: fixed;
   bottom: 3%;
@@ -677,6 +688,11 @@ a.btn.btn-success.book-btn {
                         <a href="#" onclick="updatedservice({{ $service['terminal_id'] }}, {{ $service['website_id'] }});" class="btn btn-success book-btn">
                             Select Parking
                         </a>
+                        <?php if($service['show_link']) { ?>
+                          <p><a target="_blank" href="{{ $service['website_url'] }}"  class="weblink">
+                            Visit Website
+                        </a></p>
+                        <?php } ?>
                         {!! $service['promo']!!}
                     </div>
                 </div>

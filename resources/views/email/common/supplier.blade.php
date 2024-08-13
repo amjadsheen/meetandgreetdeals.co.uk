@@ -76,7 +76,7 @@
             </table>
             <table>
                 <tr>
-                    <th style=" width: 37%; ">Booking Date:</th>
+                <th style=" width: 37%; ">Booking Date:</th>
                     <td>{{$bk_date}} </td>
                 </tr>
                 <tr>
@@ -95,10 +95,7 @@
                     <th>Arrival date/time</th>
                     <td>{{$bk_to_date}}</td>
                 </tr>
-                <tr>
-                    <th>Email</th>
-                    <td>{{$cus_email}}</td>
-                </tr> 
+                
                 <tr>
                     <th>Name</th>
                     <td>{{$cus_title}} {{$cus_surname}}  {{$cus_name}}</td>

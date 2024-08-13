@@ -71,57 +71,62 @@
     <div class="container">
         <div class="header">
         <img style="width:50%; background: linear-gradient(#dc3545ed, #c6890f) !important;" src="{{$website_logo}}" alt="Logo"><br>
-        <span class="common"><i class="bi bi-envelope-fill"></i><a href="mailto:{{$email}}">{{$email}}</a>&nbsp;</span>
-          <span class="common"><i class="bi bi-envelope-fill"></i><a href="mailto:{{$alternate_email}}">{{$alternate_email}}</a></span>
-        <p>{{$working_time}}</p>
+        <span class="common"><i class="bi bi-envelope-fill"></i><a href="mailto:{{$campare_site_email}}">{{$campare_site_email}}</a>&nbsp;</span>
+          <span class="common"><i class="bi bi-envelope-fill"></i><a href="mailto:{{$campare_alternate_email}}">{{$campare_alternate_email}}</a></span>
+        <p>{{$campare_working_time}}</p>
         </div>
         <div class="content">
             <table>
                 <tr>
-                    <td class="b1" colspan="4">Booking Details</h2></td>
+                    <td class="b1" colspan="2">Booking Details</h2></td>
                 </tr>
                 <tr>
-                    <td colspan="4" class="b3">Booking Code: {{ $bk_ref }} </td>
+                    <td class="b32">Booking Code:</td>
+                    <td class="b32">{{ $bk_ref }} </td>
                 </tr>
                 <tr>
-                    <td colspan="4" class="b3">Name: {{$cus_title}} {{$cus_surname}}  {{$cus_name}} </td>
+                    <td class="b32">Name:</td>
+                    <td class="b32">{{$cus_title}} {{$cus_surname}}  {{$cus_name}} </td>
                 </tr>
                 <tr>   
-                    <td colspan="4" class="b3">Mobile number:  @if($customer_contact)
+                    <td class="b32">Mobile number:</td>
+                        <td class="b32">@if($customer_contact)
                             {{$customer_contact}}
                         @else
                             {{$cus_cell}}
                         @endif   </td>
                 </tr>
                 <tr>
-                    <td colspan="4" class="b3">Registration No: {{$bk_re_nu}}</td>
+                    <td class="b32">Registration No:</td>
+                    <td class="b32">{{$bk_re_nu}}</td>
                 </tr>
                 <tr>
-                    <td colspan="4" class="b3">Vehicle Colour: </td>
+                    <td class="b32">Vehicle Colour: </td>
+                    <td class="b32">{{$bk_ve_co}}</td>
                 </tr>
                     
                 <tr>
-                    <td colspan="4" class="b3">Departure: {{$bk_from_date}}</td>
-                    </tr>
-                    <tr>
-                    <td colspan="4" class="b3">Arrival: {{$bk_to_date}}</td>
+                    <td class="b32">Departure:</td>
+                    <td class="b32">{{$bk_from_date}}</td>
                 </tr>
                 <tr>
-                    <td colspan="4" class="b3">Total Payable Amount: {{$total_payable_amount}}</td>
-                    </tr>
-                    <tr>
-                    <td colspan="4" class="b3">Booking Status: {!! $current_booking_status !!}</td>
-
-                </tr>
-                
-                
-                <tr>
-                    <td  colspan="4" class="b1">Parking</h2></td>
+                    <td class="b32">Arrival:</td>
+                    <td class="b32">{{$bk_to_date}}</td>
                 </tr>
                 
                 <tr>
-                <td><img style="width: 100%; background: linear-gradient(#dc3545ed, #c6890f) !important;" src="{{$campare_website_logo}}" alt="Logo"></td>
-                <td colspan="3">
+                    <td class="b32">Booking Status:</td>
+                    <td class="b32">{!! $current_booking_status !!}</td>
+                </tr>
+                {!! $amount_detail !!}
+                
+                <tr>
+                    <td  colspan="2" class="b1">Parking</h2></td>
+                </tr>
+                
+                <tr>
+                <td style="text-align:center"><img style="width: 80%; " src="{{$campare_website_logo}}" alt="Logo"></td>
+                <td>
                     {{ $website_name }}
                     {{ $airport_name }}  <a href="{{$directions}}" target="_blank">directions</a><br>
                     <p>Upon departure please cal the service provide minutes 40 mins before you arrive to the terminal dropping your car off. </P>
@@ -135,40 +140,28 @@
         
         <div class="footer">
             <p style="text-align: left;"><strong>Please note:</strong></p>
-        <ul style="text-align:left;">
-                <li>Overstaying will lead to £30 charge per day or part of the day.</li>
-                <li>If the customer comes 24 hours before they are scheduled to collect their vehicle without calling Heathrow Airport Meet and Greet Parking Parking will result in a £30 charge.</li>
-                <li>Any amendments made after the booking is first completed will cost £30.</li>
-                <li>We are not responsible for any electric devices, flat battery, flat tyres and any scratches on the alloys.</li>
-                <li>Driver will adjust steering, mirrors and seat so they can safely drive your vehicle.</li>
-                <li>We do not cover any wind screen scratches or damages.</li>
-                <li>To avoid any technical problems please inform us of any tracker or any other extra security device that may be fitted to your vehicle.</li>
-                <li>Check you vehicle before you leave the terminal, after you have left the terminal we are not responsible for anything.</li>
-                <li>If you are unsure if the driver is part of the Heathrow Airport Meet and Greet Parking Parking team take note of their name and number and immediately give us a call and we will look into it. Do not hand the vehicle over until we confirm.</li>
-                <li>if you leave any devices or anything valuable in your car please confirm with Heathrow Airport Meet and Greet Parking Parking office as we are not responsible for any item that is lost.</li>
-                <li>Keep spare vehicle key to yourself and the other key to the driver. The driver will only accept the vehicle key.</li>
-                <li>customers that don't call 40 minutes before arriving at the terminal they will
-                    have to pay the terminal access fee.</li>
-                <li>customers that book via third parties must pay terminal access fee.</li>
-                <li>The customer must take pictures at the terminal of their vehicle when the driver is present in regards to damages.
-                    Failure to show a clear picture showing date, time and location we will not accept any claim.
-                    The customer must take a clear picture showing date, time and location of the full vehicle when the driver delivers the vehicle back to the customer at the terminal.
-                    This is in case of any damages that the customer may claim. Failure to show a clear picture we will not accept any claim. </li>
-                <li>Heathrow Airport Meet and Greet Parking Parking has the right to cancel any bookings at any time within 24 hours or after 24 hours whether direct or from any third party with reason or without reason.</li>
-                <li>If a customer arrives for departure without informing Heathrow Airport Meet and Greet Parking Parking, the customer will have to wait longer than usual and they are responsible to pay the car park fee. We are not responsible for missed flights or any other damages that may have been caused due to customer not notifying us letting u know that they are 40 to 60 minutes away from the terminal.</li>
-                <li>If a customer arrives from their trip without notifying Heathrow Airport Meet and Greet Parking Parking they will have to wait a minimum 2 hours and they will be charged £30. The customer will have to notify Heathrow Airport Meet and Greet Parking Parking beforehand so we can deliver the vehicle upon arrival on time. We will not be responsible for any loses due not notifying Heathrow Airport Meet and Greet Parking Parking on time so they we can deliver the vehicle. </li>
-                <li>Heathrow Airport Meet and Greet Parking Parking is not responsible for natural dirt caused by birds and weather.</li>
-                <li>Customers that use Heathrow Airport Meet and Greet Parking Paring meet and greet service between the time 23:00 to 5:00 for reasons such as delayed arrival and departure flights or for any other reasons will be charged £30 plus the booking price.</li>
-                <li>Upon departure and arrival the customer must call the number provided on the website or on the paperwork</li>
-                <li>Customers that change their terminal details when landing can incur a cost of £30.</li>
-                <li>Customers that do not provide correct details such as flight numbers, return and depart can incur a minimum wait of 2 hours and a £30 fee.
-                </li>
-                <li>Please read Terms and Conditions for full explanation.</li>
-                <li>Customer needs to pick up their vehicle within 1 hour after their flight has landed any delay the customer must inform the duty controller immediately.</li>
-                <li>If you are collecting your vehicle after midnight there will be a cost of £30 per hour.</li>
-                <li>If you are bring an electric vehicle - it must be fully charged, if not fully charged and you would like it to be charged by us you will need to show the driver how to charge it and you will have to pay £30 for the charge per hours and £30 per hour for the waiting time this payment has to be made by cash when you are dropping your vehicle off.</li>
-                <li>If the customer takes their car whilst it is parked with us, without our acknowledgement we will have to report the car as stolen to the police and produce to court as we will consider as a crime.</li>
-            </ul>
+                <ul style="text-align:left;">
+                    <li>Drop-off Procedure Please call {{ $website_name }} Please look out for your chauffeur who will be wearing a {{ $website_name }} Hi Visibility jacket and carrying ID. Please make sure that the driver has all the correct booking details that you have given when booking. Please note that your specified meet time. appointed. If you should arrive before or after this time this may result in a delay. As a car park provider, {{ $website_name }} will pay up to the first 15 minutes of parking, and the customer responsible for the extra exit fee if 15 minutes is over. </li>
+                    <li>Directions Terminal 2: When you have exited the tunnel for all terminals follow the sign of terminal 2 keep to the right passing the central bus station. Continue to keep right as the road to Terminal 2 will move away from the building before turning back as the road ramps up to Terminal 2 Departures and the short stay 2 car park on Constellation Way. On the ramp continue to keep right because the ramp will lead directly into the Short stay car park entry barriers. When you enter the car park on level 4 continue left down the spiral to meet and greet area. One of level 2 following the signs for off airport parking and park your vehicle uniformed chauffeurs will meet you at your car with a your booking detail. </li>
+                    <li>Post Code: TW6 1EW Terminal 3: When Entering Heathrow Airport, following signs for Terminal 3, "Valet drop off point". Park your vehicle in Lane 5 (furthest lane away from the Terminal Building). You will see a sign on the floor marked Permit Holders on the left hand side, park your vehicle there. One of uniformed chauffeurs willa meet you at your car with all your booking detail.</li>
+                    <li>Terminal 4: When Entering Heathrow Airport, following signs for Terminal 4, "Departure Passenger Drop Off". As you go on the ramp towards Terminal 4, keep your vehicle in the left hand lane. Enter into Lane A (lane 3), which is the furthest lane away from the Terminal. Park your vehicle there, one of uniformed chauffeurs will meet you at your car with all your booking detail. </li>
+                    <li>Post Code: TW6 3XA Terminal 5: Follow the signs for Short stay Car Park found on the right hand side of the ramp as your enter the exit for Terminal 5 roundabout. After following the signs for Short Stay Car Park, you will see sign on the left-hand lane marked "LEVEL 4". Stay in this lane which will take you straight to a set of barriers (last barrier).Take the ticket from the barrier and make your way to Zones R or S. Park your vehicle in these designated areas which is sign posted in these zones as Meet and Greet or Off Airport. One of uniformed chauffeurs will meet you at your car with all your booking details. Post Code: TW6 2GA </li>
+                    <li>Return Procedure Please call {{ $website_name }} on {{$contact_num}} / {{$alternate_contact_num}} As soon as you arrive from your trip give {{ $website_name }} a call when you have landed and a second call when you have collected all the bags/luggage. </li>
+                    <li>TERMINAL - 2: Once you have collected your luggage and are about to clear Customs, call the number given when your car was collected. Make your way to the same place where you dropped your vehicle which was the Level 2 short stay car park and you will meet our driver in meet and greet Off Airport Meet and Greet with your vehicle.</li>
+                    <li>TERMINAL -3: Once you have collected your luggage and are about to clear Customs, call the number given when your car was collected. As you arrive at the arrivals in Terminal 3, just before the exit door on the Right Hand Side, take the lift to level 1. Walk across the tunnel to the short stay car park, take another lift to level 3 Short Stay Car Park, ROW "A". Your vehicle will be returned where the Black and White signs say Off Airport Meet and Greet in row A </li>
+                    <li>TERMINAL - 4: Once you have collected your luggage and are about to clear Customs, call the number given when your car was collected. As you exit the arrival Hall, cross the road directly towards the Short Stay Car park and take a lift to level 2. Your vehicle will be returned where the Black and White signs say Off-airport Meet and Greet at the furthest point of the car park away from the Terminal building on the Right-hand side. </li>
+                    <li>TERMINAL - 5: Once you have collected your luggage and are about to clear Customs, call the number given when your car was collected. Make your way to the same place where you dropped the vehicle off; Level 4 short-stay car park. The vehicle will be parked in Row R OR S. (The same place where you dropped your vehicle off). </li>
+                    <li>Important Information Please do not leave any valuables inside the vehicle, if you do on your own risk then please take a Please note that may result in a delay. As a car park provider, {{ $website_name }} will pay up to the first 15 minutes of parking, receipt from the driver. your specified meet time is appointed. If you should arrive before or after this time and the customer is responsible for the extra exit fee if 15 minutes is over. Ultra Low Emission Zone (ULEZ) is expanding across all London boroughs, including Heathrow Airport, starting 29 August 2023. If you drive anywhere within the ULEZ, including the Heathrowa Airport, from 29 August 2023, and your vehicle does meet the emissions standards, you must pay £12.50.</li>
+                </ul>
+                <p style="text-align: left;"><strong>Meet and Greet Deals Airport Parking Terms & Conditions (short Manage My Booking(s) version):</strong></p>
+                <ul style="text-align:left;">
+                    <p> Booking Ref. is AZP-77878 View, re-send & download booking confirmation Amend booking at no extra cost (except date change) Get 15% life time Discount Click Here to Manage Booking(s). Customer Support Meet and Greet Deals Airport Parking Ltd is booking agent for the featured Car Parks and customers will be contracting with {{ $website_name }} Limited and will be subject to their terms and conditions which contain certain exemption clauses and limit each company's liability. You need to call {{ $website_name }} Limited on youra Departure (Drop-off) and Return (Pick-up) day. Any claims by the customer in respect of parking services e.g collection, delivery of the vehicle, damage the vehicle etc must be made against {{ $website_name }} Limited and subject to their terms and conditions. As a booking agent for the Car Park, Meet and Greet Deals Airport Parking LTD is liable to the customer only for losses directly arising from any negligence of the company in processing a booking.</p>
+                    <p style="text-align: left;"><strong>Manage My Bookings</strong></p>
+                    Only booking related issues. Cancellation request Extend booking (24hrs before departure date) Parking service related issue or complaints must be discuss / deal with {{ $website_name }} Limited Full Meet and Greet Deals Terms & Conditions Click Here for Customer Support.</p>
+                    <p>Meet and Greet Deals Airport Parking Ltd's full Terms & Conditions Amount (GBP) £ 150.00 £ 0.00 £ 30.00 £ 1.95 £ 1.99 Booking Quote / Optional Service /Discount /VAT Invoice Booking Quote * Airport Levy Charges * Discount Amount Booking Fee * Optional Charges (Cancellation Cover, SMS Service) Total Paid Amount £ 123.94 Meet and Greet Deals Airport Parking Ltd., 
+                    Unit 1 Railway House, 14 Chertsey Road, Woking, Surrey, GU21 5AH. This confirmation can also be used as VAT Receipt</p>
+                    
+                </ul>
         </div>
     </div>
 </body>

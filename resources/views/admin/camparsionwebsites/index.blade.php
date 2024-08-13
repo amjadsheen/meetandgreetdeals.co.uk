@@ -95,6 +95,7 @@
                                     <!-- <th>Favicon</th> -->
                                     <th>Status</th>
                                     <th>Show HomePage</th>
+                                    <th>Show Link</th>
                                     <th>Actions</th>
 
                                 </tr>
@@ -165,6 +166,22 @@
                                                  data-source='[{"value":0,"text":"hide"},{"value":1,"text":"show"}]' data-column="show_homepage"
                                                  data-url="{{route('websites/updateinline', ['id'=>$website->id])}}" data-pk="{{$website->id}}"
                                                  data-title="change" data-name="show_homepage">hide
+                                                 </a>
+                                            @endif
+                                        </td>
+
+                                        <td>
+                                            @if($website->show_link == 1)
+                                                  <a class="testEdit" data-type="select"
+                                                     data-source='[{"value":1,"text":"show"},{"value":0,"text":"hide"}]' data-column="show_link"
+                                                     data-url="{{route('websites/updateinline', ['id'=>$website->id])}}" data-pk="{{$website->id}}"
+                                                     data-title="change" data-name="show_link">show
+                                                  </a>
+                                            @else
+                                                 <a class="testEdit" data-type="select"
+                                                 data-source='[{"value":0,"text":"hide"},{"value":1,"text":"show"}]' data-column="show_link"
+                                                 data-url="{{route('websites/updateinline', ['id'=>$website->id])}}" data-pk="{{$website->id}}"
+                                                 data-title="change" data-name="show_link">hide
                                                  </a>
                                             @endif
                                         </td>
