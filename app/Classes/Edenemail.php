@@ -110,6 +110,7 @@ class Edenemail
         }
         
         
+        
         $data['payment_option'] = $payment_option;
         $data['current_booking_status'] = $current_booking_status;
         $data['txn_payment_status'] = $txn_payment_status;
@@ -269,9 +270,31 @@ class Edenemail
         $amount_detail .= "<tr><td>TOTAL PAYABLE AMOUNT</td><td> $bk_detail->cur_symbol ".number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '')."</td></tr>";
         $orderamount = 	number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '');
 
+        
+        $supplier_cost = "";
+        
+        if ($data['supplier_cost_type'] != 'none' && $data['supplier_cost_value'] > 0) {
+            if ($data['supplier_cost_type'] == 'percentage') {
+                // Calculate supplier cost as a percentage of the total payable amount
+                $supplier_cost = ($data['supplier_cost_value'] / 100) * $TOTAL_PAYABLE_AMOUNT;
+            } else {
+                // Supplier cost is a fixed value
+                $supplier_cost = $data['supplier_cost_value']; 
+            }
+        }
+        if(!empty($supplier_cost)){ 
+            $supplier_cost = number_format($supplier_cost, 2, '.', '');
+            $amount_detail .= "<tr class='hidecustomer'><td>Supplier Cost</td><td>$bk_detail->cur_symbol $supplier_cost </td></tr>";
+        }
         $amount_detail .= "<tr><td colspan='2'>(The price paid is non-refundable in the case of a no show or booking cancellation within 24 hours of departure.)</td></tr>";
+        
+        
         $data['amount_detail'] = $amount_detail;
         $data['total_payable_amount'] = $bk_detail->cur_symbol . $TOTAL_PAYABLE_AMOUNT;
+
+        
+  
+
         $payment_links = "";
         if(empty($payment_reciever)){
             ///$notify_url = $bk_detail->website_url

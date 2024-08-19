@@ -44,3 +44,9 @@ class Customer extends Model
 
 
 // ALTER TABLE `websites` ADD `show_link` INT(3) NOT NULL DEFAULT '0' AFTER `show_homepage`;
+
+/*
+ALTER TABLE `websites`
+ADD `supplier_cost_type` ENUM('percentage', 'fixed', 'none') NOT NULL DEFAULT 'percentage' AFTER `show_homepage`,
+ADD `supplier_cost_value` INT NOT NULL AFTER `supplier_cost_type`;
+*/

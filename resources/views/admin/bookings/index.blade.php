@@ -501,6 +501,22 @@
                                                 // }
                                                 $bk_final_amount = $booking->bk_total_amount + $carwash + $booking->not_working_hours +  $booking->last_min_booking + $booking->charging_service_charges + $booking->charging;
                                                 echo '<span style="background: '.$pricecolor.'; color:#fff; padding: 4px 4px;">'.$booking->cur_symbol." ".number_format($bk_final_amount, 2, '.', '') . ' ' . $ipntag .' </span>';
+                                                $supplier_cost = "";
+        
+                                                if ($booking->supplier_cost_type != 'none' && $booking->supplier_cost_value > 0) {
+                                                    if ($booking->supplier_cost_type == 'percentage') {
+                                                        // Calculate supplier cost as a percentage of the total payable amount
+                                                        $supplier_cost = ($booking->supplier_cost_value / 100) * $bk_final_amount;
+                                                    } else {
+                                                        // Supplier cost is a fixed value
+                                                        $supplier_cost = $booking->supplier_cost_value; 
+                                                    }
+                                                }
+                                                if(!empty($supplier_cost)){ 
+                                                    $supplier_cost = number_format($supplier_cost, 2, '.', '');
+                                                    echo '<br><br>Supplier Cost: <span style="background: orangered; color:#fff; padding: 4px 4px;">'.$booking->cur_symbol." ". $supplier_cost . ' </span>';
+                                                }
+                                                
                                                 ?>
                                         </td>
                                         <td>

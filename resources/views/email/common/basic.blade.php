@@ -64,6 +64,7 @@
         .b3{
             background-color: #c2bdb942;
         }
+        .hidecustomer{ display:none;}
     </style>
     
 </head>

@@ -87,14 +87,15 @@
                             <table class="table table-bordered">
                                 <tbody>
                                 <tr>
-                                    <th style="width: 10px">#</th>
-                                    <th>Name</th>
+                                    <th style="width: 2%">#</th>
+                                    <th style="width: 10%">Name</th>
                                     <th>Url</th>
                                     <!-- <th>Prefix</th> -->
                                     <th>Logo</th>
-                                    <!-- <th>Favicon</th> -->
+                                    <th style="width: 10%;">Supplier Cost Type</th>
+                                    <th style="width: 10%;">Supplier Cost Value</th>
                                     <th>Status</th>
-                                    <th>Show HomePage</th>
+                                    <th style="width: 10%;">Show HomePage</th>
                                     <th>Show Link</th>
                                     <th>Actions</th>
 
@@ -140,7 +141,30 @@
                                         </td>
                                         
 
+                                       
 
+
+
+                                        <td>
+                                            <a class="testEdit" data-type="select"
+                                            data-source='[{"value":"percentage","text":"percentage"},{"value":"fixed","text":"fixed"},{"value":"none","text":"none"}]' 
+                                            data-column="supplier_cost_type"
+                                            data-url="{{ route('websites/updateinline', ['id' => $website->id]) }}" 
+                                            data-pk="{{ $website->id }}"
+                                            data-title="Change Status" 
+                                            data-name="supplier_cost_type">
+                                            {{ $website->supplier_cost_type }}
+                                            </a>
+                                        </td>
+
+
+                                        <td>
+                                            <a class="testEdit" data-type="text" data-column="supplier_cost_valuepercentage"
+                                               data-url="{{route('websites/updateinline', ['id'=>$website->id])}}"
+                                               data-pk="{{$website->id}}" data-title="change"
+                                               data-name="supplier_cost_value">{{$website->supplier_cost_value}}
+                                            </a>
+                                        </td>
 
                                         <td>
                                             <a class="testEdit" data-type="select"
