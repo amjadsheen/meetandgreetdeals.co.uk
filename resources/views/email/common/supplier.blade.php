@@ -69,9 +69,7 @@
             <p class="center zero">{{ $refrence_num_extra }}</p>
             <table>
                 <tr><td class="center"><h2 style="padding: 2px 0;">Booking code: {{ $bk_ref }}</h2>
-                     @if($refrence_num_common)
-                        {{$refrence_num_common}}
-                    @endif
+                    
                 </td></tr>
             </table>
             <table>
@@ -84,18 +82,13 @@
                     <td>{{$airport_name}}</td>
                 </tr>
                 <tr>
-                    <th>Service</th>
+                    <th>Service Provider</th>
                     <td>{{ $website_name }} {{$service_name}}</td>
                 </tr>
                 <tr>
-                    <th>Departure date/time</th>
-                    <td>{{$bk_from_date}}</td>
+                    <th>Booking Status</th>
+                    <td>{!! $current_booking_status !!}</td>
                 </tr>
-                <tr>
-                    <th>Arrival date/time</th>
-                    <td>{{$bk_to_date}}</td>
-                </tr>
-                
                 <tr>
                     <th>Name</th>
                     <td>{{$cus_title}} {{$cus_surname}}  {{$cus_name}}</td>
@@ -110,6 +103,16 @@
                         @endif    
                     </td>
                 </tr>
+                
+                <tr>
+                    <th>Departure date/time</th>
+                    <td>{{$bk_from_date}}</td>
+                </tr>
+                <tr>
+                    <th>Arrival date/time</th>
+                    <td>{{$bk_to_date}}</td>
+                </tr>
+                
                 
 
                 <tr>

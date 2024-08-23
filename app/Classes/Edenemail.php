@@ -234,9 +234,9 @@ class Edenemail
          
         $temrmainl_access_free_notice = "";
         if($data['terminal_parking_fee'] == 'N'){
-            $temrmainl_access_free_notice = "<span style='color:red'>(Not Added) Customer are responsible to pay Terminal fee upon Departure and Arrival</span>";
+            $temrmainl_access_free_notice = "Not Added";
         }else if ($data['terminal_parking_fee'] == 'P'){
-            $temrmainl_access_free_notice = "<span style='color:green'>(Added) departure & Arrival 25 mins Only </span> ";
+            $temrmainl_access_free_notice = "<span style='color:green'>(Added)</span> ";
         }
         
         //$amount_detail = "Booking interval: ".$bk_detail->bk_days."Days<br />";
@@ -247,7 +247,8 @@ class Edenemail
         $amount_detail .= "<tr><td>Online payment fee ($bk_detail->bk_online_fee_value %)</td><td> $bk_detail->cur_symbol ".number_format($bk_detail->bk_online_fee_amount, 2, '.', '')." (Non-Refundable)</td></tr>";
         $amount_detail .= "<tr><td>Booking fee</td><td> $bk_detail->cur_symbol ".number_format($bk_detail->bk_booking_fee, 2, '.', '')." (Non-Refundable)</td></tr>";
         //$amount_detail = "$amount_detail Airport access fee: $bk_detail->cur_symbol ".number_format($bk_detail->bk_access_fee, 2, '.', '')." (Non-Refundable)<br />Customers that book via third parties must pay the terminal access fee.<br />";
-        $amount_detail .= "<tr><td>Airport access fee</td><td> $bk_detail->cur_symbol ".number_format($bk_detail->bk_access_fee, 2, '.', '')." (Non-Refundable) $temrmainl_access_free_notice <br />Customers that book via third parties must pay the terminal access fee.</td></tr>";
+        //$amount_detail .= "<tr><td>Airport access fee</td><td> $bk_detail->cur_symbol ".number_format($bk_detail->bk_access_fee, 2, '.', '')." (Non-Refundable) $temrmainl_access_free_notice <br />Customers that book via third parties must pay the terminal access fee.</td></tr>";
+        $amount_detail .= "<tr><td>Airport access fee</td><td> $temrmainl_access_free_notice </td></tr>";
         //$amount_detail = "$amount_detail Customers that book via third parties must pay the terminal access fee.<br />";
         $amount_detail .= "<tr><td>VAT ($bk_detail->bk_vat_value %)</td><td> $bk_detail->cur_symbol ".number_format($bk_detail->bk_vat_amount, 2, '.', '')."</td></tr>";
 
