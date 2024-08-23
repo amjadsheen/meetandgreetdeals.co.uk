@@ -133,7 +133,11 @@
                     {{ $website_name }} {{$service_name}}<br>
                     <p style="color: rgb(237, 92, 87);">Important note (For departure)</p>
                     <p>Upon departure for dropping your car off please call the service provider (on the number below) 40 minutes before you arrive to the terminal.</p>
-                    <span><a style="color: #000;" href="tel:{{$contact_num}}">{{$contact_num}}</a> / <a style="color: #000;" href="tel:{{$alternate_contact_num}}">{{$alternate_contact_num}}</a></span>
+                    <span>
+                        <strong><a style="color: #000;" href="tel:{{$contact_num}}">{{$contact_num}}</a></strong> 
+                        <br> 
+                        <strong><a style="color: #000;" href="tel:{{$alternate_contact_num}}">{{$alternate_contact_num}}</a></strong> 
+                    </span>
                     <p style="color: rgb(237, 92, 87);">Important note (For Arrival)</p>
                     <p>Upon arrival for picking your car please call the number above, first call when you land and the second call when you have collected all your luggage.
                     (Any changes between your trip inform the service provider immediately)</p>
