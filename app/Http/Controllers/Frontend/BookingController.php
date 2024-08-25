@@ -1215,7 +1215,7 @@ class BookingController extends Controller
                 
                 
                 /*============== TO amjad  both detailed and basic ============*/
-                $to_email = "amjadalisheen@gmail.com";
+                /*$to_email = "amjadalisheen@gmail.com";
                 $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
                 $email_subject_amjad = $email_subject . ' amjad';
                 Mail::send($Email_Template . '.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_amjad, $to_email, $to_name) {
@@ -1225,7 +1225,7 @@ class BookingController extends Controller
                 Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_amjad, $to_email, $to_name) {
                     $message->to($to_email, $to_name)->subject($email_subject_amjad);
                     $message->from($st_admin_from_email, $st_admin_name);
-                });
+                });*/
                 /*============== TO amjad ============*/  
                 
             }
@@ -3840,7 +3840,7 @@ class BookingController extends Controller
         /*============== TO ADMIN ============*/
      
         /*============== TO amjad ============*/
-        $to_email = "amjadalisheen@gmail.com";
+        /*$to_email = "amjadalisheen@gmail.com";
         $email_subject_amjad = $email_subject . ' amjad';
         $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
         Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_amjad, $to_email, $to_name) {
@@ -3850,7 +3850,7 @@ class BookingController extends Controller
         Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_amjad, $to_email, $to_name) {
             $message->to($to_email, $to_name)->subject($email_subject_amjad);
             $message->from($st_admin_from_email, $st_admin_name);
-        });
+        });*/
         /*============== TO amjad ============*/
 
         /*============== Notifications Emails ============*/

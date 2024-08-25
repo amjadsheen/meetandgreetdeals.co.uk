@@ -121,7 +121,7 @@ $qrcode = $bookings->booking_id;
         <td width="30%" valign="top"
             style="padding-right: 6px; padding-left: 6px; border-right:thin; border-right-style:dashed; border-color:#A0A0A4;">
             <div style="float:left;">
-                <img align="middle" width="300" src="/storage/uploads/{{$domain->website_logo}}" alt="{{$bookings->website_name}}" />
+                <img align="middle" width="300" src="/storage/uploads/{{$bookings->website_logo}}" alt="{{$bookings->website_name}}" />
             </div>
             <div style="float:right;">
                 <img width="50" class="<?php echo $hideimage; ?>" src="/storage/qrcodes/{{$bookings->booking_id}}.png"  />
@@ -614,7 +614,7 @@ $qrcode = $bookings->booking_id;
         <td width="30%" valign="top"
             style="padding-right: 6px; padding-left: 6px; border-right:thin; border-right-style:dashed; border-color:#A0A0A4;">
             <div style="float:left;">
-                <img align="middle"  width="300" src="/storage/uploads/{{$domain->website_logo}}" alt="{{$bookings->website_name}}" />
+                <img align="middle"  width="300" src="/storage/uploads/{{$bookings->website_logo}}" alt="{{$bookings->website_name}}" />
             </div>
             <div style="float:right;"><img width="50" class="<?php echo $hideimage; ?>" src="/storage/qrcodes/{{$bookings->booking_id}}.png"/></div>
             <br/><br/><br/><br/><br/>
@@ -1101,7 +1101,7 @@ $qrcode = $bookings->booking_id;
         <td width="30%" valign="top"
             style="padding-right: 6px; padding-left: 6px; border-right:thin; border-right-style:dashed; border-color:#A0A0A4;">
             <div style="float:left;">
-                <img align="middle"  width="300"  src="/storage/uploads/{{$domain->website_logo}}" alt="{{$bookings->website_name}}" />
+                <img align="middle"  width="300"  src="/storage/uploads/{{$bookings->website_logo}}" alt="{{$bookings->website_name}}" />
             </div>
             <div style="float:right;"><img width="50" class="<?php echo $hideimage; ?>" src="/storage/qrcodes/{{$bookings->booking_id}}.png"/></div>
             <br/><br/><br/><br/><br/>
@@ -1594,7 +1594,7 @@ $qrcode = $bookings->booking_id;
 
     <!--SECOND COLUMN START PAGE 1-->
         <td width="30%" valign="top" style="padding-left:6px; padding-right:6px; border-right:thin; border-right-style:dashed; border-color:#A0A0A4;">
-            <div style="float:left;"><img align="middle" width="300" src="/storage/uploads/{{$domain->website_logo}}" alt="{{$bookings->website_name}}" />
+            <div style="float:left;"><img align="middle" width="300" src="/storage/uploads/{{$bookings->website_logo}}" alt="{{$bookings->website_name}}" />
             </div>
             <div style="float:right;"><img width="100" class="<?php echo $hideimage; ?>" src="/storage/qrcodes/{{$bookings->booking_id}}.png"/></div>
             <br/><br/><br/><br/><br/><br/><br/><br/>
@@ -1698,7 +1698,7 @@ $qrcode = $bookings->booking_id;
         </td> <!--END SECOND COLUMN PAGE 1-->
         <!--SECOND COLUMN START PAGE 1-->
         <td width="30%" valign="top" style="padding-left:6px; padding-right:6px; border-right:thin; border-right-style:dashed; border-color:#A0A0A4;">
-            <div style="float:left;"><img align="middle" width="300" src="/storage/uploads/{{$domain->website_logo}}" alt="{{$bookings->website_name}}" />
+            <div style="float:left;"><img align="middle" width="300" src="/storage/uploads/{{$bookings->website_logo}}" alt="{{$bookings->website_name}}" />
             </div>
             <div style="float:right;"><img width="100" class="<?php echo $hideimage; ?>" src="/storage/qrcodes/'{{$bookings->booking_id}}.png"/></div>
             <br/><br/><br/><br/><br/><br/><br/><br/>
@@ -1800,7 +1800,7 @@ $qrcode = $bookings->booking_id;
         </td> <!--END SECOND COLUMN PAGE 1-->
         <!--SECOND COLUMN START PAGE 1-->
         <td width="30%" valign="top" style="padding-left:6px; padding-right:6px; border-right:thin; border-right-style:dashed; border-color:#A0A0A4;">
-            <div style="float:left;"><img align="middle" width="300" src="/storage/uploads/{{$domain->website_logo}}" alt="{{$bookings->website_name}}" />
+            <div style="float:left;"><img align="middle" width="300" src="/storage/uploads/{{$bookings->website_logo}}" alt="{{$bookings->website_name}}" />
             </div>
             <div style="float:right;"><img width="100" class="<?php echo $hideimage; ?>" src="/storage/qrcodes/'{{$bookings->booking_id}}.png"/></div>
             <br/><br/><br/><br/><br/><br/><br/><br/>

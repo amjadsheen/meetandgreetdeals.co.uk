@@ -146,33 +146,54 @@
             </table>
         </div>
         
-        <div class="footer">
-                <p><strong>Heathrow Airport TERMINAL 1 – SAT-NAVIGATION POSTCODE: TW6 1AP</strong></p>
-                <p>Heathrow Airport Terminal 1 – Closed</p>
-
-                <p><strong>Heathrow Airport TERMINAL 2 – SAT-NAVIGATION POSTCODE: TW6 1EW</strong></p>
-                <p>Terminal 2 short stay car park 2 level 4 row A or B.</p>
-                <p>(task the ticket from barrier number 6 (right hand barrier) From the barrier follow the sign “off airport meet and greet parking” and park your car there.</p>
-                <p style="color: rgb(237, 92, 87);">NOTE: Be cautious there are height restrictions.</p>
-                <p><strong>Directions - Inner Ring E, Hounslow TW6 1EW</strong></p>
-                
-                <p><strong>Heathrow Airpot TERMINAL 3- SAT-NAVIGATION POSTCODE: TW6 3QG</strong></p>
-                <p>Terminal 3 short stay car park 3 level 4 row A or B</p>
-                <p>(follow the sign off airport meet and greet parking)</p>
-                <p style="color: rgb(237, 92, 87);">NOTE: Be cautious there are height restrictions.</p>
-                <p><strong>Directions – Hounslow TW6 1SX</strong></p>
-                
-                <p><strong>Heathrow Airport TERMINAL 4- SAT-NAVIGATION POSTCODE: TW6 3XA</strong></p>
-                <p>Terminal 4 short stay car park 4 level 2 row E or F</p>
-                <p>From the barrier follow the sign “off airport meet and greet parking” and park you car there.</p>
-                <p style="color: rgb(237, 92, 87);">NOTE: Be cautious there are height restrictions.</p>
-                <p><strong>Directors - Hounslow TW6 3XA</strong></p>
-                
-                <p><strong>Heathrow Airport TERMINAL 5- SAT-NAVIGATION POSTCODE: TW6 2GA</strong></p>
-                <p>Terminal 5 short stay car park 5 level 4 row R or S.</p>
-                <p>From the barrier follow the sign “off airport meet and greet parking” and park you car there.</p>
-                <p style="color: rgb(237, 92, 87);">NOTE: Be cautious there are height restrictions.</p>
-                <p><strong>Directors –  Hounslow TW6 2GB<p><strong>
+        <div class="content ">
+            <table>
+            <tr>
+                <td style="text-align:center">
+                    <p><strong>Heathrow Airport TERMINAL 1 – SAT-NAVIGATION POSTCODE: TW6 1AP</strong></p>
+                    <p style="color: rgb(237, 92, 87);">Heathrow Airport Terminal 1 – Closed</p>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center">
+                    <p><strong>Heathrow Airport TERMINAL 2 – SAT-NAVIGATION POSTCODE: TW6 1EW</strong></p>
+                    <p>Terminal 2 short stay car park 2 level 4 row A or B.</p>
+                    <p>(task the ticket from barrier number 6 (right hand barrier) From the barrier follow the sign “off airport meet and greet parking” and park your car there.</p>
+                    <p style="color: rgb(237, 92, 87);">NOTE: Be cautious there are height restrictions.</p>
+                    <p style="display:none"><strong>Directions - Inner Ring E, Hounslow TW6 1EW</strong></p>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center">
+                    <p><strong>Heathrow Airpot TERMINAL 3- SAT-NAVIGATION POSTCODE: TW6 3QG</strong></p>
+                    <p>Terminal 3 short stay car park 3 level 4 row A or B</p>
+                    <p>(follow the sign off airport meet and greet parking)</p>
+                    <p style="color: rgb(237, 92, 87);">NOTE: Be cautious there are height restrictions.</p>
+                    <p style="display:none"><strong>Directions – Hounslow TW6 1SX</strong></p>
+                    
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center">
+                    <p style="display:none"><strong>Heathrow Airport TERMINAL 4- SAT-NAVIGATION POSTCODE: TW6 3XA</strong></p>
+                    <p>Terminal 4 short stay car park 4 level 2 row E or F</p>
+                    <p>From the barrier follow the sign “off airport meet and greet parking” and park you car there.</p>
+                    <p style="color: rgb(237, 92, 87);">NOTE: Be cautious there are height restrictions.</p>
+                    <p style="display:none"><strong>Directors - Hounslow TW6 3XA</strong></p>
+                    
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center">
+                    <p><strong>Heathrow Airport TERMINAL 5- SAT-NAVIGATION POSTCODE: TW6 2GA</strong></p>
+                    <p>Terminal 5 short stay car park 5 level 4 row R or S.</p>
+                    <p>From the barrier follow the sign “off airport meet and greet parking” and park you car there.</p>
+                    <p style="color: rgb(237, 92, 87);">NOTE: Be cautious there are height restrictions.</p>
+                    <p style="display:none"><strong>Directors –  Hounslow TW6 2GB<p><strong>
+                </td>
+            </tr>
+           
+            </table>
         </div>
     </div>
 </body>
