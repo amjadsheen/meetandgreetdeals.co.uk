@@ -56,6 +56,9 @@
             padding: 0 !important;
             margin: 0 !important;
         }
+        .hidesupplier{
+            display:none;
+        }
     </style>
 </head>
 <body>

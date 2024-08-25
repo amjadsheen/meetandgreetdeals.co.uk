@@ -287,7 +287,7 @@ class Edenemail
             $supplier_cost = number_format($supplier_cost, 2, '.', '');
             $amount_detail .= "<tr class='hidecustomer'><td>Supplier Cost</td><td>$bk_detail->cur_symbol $supplier_cost </td></tr>";
         }
-        $amount_detail .= "<tr><td colspan='2'>(The price paid is non-refundable in the case of a no show or booking cancellation within 24 hours of departure.)</td></tr>";
+        $amount_detail .= "<tr class='hidesupplier'><td colspan='2'>(The price paid is non-refundable in the case of a no show or booking cancellation within 24 hours of departure.)</td></tr>";
         
         
         $data['amount_detail'] = $amount_detail;
