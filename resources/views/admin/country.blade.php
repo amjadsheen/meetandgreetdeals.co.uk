@@ -90,18 +90,19 @@
                                             </a>
                                         </td>
 
+                                       
                                         <td>
                                             @if($country->disable == 1)
                                                   <a class="testEdit" data-type="select"
-                                                     data-source='[{"value":1,"text":"open"},{"value":0,"text":"close"}]' data-column="disable"
+                                                     data-source='[{"value":1,"text":"close"},{"value":0,"text":"open"}]' data-column="disable"
                                                      data-url="{{route('country/updateinline', ['id'=>$country->id])}}" data-pk="{{$country->id}}"
-                                                     data-title="change" data-name="disable">open
+                                                     data-title="change" data-name="disable">close
                                                   </a>
                                             @else
                                                  <a class="testEdit" data-type="select"
-                                                 data-source='[{"value":0,"text":"close"},{"value":1,"text":"open"}]' data-column="disable"
+                                                 data-source='[{"value":0,"text":"open"},{"value":1,"text":"close"}]' data-column="disable"
                                                  data-url="{{route('country/updateinline', ['id'=>$country->id])}}" data-pk="{{$country->id}}"
-                                                 data-title="change" data-name="disable">close
+                                                 data-title="change" data-name="disable">open
                                                  </a>
                                             @endif
                                         </td>

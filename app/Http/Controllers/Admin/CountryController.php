@@ -41,7 +41,7 @@ class CountryController extends Controller
        // $test = Country::find($id);
         $column_name = $request->name;
         $column_value = $request->value;
-        if( $request->name && $request->value) {
+        if( $request->name) {
             $test = Country::select()
                 ->where('id', '=', $id)
                 ->update([$column_name => $column_value]);
