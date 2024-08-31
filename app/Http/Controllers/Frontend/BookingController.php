@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Classes\Domain;
 use App\Classes\Edenemail;
@@ -1181,24 +1182,37 @@ class BookingController extends Controller
                 /*======================== /GET EMAIL CONTENT ===========================*/
 
                 if ($payment_option == 1 || $payment_option == 6) { // SEND EMAIL TO CUSTOMER IN CASE PAYLATER
+                    $email_subject_customer = $email_subject . " (Customer NP)";
                     /*======================== EMAIL TO CUSTOMER ===========================*/
                     if(!empty($data['cus_email'])){
                         $to_email = $data['cus_email'];
                         $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
                         //basic
-                        Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
-                            $message->to($to_email, $to_name)->subject($email_subject);
-                            $message->from($st_admin_from_email, $st_admin_name);
-                        });
+                        try {
+                            Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_customer, $to_email, $to_name) {
+                                $message->to($to_email, $to_name)->subject($email_subject_customer);
+                                $message->from($st_admin_from_email, $st_admin_name);
+                            });
+                            Log::error('Email send: Customer New booking '  . $to_email );
+                        } catch (\Exception $e) {
+                            Log::error('Email failed to send: Customer New booking ' . $to_email . ' ' . $e->getMessage());
+                        }
+                        
                     }
                     if(!empty($data['alternate_email'])){
                         $to_email = $data['alternate_email'];
                         $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
                         //basic
-                        Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
-                            $message->to($to_email, $to_name)->subject($email_subject);
-                            $message->from($st_admin_from_email, $st_admin_name);
-                        });
+                       
+                        try {
+                            Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_customer, $to_email, $to_name) {
+                                $message->to($to_email, $to_name)->subject($email_subject_customer);
+                                $message->from($st_admin_from_email, $st_admin_name);
+                            });
+                            Log::error('Email send: Customer New booking Alt'  . $to_email );
+                        } catch (\Exception $e) {
+                            Log::error('Email failed to send: Customer New booking Alt' . $to_email . ' ' . $e->getMessage());
+                        }
                     }
                     /*======================== /EMAIL TO CUSTOMER ===========================*/
                 }
@@ -1206,27 +1220,22 @@ class BookingController extends Controller
                 /*============== TO ADMIN ============*/
                 $to_email = $st_admin_email;
                 $to_name = $st_admin_name;
+                $email_subject = $email_subject . " (Admin NP)";
                 //detailed
-                Mail::send($Email_Template . '.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
-                    $message->to($to_email, $to_name)->subject($email_subject);
-                    $message->from($st_admin_from_email, $st_admin_name);
-                });
+                
+                try {
+                    Mail::send($Email_Template . '.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
+                        $message->to($to_email, $to_name)->subject($email_subject);
+                        $message->from($st_admin_from_email, $st_admin_name);
+                    });
+                    Log::error('Email send: Admin New booking '  . $to_email );
+                } catch (\Exception $e) {
+                    Log::error('Email failed to send: Admin New booking ' . $to_email . ' ' . $e->getMessage());
+                }
                 /*============== TO ADMIN ============*/
                 
                 
-                /*============== TO amjad  both detailed and basic ============*/
-                /*$to_email = "amjadalisheen@gmail.com";
-                $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
-                $email_subject_amjad = $email_subject . ' amjad';
-                Mail::send($Email_Template . '.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_amjad, $to_email, $to_name) {
-                    $message->to($to_email, $to_name)->subject($email_subject_amjad);
-                    $message->from($st_admin_from_email, $st_admin_name);
-                });
-                Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_amjad, $to_email, $to_name) {
-                    $message->to($to_email, $to_name)->subject($email_subject_amjad);
-                    $message->from($st_admin_from_email, $st_admin_name);
-                });*/
-                /*============== TO amjad ============*/  
+                
                 
             }
             
@@ -3832,8 +3841,11 @@ class BookingController extends Controller
         $email_subject = str_replace("New", "Confirmation", $email_subject);
         $email_subject = str_replace("Confirmation Booking details", "Booking Confirmation details", $email_subject);
 
+        // $email_subject = $email_subject . " (Admin NP)";
+        $b_cancel = false;
         if (in_array($data['txn_payment_status'], array('Refunded'))) {
             $email_subject = str_replace("Confirmation", "Cancelled/Refunded", $email_subject);
+            $b_cancel = true;
         }
 
         $to_name = $st_admin_name;
@@ -3855,52 +3867,100 @@ class BookingController extends Controller
 
         /*============== Notifications Emails ============*/
         if (!empty($st_notification_email)) {
-            $email_to = explode(";", $st_notification_email);
-            for ($x = 0; $x < count($email_to); $x++) {
-                Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $email_to, $to_name) {
-                    $message->to($email_to, $to_name)->subject($email_subject);
-                    $message->from($st_admin_from_email, $st_admin_name);
-                });
+            if(!$b_cancel){
+                $email_subject_admin = $email_subject . " (Admin)";
+            }else{
+                $email_subject_admin = $email_subject;
             }
+            
+            $email_to_array = explode(";", $st_notification_email);
+            if(!empty($email_to_array)){
+                foreach ($email_to_array as $email_to) {
+                
+                    try {
+                        Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_admin, $email_to, $to_name) {
+                            $message->to($email_to, $to_name)->subject($email_subject_admin);
+                            $message->from($st_admin_from_email, $st_admin_name);
+                        });
+                        Log::error('Email send: Admin CONFIRMATION '  . $email_to );
+                    } catch (\Exception $e) {
+                        Log::error('Email failed to send: Admin CONFIRMATION ' . $email_to . ' ' . $e->getMessage());
+                    }
+                }
+            }
+            
         }
         /*============== Notifications Emails ============*/
         /*============== TO ADMIN ============*/
 
         /*============== TO CUSTOMER ============*/
+        if(!$b_cancel){
+            $email_subject_customer = $email_subject . " (Customer)";
+        }else{
+            $email_subject_customer = $email_subject;
+        }
         if(!empty($data['email'])){
             $to_email = $data['cus_email'];
             $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
-            Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
-                $message->to($to_email, $to_name)->subject($email_subject);
-                $message->from($st_admin_from_email, $st_admin_name);
-            });
+            
+            try {
+                Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_customer, $to_email, $to_name) {
+                    $message->to($to_email, $to_name)->subject($email_subject_customer);
+                    $message->from($st_admin_from_email, $st_admin_name);
+                });
+                Log::error('Email send: Customer CONFIRMATION '  . $to_email );
+            } catch (\Exception $e) {
+                Log::error('Email failed to send: Customer CONFIRMATION ' . $to_email . ' ' . $e->getMessage());
+            }
         }
         if(!empty($data['cus_email_1'])){
             $to_email = $data['cus_email_1'];
             $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
-            Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
-                $message->to($to_email, $to_name)->subject($email_subject);
-                $message->from($st_admin_from_email, $st_admin_name);
-            });
+            try {
+                Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_customer, $to_email, $to_name) {
+                    $message->to($to_email, $to_name)->subject($email_subject_customer);
+                    $message->from($st_admin_from_email, $st_admin_name);
+                });
+                Log::error('Email send: Customer CONFIRMATION ALT '  . $to_email );
+            } catch (\Exception $e) {
+                Log::error('Email failed to send: Customer CONFIRMATION Alt ' . $to_email . ' ' . $e->getMessage());
+            }
         }
         /*============== TO CUSTOMER ============*/
 
         /*============== TO COMPARE WEBSITE ============*/
+        
+        if(!$b_cancel){
+            $email_subject_supplier = $email_subject . " (Service Provider)";
+        }else{
+            $email_subject_supplier = $email_subject;
+        }
         if(!empty($data['email'])){
             $to_email = $data['email'];
             $to_name = $data['website_name'];
-            Mail::send($Email_Template . '.supplier', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
-                $message->to($to_email, $to_name)->subject($email_subject);
-                $message->from($st_admin_from_email, $st_admin_name);
-            });
+           
+            try {
+                Mail::send($Email_Template . '.supplier', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_supplier, $to_email, $to_name) {
+                    $message->to($to_email, $to_name)->subject($email_subject_supplier);
+                    $message->from($st_admin_from_email, $st_admin_name);
+                });
+                Log::error('Email send: sUPPLIER CONFIRMATION '  . $to_email );
+            } catch (\Exception $e) {
+                Log::error('Email failed to send: sUPPLIER CONFIRMATION ' . $to_email . ' ' . $e->getMessage());
+            }
         }
         if(!empty($data['alternate_email'])){
             $to_email = $data['alternate_email'];
             $to_name = $data['website_name'];
-            Mail::send($Email_Template . '.supplier', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
-                $message->to($to_email, $to_name)->subject($email_subject);
-                $message->from($st_admin_from_email, $st_admin_name);
-            });
+            try {
+                Mail::send($Email_Template . '.supplier', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_supplier, $to_email, $to_name) {
+                    $message->to($to_email, $to_name)->subject($email_subject_supplier);
+                    $message->from($st_admin_from_email, $st_admin_name);
+                });
+                Log::error('Email send: sUPPLIER CONFIRMATION ALT'  . $to_email );
+            } catch (\Exception $e) {
+                Log::error('Email failed to send: sUPPLIER CONFIRMATION Alt' . $to_email . ' ' . $e->getMessage());
+            }
         }
         /*============== /TO COMPARE WEBSITE ============*/
 

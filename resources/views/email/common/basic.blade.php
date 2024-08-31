@@ -158,7 +158,7 @@
                 <td style="text-align:center">
                     <p><strong>Heathrow Airport TERMINAL 2 – SAT-NAVIGATION POSTCODE: TW6 1EW</strong></p>
                     <p>Terminal 2 short stay car park 2 level 4 row A or B.</p>
-                    <p>(task the ticket from barrier number 6 (right hand barrier) From the barrier follow the sign “off airport meet and greet parking” and park your car there.</p>
+                    <p>(Take the ticket from barrier number 6 (right hand barrier) From the barrier follow the sign “off airport meet and greet parking” and park your car there.</p>
                     <p style="color: rgb(237, 92, 87);">NOTE: Be cautious there are height restrictions.</p>
                     <p style="display:none"><strong>Directions - Inner Ring E, Hounslow TW6 1EW</strong></p>
                 </td>

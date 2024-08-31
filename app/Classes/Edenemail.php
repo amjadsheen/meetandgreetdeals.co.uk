@@ -280,12 +280,12 @@ class Edenemail
                 $supplier_cost = ($data['supplier_cost_value'] / 100) * $TOTAL_PAYABLE_AMOUNT;
             } else {
                 // Supplier cost is a fixed value
-                $supplier_cost = $data['supplier_cost_value']; 
+                $supplier_cost = $TOTAL_PAYABLE_AMOUNT - $data['supplier_cost_value']; 
             }
         }
         if(!empty($supplier_cost)){ 
             $supplier_cost = number_format($supplier_cost, 2, '.', '');
-            $amount_detail .= "<tr class='hidecustomer'><td>Supplier Cost</td><td>$bk_detail->cur_symbol $supplier_cost </td></tr>";
+            $amount_detail .= "<tr class='hidecustomer'><td>Service Provider Cost</td><td>$bk_detail->cur_symbol $supplier_cost </td></tr>";
         }
         $amount_detail .= "<tr class='hidesupplier'><td colspan='2'>(The price paid is non-refundable in the case of a no show or booking cancellation within 24 hours of departure.)</td></tr>";
         

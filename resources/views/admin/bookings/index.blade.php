@@ -509,12 +509,12 @@
                                                         $supplier_cost = ($booking->supplier_cost_value / 100) * $bk_final_amount;
                                                     } else {
                                                         // Supplier cost is a fixed value
-                                                        $supplier_cost = $booking->supplier_cost_value; 
+                                                        $supplier_cost = $bk_final_amount - $booking->supplier_cost_value; 
                                                     }
                                                 }
                                                 if(!empty($supplier_cost)){ 
                                                     $supplier_cost = number_format($supplier_cost, 2, '.', '');
-                                                    echo '<br><br>Supplier Cost: <span style="background: orangered; color:#fff; padding: 4px 4px;">'.$booking->cur_symbol." ". $supplier_cost . ' </span>';
+                                                    echo '<br><br>Service Provider Cost: <span style="background: orangered; color:#fff; padding: 4px 4px;">'.$booking->cur_symbol." ". $supplier_cost . ' </span>';
                                                 }
                                                 
                                                 ?>

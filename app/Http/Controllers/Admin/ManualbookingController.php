@@ -6,6 +6,7 @@ use App\Classes\Domain;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
@@ -152,10 +153,10 @@ class ManualbookingController  extends Controller
         $bk_vip = 0;
         $email_to_client = 0;
         $email_to_admins = 0;
-
+        $email_to_supplier = 0;
         $email_to_client = $request->get('email_to_client');
         $email_to_admins = $request->get('email_to_admins');
-
+        $email_to_supplier = $request->get('email_to_supplier');
         /* ======= Settings ======= */
         $settings = Edenemail::get_website_settings($website_id);
         /* ======= Settings ======= */
@@ -338,63 +339,127 @@ class ManualbookingController  extends Controller
                       $st_admin_email = Edenemail::get_email_settings('st_admin_email');
                       $st_notification_email = Edenemail::get_email_settings('st_notification_email');
                       $email_subject = Edenemail::get_email_settings('st_new_booking_subject');
+                      $b_cancel = false;
                       /*======================== GET EMAIL CONTENT ===========================*/
 
                        /* -------------- @new enail template ---------------- */
-                       $Email_Template = "email.eden"; //@new enail template
-                       if(in_array($domain->website_templete, array('eden'))){ // if eden use eden
-                           $Email_Template = "email.".$domain->website_templete;
-                       }else{
-                           $Email_Template = "email.common";
-                           $email_subject = str_replace("Eden", $domain->website_name, $email_subject);
-                           $st_admin_name =  str_replace("Eden", $domain->website_name, $st_admin_name);
-                       }
+                       $Email_Template = "email.common";
                        /* -------------- /@new enail template ---------------- */
                        
                       if($email_to_admins == 1) {
+                        $email_subject_admin = $email_subject . " (Admin)";
                           /*============== TO ADMIN ============*/
                           $to_email = $st_admin_email;
                           $to_name = $st_admin_name;
-                          Mail::send($Email_Template.'.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
-                              $message->to($to_email, $to_name)->subject($email_subject);
-                              $message->from($st_admin_from_email, $st_admin_name);
-                          });
+                          
+                          try {
+                            Mail::send($Email_Template.'.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_admin, $to_email, $to_name) {
+                                $message->to($to_email, $to_name)->subject($email_subject_admin);
+                                $message->from($st_admin_from_email, $st_admin_name);
+                            });
+                            Log::error('Email send: manaul booking Admin '  . $to_email );
+                        } catch (\Exception $e) {
+                            Log::error('Email failed to send: manaul booking Admin' . $to_email . ' ' . $e->getMessage());
+                        }
                           /*============== TO ADMIN ============*/
 
                           /*============== Notifications Emails ============*/
+
                             if (!empty($st_notification_email)) {
-                                $email_to = explode(";", $st_notification_email);
-                                for ($x = 0; $x < count($email_to); $x++) {
-                                    Mail::send($Email_Template . '.detailed', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $email_to, $to_name) {
-                                        $message->to($email_to, $to_name)->subject($email_subject);
-                                        $message->from($st_admin_from_email, $st_admin_name);
-                                    });
+                                if(!$b_cancel){
+                                    $email_subject_admin = $email_subject . " (Admin)";
+                                }else{
+                                    $email_subject_admin = $email_subject;
                                 }
+                                
+                                $email_to_array = explode(";", $st_notification_email);
+                                if(!empty($email_to_array)){
+                                    foreach ($email_to_array as $email_to) {
+                                    
+                                        try {
+                                            Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_admin, $email_to, $to_name) {
+                                                $message->to($email_to, $to_name)->subject($email_subject_admin);
+                                                $message->from($st_admin_from_email, $st_admin_name);
+                                            });
+                                            Log::error('Email send: Admin manaul booking '  . $email_to );
+                                        } catch (\Exception $e) {
+                                            Log::error('Email failed to send: Admin manaul booking ' . $email_to . ' ' . $e->getMessage());
+                                        }
+                                    }
+                                }
+                                
                             }
-                            /*============== Notifications Emails ============*/
+                        /*============== Notifications Emails ============*/
                     }
 
                       if($email_to_client == 1) {
+                        $email_subject_customer = $email_subject . " (Customer)";
                           /*============== TO CUSTOMER ============*/
                         if(!empty($data['email'])){
                             $to_email = $data['cus_email'];
                             $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
-                            Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
-                                $message->to($to_email, $to_name)->subject($email_subject);
-                                $message->from($st_admin_from_email, $st_admin_name);
-                            });
+                            
+                            try {
+                                Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_customer, $to_email, $to_name) {
+                                    $message->to($to_email, $to_name)->subject($email_subject_customer);
+                                    $message->from($st_admin_from_email, $st_admin_name);
+                                });
+                                Log::error('Email send: manaul booking CUSTOMER '  . $to_email );
+                            } catch (\Exception $e) {
+                                Log::error('Email failed to send: manaul booking CUSTOMER' . $to_email . ' ' . $e->getMessage());
+                            }
                         }
                         if(!empty($data['cus_email_1'])){
                             $to_email = $data['cus_email_1'];
                             $to_name = $data['cus_title'] . ' ' . $data['cus_name'];
-                            Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject, $to_email, $to_name) {
-                                $message->to($to_email, $to_name)->subject($email_subject);
-                                $message->from($st_admin_from_email, $st_admin_name);
-                            });
+                            
+                            try {
+                                Mail::send($Email_Template . '.basic', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_customer, $to_email, $to_name) {
+                                    $message->to($to_email, $to_name)->subject($email_subject_customer);
+                                    $message->from($st_admin_from_email, $st_admin_name);
+                                });
+                                Log::error('Email send: manaul booking CUSTOMER  ALT'  . $to_email );
+                            } catch (\Exception $e) {
+                                Log::error('Email failed to send: manaul booking CUSTOMER Alt' . $to_email . ' ' . $e->getMessage());
+                            }
                         }
                         /*============== TO CUSTOMER ============*/
                       }
 
+
+                      if($email_to_supplier == 1) {
+                        /*============== TO COMPARE WEBSITE ============*/
+                        $email_subject_supplier = $email_subject . " (Service Provider)";
+                        if(!empty($data['email'])){
+                            $to_email = $data['email'];
+                            $to_name = $data['website_name'];
+                            
+                            try {
+                                Mail::send($Email_Template . '.supplier', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_supplier, $to_email, $to_name) {
+                                    $message->to($to_email, $to_name)->subject($email_subject_supplier);
+                                    $message->from($st_admin_from_email, $st_admin_name);
+                                });
+                                Log::error('Email send: manaul booking sUPPLIER  '  . $to_email );
+                            } catch (\Exception $e) {
+                                Log::error('Email failed to send: manaul booking sUPPLIER  ' . $to_email . ' ' . $e->getMessage());
+                            }
+                        }
+                        if(!empty($data['alternate_email'])){
+                            $to_email = $data['alternate_email'];
+                            $to_name = $data['website_name'];
+                            
+                            try {
+                                Mail::send($Email_Template . '.supplier', $data, function ($message) use ($st_admin_from_email, $st_admin_name, $email_subject_supplier, $to_email, $to_name) {
+                                    $message->to($to_email, $to_name)->subject($email_subject_supplier);
+                                    $message->from($st_admin_from_email, $st_admin_name);
+                                });
+                                Log::error('Email send: manaul booking sUPPLIER  ALT'  . $to_email );
+                            } catch (\Exception $e) {
+                                Log::error('Email failed to send: manaul booking sUPPLIER Alt' . $to_email . ' ' . $e->getMessage());
+                            }
+                        }
+                        /*============== /TO COMPARE WEBSITE ============*/
+                    }
 
                       return response()->json([ 'data'=>'Booking Added Succesfully Ref# is '.$bk_ref.''], 200);
                   }else{

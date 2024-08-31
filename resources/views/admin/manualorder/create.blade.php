@@ -544,6 +544,8 @@
                                             &nbsp;&nbsp;&nbsp;
                                             <input type="checkbox" name="email_to_admins" id="email_to_admins"
                                                    value="1"> Send email to admins
+                                            <input type="checkbox" name="email_to_supplier" id="email_to_supplier"
+                                                   value="1"> Send email to Service Provider
                                         </td>
                                     </tr>
                                     <tr>
