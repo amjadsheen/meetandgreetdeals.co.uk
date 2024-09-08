@@ -122,6 +122,13 @@
                 {!! $amount_detail !!}
                 
                 <tr>
+                    <th>Ulez Checked</th>
+                    <td>{{$ulze}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><span style="color:red"> We are not liable to cover any ULEZ charges. You will have to arrange yourself to pay the charge.</span></td>
+                </tr>
+                <tr>
                     <td  colspan="2" class="b133" style="text-align: center;">
                         <img style="width: 100%; max-width: 300px;" src="{{$campare_website_logo}}" alt="Logo">
                     </td>

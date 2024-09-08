@@ -761,10 +761,11 @@ $qrcode = $bookings->booking_id;
 
             <br /><br /><br /><br /><br /><br /><br /><br />
 
-            <div style="float:left1;" class="<?php echo $print; ?>">
+            <div style="float:left1;margin-top: -10px;" class="<?php echo $print; ?>">
                 <div align="center" style="font-size:20px;color:<?php echo $color ?>;"><strong>Customer service
                         numbers</strong><br /></div>
-                <div align="center" style="font-size:20px; color:<?php echo $color ?>;">{{$bookings->contact_num}} @if (trim($bookings->alternate_contact_num) !== '') / {{$bookings->alternate_contact_num}} @endif<br /></div>
+                <div align="center" style="font-size:20px; color:<?php echo $color ?>;">{{$bookings->contact_num}} @if (trim($bookings->alternate_contact_num) !== '') / {{$bookings->alternate_contact_num}} @endif 
+                    ( 05 to 23)<br /></div>
 
                 <div align="center">
                     <a href="mailto:{{$bookings->email}}" class="<?php echo $print; ?>" style="color:<?php echo $lcolor; ?>;;">{{$bookings->email}}</a>
@@ -797,9 +798,11 @@ $qrcode = $bookings->booking_id;
                 <div align="center" style="font-size:16px; color:<?php echo $color ?>;">Coming Soon</div>
                 <br />
 
-                <div style="font-size:<?php echo $tbl_font; ?>; color:<?php echo $color ?>;"><strong><u>DON'T
+                <div style="margin-top: -10px;font-size:<?php echo $tbl_font; ?>; color:<?php echo $color ?>;"><strong><u>DON'T
                             FORGET:</u></strong><br />TICKETS, PASSPORTS, PHONES, CURRENCY, CHARGERS & OTHER VALUABLE
-                    ITEMS.<br /><br /></div>
+                    ITEMS.<br />
+                    <p style="color:red; margin-top: 5px; margin-bottom: 5px;"> We are not liable to cover any ULEZ charges. You will have to arrange yourself to pay the charge.</p>
+                </div>
             </div>
 
             <table style="font-size:<?php echo $tbl_font; ?>;" width="100%" border="1" cellpadding="2" cellspacing="0" bordercolor="<?php echo $color ?>">

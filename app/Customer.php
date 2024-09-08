@@ -28,6 +28,7 @@ class Customer extends Model
         'cus_status'
       ];
 }
+//ALTER TABLE `bookings` ADD `ulze` VARCHAR(55) NULL AFTER `luggage`;
 //not_working_hours
 //ALTER TABLE `customers` ADD `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `cus_status`, ADD `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `created_at`;
 //ALTER TABLE `bookings` ADD `customer_contact` varchar(191) NULL DEFAULT NULL AFTER `customer_id`;

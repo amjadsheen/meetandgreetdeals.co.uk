@@ -167,9 +167,12 @@
                 </tr>
                 <tr>
                     <th>Ulez Checked</th>
-                    <td>{{$ulze}}</td>
+                    <td>{{$ulze}}
+                    </td>
                 </tr>
-                
+                <tr>
+                    <td colspan="2"><span style="color:red"> We are not liable to cover any ULEZ charges. You will have to arrange yourself to pay the charge.</span></td>
+                </tr>
                 <tr>
                     <th>Payment option</th>
                     <td>{!! $payment_option !!}</td>

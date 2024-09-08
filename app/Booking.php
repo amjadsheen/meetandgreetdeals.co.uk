@@ -68,9 +68,17 @@ class Booking extends Model
   'checkout_status',
   'checkin_status',
   'bk_amount_b4_update',
-   'terminal_parking_fee',
-   'last_min_booking',
+  'terminal_parking_fee',
+  'last_min_booking',
   'bk_days_b4_update',
-  'bk_dates_b4_updat'
+  'bk_dates_b4_updat',
+  'luggage',
+  'ulze',
+  'vehical_num',
+  'refrence_num_common',
+  'bank_transition_refernce',
+  'all_vehicals_total'
+
+
       ];
 }
