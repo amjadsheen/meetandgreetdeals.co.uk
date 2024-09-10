@@ -123,6 +123,10 @@ $color = "";
 $hideimage = '';
 $print1 = "";
 $p1c = "";
+$hide_label = "";
+if ((isset($_GET["hide_label"]) && ($_GET["hide_label"] == 1))) {
+    $hide_label = "#ffffff";
+}
 if ((isset($_GET["print"]) && ($_GET["print"] == 3)) && (isset($_GET["docket"]) &&  ($_GET["docket"] == 1))) {
     $blank = 'blank';
     $print1 = "print1";
@@ -210,7 +214,7 @@ $qrcode = $bookings->booking_id;
             </div>
             <br /><br />
             <?php if(!empty($bookings->refrence_num_extra)){  ?>
-                <p style="position: absolute; top: -5px; right: 77px; font-size: 14px;"> <?php echo $bookings->refrence_num_extra ?></p>
+                <p style="color:<?php echo $hide_label; ?>;position: absolute; top: -5px; right: 77px; font-size: 14px;"> <?php echo $bookings->refrence_num_extra ?></p>
             <?php }else{ ?>
                 <br />
             <?php } ?>
@@ -227,7 +231,7 @@ $qrcode = $bookings->booking_id;
                     </td>
                     <td width="29%">
                         <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
-                            <div style="font-size:15px">NAME:</div>
+                            <div style="color:<?php echo $hide_label; ?>;font-size:15px">NAME:</div>
                         </span>
                         <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
                             <div class="normal"><?php echo strtoupper($bookings->cus_title) . " " . strtoupper($bookings->cus_name); ?> &nbsp;</div>
@@ -235,7 +239,7 @@ $qrcode = $bookings->booking_id;
                     </td>
                     <td width="30%">
                         <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
-                            <div style="font-size:15px">SURNAME:</div>
+                            <div style="color:<?php echo $hide_label; ?>;font-size:15px">SURNAME:</div>
                         </span>
                         <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
                             <div class="normal"><?php echo strtoupper($bookings->cus_surname); ?> &nbsp;</div>
@@ -243,7 +247,7 @@ $qrcode = $bookings->booking_id;
                     </td>
                     <td width="40%">
                         <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
-                            <div style="font-size:15px">BOOKING REF:</div>
+                            <div style="color:<?php echo $hide_label; ?>;font-size:15px">BOOKING REF:</div>
                         </span>
                         <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
                             <div class="normal" style=""><?php echo strtoupper($bookings->bk_ref); ?> &nbsp;</div>
@@ -253,14 +257,14 @@ $qrcode = $bookings->booking_id;
                 <tr height="<?php echo $rh1; ?>">
                     <td width="30%">
                         <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
-                            <div style="font-size:15px">MOBILE 1:</div>
+                            <div style="color:<?php echo $hide_label; ?>;font-size:15px">MOBILE 1:</div>
                         </span>
                         <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
                             <div class="normal"><?php echo strtoupper($bookings->cus_cell); ?> &nbsp;</div>
                         </span>
                     <td width="30%">
                         <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
-                            <div style="font-size:15px">MOBILE 2:</div>
+                            <div style="color:<?php echo $hide_label; ?>;font-size:15px">MOBILE 2:</div>
                         </span>
                         <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
                             <div class="normal"><?php echo strtoupper($bookings->cus_cell2); ?></div> &nbsp;
@@ -269,7 +273,7 @@ $qrcode = $bookings->booking_id;
                     <td width="40%">
                         <?php if ($bookings->bk_payment_method != '') { ?>
                             <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
-                                <div style="font-size:15px">PAYMENT STATUS:</div>
+                                <div style="color:<?php echo $hide_label; ?>;font-size:15px">PAYMENT STATUS:</div>
                             </span>
                             <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
                                 <div class="normal">
@@ -319,7 +323,7 @@ $qrcode = $bookings->booking_id;
                     </td>
                     <td width="39%">
                         <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
-                            <div style="font-size:15px">CAR REG:</div>
+                            <div style="color:<?php echo $hide_label; ?>;font-size:15px">CAR REG:</div>
                         </span>
                         <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
                             <div class="normal"><?php echo strtoupper($bookings->bk_re_nu); ?> &nbsp;</div>
@@ -327,7 +331,7 @@ $qrcode = $bookings->booking_id;
                     </td>
                     <td width="30%">
                         <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
-                            <div style="font-size:15px">MAKE:</div>
+                            <div style="color:<?php echo $hide_label; ?>;font-size:15px">MAKE:</div>
                         </span>
                         <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
                             <div class="normal"><?php echo strtoupper($bookings->bk_ve_ma); ?> &nbsp;</div>
@@ -335,7 +339,7 @@ $qrcode = $bookings->booking_id;
                     </td>
                     <td width="30%">
                         <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
-                            <div style="font-size:15px">MODEL:</div>
+                            <div style="color:<?php echo $hide_label; ?>;font-size:15px">MODEL:</div>
                         </span>
                         <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
                             <div class="normal"><?php echo strtoupper($bookings->bk_ve_mo); ?> &nbsp;</div>
@@ -346,7 +350,7 @@ $qrcode = $bookings->booking_id;
                 <tr height="<?php echo $rh1; ?>">
                     <td width="30%">
                         <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
-                            <div style="font-size:15px">COLOUR:</div>
+                            <div style="color:<?php echo $hide_label; ?>;font-size:15px">COLOUR:</div>
                         </span>
                         <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
                             <div class="normal">
@@ -364,7 +368,7 @@ $qrcode = $bookings->booking_id;
                     
 
                     <td colspan="2" style="width: 100%;text-align:center;line-height: 17px;">
-                        <span class="<?php echo $print; ?> bbbb" style="color:<?php echo $color ?>;">
+                        <span class="<?php echo $print; ?> bbbb" style="color:<?php echo $hide_label ?>;">
                         <strong>CAR<span style="visibility: hidden">-</span>WASH </strong>
                         </span>
                         <?php
@@ -416,7 +420,7 @@ $qrcode = $bookings->booking_id;
                             <tr>
                                 <td style="width:50%">
                                     <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
-                                        <div style="font-size: 15px;">DROP OFF DATE:</div>
+                                        <div style="color:<?php echo $hide_label; ?>;font-size: 15px;">DROP OFF DATE:</div>
                                     </span>
                                     <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
                                         <div class="normal" style="font-size: 20px;">
@@ -442,7 +446,7 @@ $qrcode = $bookings->booking_id;
                                 <td style="border-right: 1px solid; width:5%">&nbsp;</td>
                                 <td style="width:40%;text-align: right;">
                                     <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
-                                        <div style="font-size: 15px;">
+                                        <div style="color:<?php echo $hide_label; ?>;font-size: 15px;">
                                             <p style="text-align: center;">Ulez Checked:</p>
                                         </div>
                                     </span>
@@ -461,7 +465,7 @@ $qrcode = $bookings->booking_id;
                     </td>
                     <td width="" style="text-align: center;">
                         <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
-                            <div style="font-size: 15px;">TERMINAL:</div>
+                            <div style="color:<?php echo $hide_label; ?>;font-size: 15px;">TERMINAL:</div>
                         </span>
                         <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
                             <div class="normal" style="font-size: 20px;"><?php echo strtoupper($bookings->ter_name1); ?> &nbsp;</div>
@@ -480,7 +484,7 @@ $qrcode = $bookings->booking_id;
                                     <tr>
                                         <td style="width:50%">
                                             <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
-                                                <div style="font-size: 15px;">DROP OFF TIME:</div>
+                                                <div style="color:<?php echo $hide_label; ?>;font-size: 15px;">DROP OFF TIME:</div>
                                             </span>
                                             <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
                                                 <div class="normal" style="font-size: 20px;">
@@ -515,7 +519,7 @@ $qrcode = $bookings->booking_id;
                                         <td style="border-right: 1px solid; width:5%">&nbsp;</td>
                                         <td style="width:40%;text-align: right;">
                                             <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
-                                                <div style="font-size: 15px;">
+                                                <div style="color:<?php echo $hide_label; ?>;font-size: 15px;">
                                                     <p style="text-align: center;">CHARGING:</p>
                                                 </div>
                                             </span>
@@ -537,7 +541,7 @@ $qrcode = $bookings->booking_id;
                         <!----- /IF CHARGING ----->
                     <td width="">
                         <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
-                            <div style="font-size: 15px;">OUTBOUND FLIGHT:</div>
+                            <div style="color:<?php echo $hide_label; ?>;font-size: 15px;">OUTBOUND FLIGHT:</div>
                         </span>
                         <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
                             <div class="normal" style="font-size: 20px;"><?php echo strtoupper($bookings->bk_ou_fl_nu); ?> &nbsp;</div>
@@ -553,16 +557,16 @@ $qrcode = $bookings->booking_id;
             <table style="font-size:<?php echo $tbl_font; ?>;" width="100%" border="1" cellpadding="2" cellspacing="0" bordercolor="<?php echo $color ?>">
                 <tr height="<?php echo $rh1; ?>">
                     <td style="width: 30%;text-align:center;line-height: 17px;">
-                        <span class="<?php echo $print; ?> bbbb" style="color:<?php echo $color ?>;">
+                        <span class="<?php echo $print; ?> bbbb" style="color:<?php echo $hide_label ?>;">
                            <strong>BOOKING DAYS</strong>
                         </span><br>
-                        <span class="<?php echo $print; ?> bbbb" style="font-size:24px;font-weight: 900; color:<?php echo $color ?>;">
+                        <span class="<?php echo $print; ?> bbbb" style="font-size:24px;font-weight: 900; color:<?php echo $p1c ?>;">
                         <?php echo $bookings->bk_days; ?> 
-                        </span> Days
+                        </span> <span  style="color:<?php echo $p1c ?>;">Days</span>
                     </td>
                     <td width="30%">
                         <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
-                            <div style="font-size:15px">IN MILEAGE:</div>
+                            <div style="color:<?php echo $hide_label; ?>;font-size:15px">IN MILEAGE:</div>
                         </span>
                         <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
                             <div class="normal">&nbsp;</div>
@@ -570,7 +574,7 @@ $qrcode = $bookings->booking_id;
                     </td>
                     <td width="30%">
                         <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
-                            <div style="font-size:15px">OUT MILEAGE:</div>
+                            <div style="color:<?php echo $hide_label; ?>;font-size:15px">OUT MILEAGE:</div>
                         </span>
                         <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
                             <div class="normal">&nbsp;</div>
@@ -596,7 +600,7 @@ $qrcode = $bookings->booking_id;
                     </td>
                     <td width="59%">
                         <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
-                            <div style="font-size: 15px;">ARRIVAL DATE:</div>
+                            <div style="color:<?php echo $hide_label; ?>;font-size: 15px;">ARRIVAL DATE:</div>
                         </span>
                         <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
                             <div class="normal" style="font-size: 29px;">
@@ -628,7 +632,7 @@ $qrcode = $bookings->booking_id;
                     </td>
                     <td width="">
                         <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
-                            <div style="font-size: 15px;">TERMINAL:</div>
+                            <div style="color:<?php echo $hide_label; ?>;font-size: 15px;">TERMINAL:</div>
                         </span>
                         <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
                             <div class="normal" style="font-size: 29px;"><?php echo strtoupper($bookings->ter_name2); ?> &nbsp;</div>
@@ -642,7 +646,7 @@ $qrcode = $bookings->booking_id;
                             <tr>
                                 <td style="width:50%">
                                     <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
-                                        <div style="font-size: 15px;">ARRIVAL TIME:</div>
+                                        <div style="color:<?php echo $hide_label; ?>;font-size: 15px;">ARRIVAL TIME:</div>
                                     </span>
                                     <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
                                         <div class="normal" style="font-size: 29px;">
@@ -675,7 +679,7 @@ $qrcode = $bookings->booking_id;
                                 <td style="border-right: 1px solid; width:5%">&nbsp;</td>
                                 <td style="width:20%;text-align: right;">
                                     <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
-                                        <div style="font-size: 15px;">
+                                        <div style="color:<?php echo $hide_label; ?>;font-size: 15px;">
                                             <p style="text-align: center;">BAGS:</p>
                                         </div>
                                     </span>
@@ -692,7 +696,7 @@ $qrcode = $bookings->booking_id;
 
                     <td width="">
                         <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
-                            <div style="font-size: 15px;">INBOUND FLIGHT:</div>
+                            <div style="color:<?php echo $hide_label; ?>;font-size: 15px;">INBOUND FLIGHT:</div>
                         </span>
                         <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
                             <div class="normal" style="font-size: 29px;"><?php echo strtoupper($bookings->bk_re_fl_nu); ?> &nbsp;</div>

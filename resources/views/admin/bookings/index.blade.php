@@ -631,7 +631,8 @@
 
 
                                                 <hr>
-                                                  <a href="/admin/docket?id=<?php echo $booking->booking_id; ?>&print=3&docket=1" target="_new">D1</a>
+                                                <a href="/admin/docket?id=<?php echo $booking->booking_id; ?>&print=3&docket=1&hide_label=1" target="_new">EP</a>
+                                                  | <a href="/admin/docket?id=<?php echo $booking->booking_id; ?>&print=3&docket=1" target="_new">D1</a>
                                                   | <a href="/admin/docket?id=<?php echo $booking->booking_id; ?>&print=3&docket=22" target="_new">D2</a>
                                                   |  <a href="/admin/docket?id=<?php echo $booking->booking_id; ?>&print=3&docket=22-p" target="_new">D2-P</a>
                                                 | <a href="/admin/docket?id=<?php echo $booking->booking_id; ?>&print=3&docket=0" target="_new">P1</a>
