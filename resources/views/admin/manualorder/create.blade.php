@@ -215,12 +215,13 @@
                                                         <select name="bk_payment_method" class="form-control" id="bk_payment_method">
                                                             <option value="1">Pay later</option>
                                                             <option value="2">Paypal</option>
-                                                            <option value="3">Credit Card</option>
+                                                            <option value="3">Worldpay</option>
                                                             <option value="5">Stripe</option>
                                                             <option value="6">Bank Transfer</option>
                                                             <option value="7">Cash</option>
                                                             <option value="4">Other</option>
-
+                                                            <option value="8">Credit/Debit Card</option>
+                                                            <option value="9">Tide link</option>
                                                         </select></td>
                                                 </tr>
                                                 <tr>

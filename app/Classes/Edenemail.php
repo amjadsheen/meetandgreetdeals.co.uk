@@ -90,7 +90,14 @@ class Edenemail
             }else if($bk_detail->bk_payment_method ==7){ // Credit/debit card
                 $payment_option = "Cash";
                 $current_booking_status = "Active";
+            }else if($bk_detail->bk_payment_method ==8){ // Credit/debit card
+                $payment_option = "Credit/Debit Card";
+                $current_booking_status = "Active";
+            }else if($bk_detail->bk_payment_method ==9){ // Credit/debit card
+                $payment_option = "Tide link";
+                $current_booking_status = "Active";
             }
+
 
 
         }else{

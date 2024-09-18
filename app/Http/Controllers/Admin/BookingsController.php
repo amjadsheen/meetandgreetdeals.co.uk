@@ -145,6 +145,14 @@ class BookingsController  extends Controller
             array(
                 "value" => 7,
                 "text" => "Cash",
+            ),
+            array(
+                "value" => 8,
+                "text" => "Credit/Debit Card",
+            ),
+            array(
+                "value" => 9,
+                "text" => "Tide link",
             )
 
         );

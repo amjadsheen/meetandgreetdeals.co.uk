@@ -178,6 +178,10 @@ if ($bookings->bk_payment_method == 1) {
     $payment_method = "Other";
 }elseif ($bookings->bk_payment_method==7){
     $payment_method = "Cash";
+}elseif ($bookings->bk_payment_method==8){
+    $payment_method = "Credit/Debit Card";
+}elseif ($bookings->bk_payment_method==9){
+    $payment_method = "Tide link";
 }
 
 

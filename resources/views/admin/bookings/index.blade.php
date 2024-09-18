@@ -77,6 +77,8 @@
                                         <option value="6" {{($search_filter['payment_method'] == 6) ? 'selected':'' }}>Bank Transfer</option>
                                         <option value="7" {{($search_filter['payment_method'] == 7) ? 'selected':'' }}>Cash</option>
                                         <option value="4" {{($search_filter['payment_method'] == 4) ? 'selected':'' }}>other</option>
+                                        <option value="8" {{($search_filter['payment_method'] == 8) ? 'selected':'' }}>Credit/Debit Card</option>
+                                        <option value="9" {{($search_filter['payment_method'] == 9) ? 'selected':'' }}>Tide link</option>
                                     </select>
                                 </div>
 
@@ -535,6 +537,10 @@
                                                 $payment_method = "Bank Transfer";
                                             }elseif ($booking->bk_payment_method==7){
                                                 $payment_method = "Cash";
+                                            }elseif ($booking->bk_payment_method==8){
+                                                $payment_method = "Credit/Debit Card";
+                                            }elseif ($booking->bk_payment_method==9){
+                                                $payment_method = "Tide link";
                                             }
 
 
@@ -638,6 +644,7 @@
                                                 | <a href="/admin/docket?id=<?php echo $booking->booking_id; ?>&print=3&docket=0" target="_new">P1</a>
                                                 | <a href="/admin/docket?id=<?php echo $booking->booking_id; ?>&print=3&docket=2" target="_new">P2</a>
                                                 | <a href="/admin/docket?id=<?php echo $booking->booking_id; ?>&docket=5" target="_new">D5</a>
+                                                | <a href="/admin/docket?id=<?php echo $booking->booking_id; ?>&docket=5&hide_label=1" target="_new">D5-E</a>
                                                 | <a href="/admin/docket?id=<?php echo $booking->booking_id; ?>&docket=6" target="_new">D6</a>
                                                 <hr>
 

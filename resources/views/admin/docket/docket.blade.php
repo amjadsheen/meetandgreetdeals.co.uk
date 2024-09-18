@@ -125,7 +125,7 @@ $print1 = "";
 $p1c = "";
 $hide_label = "";
 if ((isset($_GET["hide_label"]) && ($_GET["hide_label"] == 1))) {
-    $hide_label = "#ffffff";
+    $hide_label = "transparent";
 }
 if ((isset($_GET["print"]) && ($_GET["print"] == 3)) && (isset($_GET["docket"]) &&  ($_GET["docket"] == 1))) {
     $blank = 'blank';
@@ -186,6 +186,10 @@ if ($bookings->bk_payment_method == 1) {
     $payment_method = "Bank Transfer";
 }elseif ($bookings->bk_payment_method==7){
     $payment_method = "Cash";
+}elseif ($bookings->bk_payment_method==8){
+    $payment_method = "Credit/Debit Card";
+}elseif ($bookings->bk_payment_method==9){
+    $payment_method = "Tide link";
 }
 
 
@@ -560,9 +564,9 @@ $qrcode = $bookings->booking_id;
                         <span class="<?php echo $print; ?> bbbb" style="color:<?php echo $hide_label ?>;">
                            <strong>BOOKING DAYS</strong>
                         </span><br>
-                        <span class="<?php echo $print; ?> bbbb" style="font-size:24px;font-weight: 900; color:<?php echo $p1c ?>;">
+                        <span class="<?php echo $print; ?> bbbb" style="font-size:24px;font-weight: 900; color:<?php echo $hide_label ?>;">
                         <?php echo $bookings->bk_days; ?> 
-                        </span> <span  style="color:<?php echo $p1c ?>;">Days</span>
+                        </span> <span  style="color:<?php echo $hide_label ?>;">Days</span>
                     </td>
                     <td width="30%">
                         <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
