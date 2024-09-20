@@ -57,7 +57,7 @@
                                         <th>Airport</th>
                                         <th>Departure Terminal</th>
                                         <th>Arrival Terminal</th>
-                                        <th>Price</th>
+                                        <th>Terminal Switch Charge</th>
                                     </tr>
                                 </thead>
                                 <tbody>
