@@ -344,6 +344,7 @@ class BookingController extends Controller
         $discount_applied = 0;
         $airport1 = $request->get('airport1');
         $terminal = $request->get('terminal');
+        $return_terminal = $request->get('return_terminal');
         $selected_termainal =  $request->get('terminal');
         $selected_service = $request->get('service');
         $terminal_parking_fee = $request->get('terminal_parking_fee');
@@ -462,7 +463,7 @@ class BookingController extends Controller
                                     'country' => $prepared_session_data['country'],
                                     'airport1' => $prepared_session_data['airport1'],
                                     'terminal' => $prepared_session_data['terminal'],
-                                    'return_terminal' => $terminal->id,
+                                    'return_terminal' => $prepared_session_data['return_terminal'],
                                     'service' => $service->id,
                                     'cur_id' => $prepared_session_data['currency1'],
                                     'discount_coupon' => $prepared_session_data['discount_coupon'],
@@ -473,10 +474,6 @@ class BookingController extends Controller
                                     'luggage' => $prepared_session_data['luggage'],
                                     'ulze' => $prepared_session_data['ulze'],
                                     'bk_ou_fl_nu' => $prepared_session_data['bk_ou_fl_nu'],
-                                    //'bk_ve_ma' => $prepared_session_data['bk_ve_ma'],
-                                    //'bk_ve_mo' => $prepared_session_data['bk_ve_mo'],
-                                    //'bk_ve_co' => $prepared_session_data['bk_ve_co'],
-                                    //'v_contact_num' => $prepared_session_data['v_contact_num'],
                                     'vehical_type_id' => $prepared_session_data['vehical_type_id'],
                                     'carwash_in_and_out' => $prepared_session_data['carwash_in_and_out'],
                                     'carwash_out_only' => $prepared_session_data['carwash_out_only'],
@@ -996,7 +993,7 @@ class BookingController extends Controller
                 //COMPARE DEPARTUE DATE WITH CURRENT DATE AND GET DIFFERENCE IN HOUR
                 // CHECK IF HOUR EXISTS IF EXISTS GET PRICE AND ADD IT TO RELAVENT COLUMN
                 $last_minutes_booking_values = Domain::calculate_last_min_booking_prices($bk_date1, $camparison_website);
-                
+                $terminal_extra_charges_value = Domain::calculate_terminal_shift_extra_charges($terminal, $return_terminal, $camparison_website);
                 $bk_vip = $this->is_vip_service($booking_service);
 
                 if (trim($prepared_session_data['carwash_in_and_out']) == 1) { //a IN AND OUT
@@ -1055,6 +1052,7 @@ class BookingController extends Controller
                     'terminal_parking_fee' => $terminal_parking_fee,
                     'vehical_num' => $vehical_num,
                     'last_min_booking'=> $last_minutes_booking_values,
+                    'terminal_extra_charges'=> $terminal_extra_charges_value,
                     'bk_payment_method'=> $payment_option,
                     'bk_ou_fl_nu' => $OutboundFlightNumber,
                     'bk_re_fl_nu' => $ReturnFlightNumber,
@@ -1158,7 +1156,7 @@ class BookingController extends Controller
                 
 
                 $carwash = $booking_update->carwash_in_and_out + $booking_update->carwash_out_only + $booking_update->carwash_in_only;
-                $TOTAL_PAYABLE_AMOUNT = $booking_update->bk_total_amount + $carwash + $booking_update->not_working_hours + $booking_update->last_min_booking + $booking_update->charging_service_charges + $booking_update->charging;
+                $TOTAL_PAYABLE_AMOUNT = $booking_update->bk_total_amount + $carwash + $booking_update->not_working_hours + $booking_update->last_min_booking + $booking_update->terminal_extra_charges + $booking_update->charging_service_charges + $booking_update->charging;
                 $TOTAL_PAYABLE_AMOUNT = number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '');
                 $all_vehical_final_total = $all_vehical_final_total + $TOTAL_PAYABLE_AMOUNT;
                 $booking_currency = $this->get_booking_currency($booking_update->currency_id);
@@ -1507,258 +1505,7 @@ class BookingController extends Controller
         
     }
 
-    public function getallservicesprice(Request $request)
-    {
-        $html = "";
-        $domain = Domain::get_domain_id(1);
-        /* ======= Settings ======= */
-        $settings = $this->get_website_settings($domain->id);
-        /* ======= Settings ======= */
-        $Err = 0;
-        $discount_applied = 0;
-        $airport1 = $request->get('airport1');
-        $terminal = $request->get('terminal');
-        $selected_termainal =  $request->get('terminal');
-        $selected_service = $request->get('service');
-        $terminal_parking_fee = $request->get('terminal_parking_fee');
-        $vehical_num = $request->get('vehical_num');
-        //$country = $request->get('country');
-        $bookingeditpage = $request->get('bookingeditpage');
-        $var_date1 = $request->get('date1');
-        $var_date_exp1 = explode('-', $var_date1);
-        $date = str_replace('/', '-', $var_date_exp1[0]);
-        $date1 = date('Y-m-d', strtotime($date));
-        $var_date_time_1 = explode(':', $var_date_exp1[1]);
-        $hour1 = $var_date_time_1[0];
-        $min1 = $var_date_time_1[1];
-
-        $var_date2 = $request->get('date2');
-        $var_date_exp_2 = explode('-', $var_date2);
-        $date = str_replace('/', '-', $var_date_exp_2[0]);
-        $date2 = date('Y-m-d', strtotime($date));
-        $var_date_time_2 = explode(':', $var_date_exp_2[1]);
-        $hour2 = $var_date_time_2[0];
-        $min2 = $var_date_time_2[1];
-
-        $cur_id = $request->get('cur_id');
-        $discount_coupon = $request->get('discount_coupon');
-        $time1 = $hour1 . ":" . $min1 . ":00";
-        $time2 = $hour2 . ":" . $min2 . ":00";
-
-        $rs_ter_interval = DB::table('terminals')
-            ->select('ter_interval')
-            ->where('id', '=', $terminal)
-            ->first();
-        $st_hours = $rs_ter_interval->ter_interval;
-        $st_mins = $st_hours * 60;
-
-        // CHECKING HOURS DIFFERENCE FOR X HOURS
-        $cdatetime = date('Y-m-d H:i:s');
-        $interval = date_diff(date_create($date1 . $time1), date_create($cdatetime));
-        $int_days = $interval->format('%a');
-        $int_hours = 0;
-        if ($int_days > 0) {
-            $int_hours = $int_days * 24;
-        }
-        $int_hours = $int_hours + $interval->format('%h');
-        $int_mins = $int_hours * 60;
-        $int_mins = $int_mins + $interval->format('%i') . " ";
-
-        // Checking for errors
-        $airport_disable = 0;
-        $rs_ter_interval = DB::table('airports')
-            ->select('id')
-            ->where('airport_disable', '=', 1)
-            ->where('id', '=', $airport1)
-            ->count();
-        if ($rs_ter_interval == 1) {
-            $airport_disable = 1; // airport closed/disabled
-        }
-
-        // check if terminal is closed for booking by admin
-        $terminal_disable = 0;
-        $terminals = DB::table('terminals')
-            ->select('id', 'ter_name', 'ter_cap', 'ter_disable')
-            ->where('id', '=', $terminal)
-            ->first();
-        if (($terminals->ter_disable) == 1) { // if terminal closed for booking
-            $terminal_disable = 1; // terminal closed/disabled
-        }
-
-        // check if terminal is over booked
-        /*======= Terminal over booked Check ======*/
-        $terminal_booked = 0;
-        $ter_count = DB::table('bookings')
-            ->select('id')
-            ->whereDate('bk_from_date', '>=', $date1 . $time1)
-            ->whereDate('bk_from_date', '<=', $date2 . $time2)
-            ->where('bk_ou_te', '=', $terminal)
-            ->where('bk_status', '=', 2)
-            ->count();
-        if ($ter_count >= $terminals->ter_cap) {
-            $terminal_booked = 1;
-        }
-        /*======= Terminal over booked Check ======*/
-
-
-        //service disable check
-        $service_disabled = $this->is_service_disabled($selected_service);
-        $allservices = $this->GetAllActiveServices();
-        $allterminals = $this->GetAllTerminals($airport1);
-        $allwebsites = $this->GetAllActiveWebsites();
-        $services_response_array = array();
-
-        if ($Err == 0) {
-
-            /*===========PRICING CALCULATOR=============*/
-            $interval = date_diff(date_create($date1 . $time1), date_create($date2 . $time2));
-            $bk_date = date('Y-m-d H:i:s');
-            $bk_date1 = $date1 . " " . $time1;
-            $bk_date2 = $date2 . " " . $time2;
-            $int_days = $interval->format('%a') + 1;
-            $int_hours = $interval->format('%h');
-            $int_mins = $interval->format('%i');
-
-            $price_table = "regular_prices";
-            $discount_table = "regular_discounts";
-
-            $rs_cur_rate = DB::table('currencies')
-                ->select('id', 'cur_name', 'cur_code', 'cur_symbol', 'cur_rate')
-                ->where('id', '=', $cur_id)
-                ->first();
-
-            $cur_rate = $rs_cur_rate->cur_rate;
-            $cur_symbol = $rs_cur_rate->cur_symbol;
-
-            foreach ($allwebsites as  $c_website) {
-                foreach ($allservices as $service) {
-                    foreach ($allterminals as $key => $terminal) {
-
-                        if ($int_days <= 30) { // if days are less than 30, then select price per day
-                            $int_days_less_then_7 = 'cal_d' . $int_days;
-                            $gross_price = DB::table($price_table)
-                                ->select($int_days_less_then_7)
-                                ->where('terminal_id', '=', $terminal->id)
-                                ->where('service_id', '=', $service->id)
-                                ->where('website_id', '=', $c_website->id)
-                                ->first();
-                        
-                            $gross_price = number_format($gross_price->$int_days_less_then_7, 2, '.', '');
-                        } elseif ($int_days > 30) { // if days are more than 30, then select price from 7th day + flat rate
-
-                            $price = DB::table($price_table)
-                                ->select('cal_fix_rate', 'cal_d30')
-                                ->where('terminal_id', '=', $terminal->id)
-                                ->where('service_id', '=', $service->id)
-                                ->where('website_id', '=', $c_website->id)
-                                ->first();
-                            //$gross_price = $price->cal_d30 + ($price->cal_fix_rate * ($int_days - 7));
-                            $days_count = $int_days - 30;
-                            $gross_price = $price->cal_d30 + ($days_count * $price->cal_fix_rate);
-                            $gross_price = number_format($gross_price, 2, '.', '');
-                        }
-                        $gross_price = $gross_price * $cur_rate; // applying currency rate
-
-                        if ($discount_applied == 1) { // if discount is applied
-                            $discount_value_rs = DB::table($discount_table)
-                                ->select('dis_value')
-                                ->where('terminal_id', '=', $terminal->id)
-                                ->where('service_id', '=', $service->id)
-                                ->where('dis_coupon', '=', $discount_coupon)
-                                ->where('dis_active', '=', 1)
-                                ->where('website_id', '=', $c_website->id)
-                                ->first();
-                            if ($discount_value_rs) {
-                                $discount_value = $discount_value_rs->dis_value;
-                                $discount_amount = ($gross_price * $discount_value_rs->dis_value / 100);
-                                $discount_amount = number_format($discount_amount, 2, '.', '');
-                                $net_price = $gross_price - $discount_amount;
-                                $net_price = number_format($net_price, 2, '.', '');
-                            } else {
-                                $discount_value = 0;
-                                $discount_amount = 0;
-                                $net_price = $gross_price;
-                            }
-                        } else { // if discount is not applied
-
-                            $discount_value = 0;
-                            $discount_amount = 0;
-                            $net_price = $gross_price;
-                        }
-
-                        $pricing = DB::table($price_table)
-                            ->select('service_id', 'cal_vat', 'cal_access_fee', 'cal_online_fee', 'cal_booking_fee')
-                            ->where('terminal_id', '=', $terminal->id)
-                            ->where('service_id', '=', $service->id)
-                            ->where('website_id', '=', $c_website->id)
-                            ->first();
-                        
-                        
-                        $vat_value = 0;
-                        $vat_amount = 0;
-                        $access_fee = 0;
-
-                        $online_fee_value = $pricing->cal_online_fee; // get online fee % no need to apply currency conversion
-
-                        $booking_fee = $pricing->cal_booking_fee; // get booking fee
-                        $booking_fee = $booking_fee * $cur_rate; // currency conversion
-
-                        $vat_value = $pricing->cal_vat; // % vat value, no need to apply currency conversion.
-                        $vat_amount = $vat_value / 100 * $net_price; // vat calculation on parking price
-
-                        $net_price = $net_price + $vat_amount;   //  add vat
-                        $net_price = $net_price + $booking_fee; // add booking fee
-
-                        $access_fee = $pricing->cal_access_fee;  // get access fee
-                        $access_fee = $access_fee * $cur_rate;
-
-                        if($terminal_parking_fee == 'P'){ // @am2022 pay access fee in website
-                        if ($access_fee >= 0) {
-                            $net_price = $net_price + $access_fee; // add access fee
-                        }
-                        }else{
-                        $access_fee = 0;
-                        }
-
-
-                        $online_fee_amount = $online_fee_value / 100 * $net_price; // online fee applied on parking price
-                        $net_price = $net_price + $online_fee_amount;
-
-
-
-                        /* Not Working Hours New */
-                        $not_working_hours_price = Domain::GetNotWorkingHoursPrice($domain->id,  $bk_date1, $bk_date2);
-                        $net_price = $not_working_hours_price + $net_price;
-                        /* /Not Working Hours New */
-
-                        /* Last minutes booking */
-                        $last_minutes_booking_values = Domain::calculate_last_min_booking_prices($bk_date1, 1);
-                        $net_price = $last_minutes_booking_values + $net_price;
-                        /* Last minutes booking */
-
-
-                        $bg_color = "";
-                        if($selected_termainal == $terminal->id &&  $service->id == $selected_service ){
-                            $bg_color = 'style="background: #12d07891;"';
-                        }
-                        $service_name = $this->GetServiceName($pricing->service_id);
-                        $color = "#fff";
-                        $price_with_symbol =  $cur_symbol . " " . number_format($net_price, 2, '.', '');
-                        $price_with_symbol = "<span style='color:$color; font-size:15px;'>Select " . $price_with_symbol . "</span>";
-
-                        $full_text = $terminal->ter_name . '( ' . $price_with_symbol . ' )';
-                        $html .= '<div class="col-md-12 d-flex align-items-stretch mt-4 mt-md-0">';
-                        $html .= '<div class="icon-box" '.$bg_color.'>';
-                        $html .= '<h4> '. $c_website->website_name . ' Termainal <span style="font-size: 30px; margin-left: 4px;">'  . $terminal->ter_name . ' -- ' .$service_name . '</span></h4>';
-                        $html .= '<a style="cursor:pointer;" onclick="updatedservice(' . $terminal->id . ');"  class="plan-btn">' . $price_with_symbol . '</a>';
-                        $html .= '</div>';
-                        $html .= '</div>';
-                    }
-                }
-            }
-            return $html;
-        }
-    }
+    
     public function GetServiceName($id) {
         $website = Services::where('id', $id)->first();
         return $website->service_name;
@@ -2101,7 +1848,7 @@ class BookingController extends Controller
         $settings = $this->get_website_settings($request['website_id']);
         /* ======= Settings ======= */
        //dd($request);
-        
+       
         $airport1 = $request['airport1'];
         $terminal = $request['terminal'];
         $service = $request['service'];
@@ -2303,6 +2050,10 @@ class BookingController extends Controller
         $net_price = $last_minutes_booking_values + $net_price;
         /* Last minutes booking */
 
+        /* Last minutes booking */
+        $terminal_extra_charges_value = Domain::calculate_terminal_shift_extra_charges($request['terminal'], $request['return_terminal'], $request['website_id']);
+        $net_price = $terminal_extra_charges_value + $net_price;
+        /* Last minutes booking */
         
         if (trim($request['carwash_in_and_out']) == 1) { //a IN AND OUT
             $pprice = $this->Get_Carwash_Veh_Type_Price_Single($request['website_id'], $request['vehical_type_id'], 'carwash_in_and_out');
@@ -2342,6 +2093,7 @@ class BookingController extends Controller
             'gross_price' => $gross_price,
             'not_working_hours_price' => $not_working_hours_price,
             'last_minutes_booking_values' => $last_minutes_booking_values,
+            'terminal_extra_charges_value' => $terminal_extra_charges_value,
             'cal_online_fee' => $pricing->cal_online_fee,
             'cal_booking_fee' => $pricing->cal_booking_fee,
             'cal_vat' => $pricing->cal_vat,
@@ -2670,6 +2422,11 @@ class BookingController extends Controller
              $net_price = $last_minutes_booking_values + $net_price;
              /* Last minutes booking */
 
+            /* Last minutes booking */
+            $terminal_extra_charges_value = Domain::calculate_terminal_shift_extra_charges($bk_date1, 1);
+            $net_price = $terminal_extra_charges_value + $net_price;
+            /* Last minutes booking */
+
             /*=============== EDIT BOOKING DETAILS SHOW HIDE PAYMENT BUTTON ==============*/
             $bkdays_am = "<span style='color:#f22525 !important;font-size: 24px;'>Parking days booked " . $int_days . " days: </span>";
             //". $int_hours ." hours "  . $int_mins . " min";
@@ -2941,32 +2698,9 @@ class BookingController extends Controller
                     );
                     
                     // Add the booking price to the total
-                    //dd($bookingPrice);
+
                     $totalBookingPrice += $bookingPrice['net_price'];
-                    /*$offer_percentage = $bookingPrice['offer_percentage'];
-                    $car_wash = $bookingPrice['car_wash'];
-                    $days = $bookingPrice['days'];
-                    $gross_price = $bookingPrice['gross_price'];
-                    $not_working_hours_price = $bookingPrice['not_working_hours_price'];
-                    $last_minutes_booking_values = $bookingPrice['last_minutes_booking_values'];*/
-                    /*'net_price' => $net_price = number_format($net_price, 2, '.', ''), 
-                    'days' => $int_days , 
-                    'car_wash'=> $pprice,
-                    'offer_percentage'=> $offer_percentage,*/
-                    /*
-                    'net_price' => $net_price = number_format($net_price, 2, '.', ''), 
-                    'days' => $int_days , 
-                    'car_wash'=> $pprice,
-                    'offer_percentage'=> $offer_percentage,
-                    'offer_amount' => $offer_amount,
-                    'gross_price' => $gross_price,
-                    'not_working_hours_price' => $not_working_hours_price,
-                    'last_minutes_booking_values' => $last_minutes_booking_values,
-                    'cal_online_fee' => $pricing->cal_online_fee,
-                    'cal_booking_fee' => $pricing->cal_booking_fee,
-                    'cal_vat' => $pricing->cal_vat,
-                    'vat_amount' => $vat_amount,
-                    'cal_access_fee' => $pricing->cal_access_fee*/
+                    
                     $cart_data[$key] = array(
                         'bk_from_date' => $vehicle['date1'],
                         'bk_to_date' => $vehicle['date2'],
@@ -2978,6 +2712,7 @@ class BookingController extends Controller
                         'gross_price' => $bookingPrice['gross_price'],
                         'not_working_hours_price' => $bookingPrice['not_working_hours_price'],
                         'last_minutes_booking_values' => $bookingPrice['last_minutes_booking_values'],
+                        'terminal_extra_charges_value' => $bookingPrice['terminal_extra_charges_value'],
                         'cal_online_fee' => $bookingPrice['cal_online_fee'],
                         'cal_booking_fee' => $bookingPrice['cal_booking_fee'],
                         'cal_vat' => $bookingPrice['cal_vat'],
@@ -3016,7 +2751,8 @@ class BookingController extends Controller
 
             $html .= "<p><strong>Booking Type</strong>: " . $bk_type . '</p>';
             $html .= "<p><strong>Airport</strong>: " . Domain::GetAirportNameById($prepared_session_data['airport1']) . '</p>';
-            $html .= "<p><strong>Outbound terminal</strong>: " . Domain::GetTerminalNameById($prepared_session_data['terminal']) . '</p>';
+            $html .= "<p><strong>Departure terminal</strong>: " . Domain::GetTerminalNameById($prepared_session_data['terminal']) . '</p>';
+            $html .= "<p><strong>Arrival terminal</strong>: " . Domain::GetTerminalNameById($prepared_session_data['return_terminal']) . '</p>';
             $html .= "<p><strong>Service</strong>: " . Domain::GetServiceNameById($prepared_session_data['service']) . '</p>';
             
             foreach($cart_data as $key => $veh){
@@ -3051,7 +2787,7 @@ class BookingController extends Controller
                 }
                 $html .= "<p><strong> OUT OF WORKING HOURS </strong>: <span>" . $cur_symbol . " " . number_format($veh['not_working_hours_price'], 2, '.', '') . "</span></p>";
                 $html .= "<p><strong> Last Minute Booking </strong>: <span>" . $cur_symbol . " " . number_format($veh['last_minutes_booking_values'], 2, '.', '') . "</span></p>";
-    
+                $html .= "<p><strong> Terminal Switch Charge </strong>: <span>" . $cur_symbol . " " . number_format($veh['terminal_extra_charges_value'], 2, '.', '') . "</span></p>";
                 if ($veh['offer_percentage'] <> "") {
                     $html .= "<p><strong>Total Amount</strong>: <span>" . $cur_symbol . " " . number_format($totalBookingPrice +  $veh['offer_amount'], 2, '.', '') . "</span></p>";
                     $html .= "<p><span style='green !important'>Promotional discount offered (" . $veh['offer_percentage'] . " %): " . $cur_symbol . " " . number_format($veh['offer_amount'], 2, '.', '') . "</span></p>";
@@ -3186,7 +2922,7 @@ class BookingController extends Controller
             } else {
                 
             }
-            $TOTAL_PAYABLE_AMOUNT = $bk_detail->bk_total_amount + $carwash  + $bk_detail->not_working_hours + $bk_detail->last_min_booking + $bk_detail->charging_service_charges + $bk_detail->charging;
+            $TOTAL_PAYABLE_AMOUNT = $bk_detail->bk_total_amount + $carwash  + $bk_detail->not_working_hours + $bk_detail->last_min_booking + $bk_detail->terminal_extra_charges + $bk_detail->charging_service_charges + $bk_detail->charging;
                 $html .= "<br><strong class='totalclass'><h3 style='color:#da0909 !important'>TOTAL PAYABLE AMOUNT: <span>" . $bk_detail->cur_symbol . " " . number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '') . "</span></h3></strong>";
             /*if ($pcdone == 1) {
                 $html .= "<strong style='color:green;'>CONGRATULATIONS !</strong> Promotion code verified...<br /><br />";

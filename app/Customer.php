@@ -51,3 +51,9 @@ ALTER TABLE `websites`
 ADD `supplier_cost_type` ENUM('percentage', 'fixed', 'none') NOT NULL DEFAULT 'percentage' AFTER `show_homepage`,
 ADD `supplier_cost_value` INT NOT NULL AFTER `supplier_cost_type`;
 */
+
+
+
+/*
+ALTER TABLE `bookings` ADD `terminal_extra_charges` INT(3) NOT NULL DEFAULT '0' AFTER `last_min_booking`;
+*/

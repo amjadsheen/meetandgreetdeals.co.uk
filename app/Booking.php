@@ -70,6 +70,7 @@ class Booking extends Model
   'bk_amount_b4_update',
   'terminal_parking_fee',
   'last_min_booking',
+  'terminal_extra_charges',
   'bk_days_b4_update',
   'bk_dates_b4_updat',
   'luggage',

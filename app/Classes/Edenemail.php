@@ -249,6 +249,7 @@ class Edenemail
         //$amount_detail = "Booking interval: ".$bk_detail->bk_days."Days<br />";
         $amount_detail .= "<tr><td>Out Of Working hours</td><td> $bk_detail->cur_symbol ".number_format($bk_detail->not_working_hours, 2, '.', '')."</td></tr>";
         $amount_detail .= "<tr><td>Last Minute Booking</td><td> $bk_detail->cur_symbol ".number_format($bk_detail->last_min_booking, 2, '.', '')."</td></tr>";
+        $amount_detail .= "<tr><td>Terminal Switch Charge</td><td> $bk_detail->cur_symbol ".number_format($bk_detail->terminal_extra_charges, 2, '.', '')."</td></tr>";
         $amount_detail .= "<tr><td>Charging Amount</td><td> $bk_detail->cur_symbol ".number_format($bk_detail->charging, 2, '.', '')."</td></tr>";
         $amount_detail .= "<tr><td>Service Charge</td><td> $bk_detail->cur_symbol ".number_format($bk_detail->charging_service_charges, 2, '.', '')."</td></tr>";
         $amount_detail .= "<tr><td>Online payment fee ($bk_detail->bk_online_fee_value %)</td><td> $bk_detail->cur_symbol ".number_format($bk_detail->bk_online_fee_amount, 2, '.', '')." (Non-Refundable)</td></tr>";
@@ -259,7 +260,7 @@ class Edenemail
         //$amount_detail = "$amount_detail Customers that book via third parties must pay the terminal access fee.<br />";
         $amount_detail .= "<tr><td>VAT ($bk_detail->bk_vat_value %)</td><td> $bk_detail->cur_symbol ".number_format($bk_detail->bk_vat_amount, 2, '.', '')."</td></tr>";
 
-        $TOTAL_PAYABLE_AMOUNT = $bk_detail->bk_total_amount + $carwash + $bk_detail->not_working_hours + $bk_detail->last_min_booking + $bk_detail->charging_service_charges + $bk_detail->charging;
+        $TOTAL_PAYABLE_AMOUNT = $bk_detail->bk_total_amount + $carwash + $bk_detail->not_working_hours + $bk_detail->last_min_booking + $bk_detail->terminal_extra_charges + $bk_detail->charging_service_charges + $bk_detail->charging;
         if ($bk_detail->bk_discount_offer_coupon<>""){ // if promotional discount applied
             $amount_detail .= "<tr><td>Total amount</td><td> $bk_detail->cur_symbol ".number_format($TOTAL_PAYABLE_AMOUNT + $bk_detail->bk_discount_offer_amount, 2, '.', '')."</td></tr>";
             $amount_detail .= "<tr><td>Promotional discount amount ($bk_detail->bk_discount_offer_value %)</td><td> $bk_detail->cur_symbol ".number_format($bk_detail->bk_discount_offer_amount, 2, '.', '')."</td></tr>";

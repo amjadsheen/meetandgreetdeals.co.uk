@@ -124,6 +124,26 @@ class Domain
         return $last_minutes_booking_values;
     }
 
+    public static function calculate_terminal_shift_extra_charges($departure_terminal, $arrival_terminal, $website_id) {
+        // If departure and arrival terminals are the same, return 0
+        if ($departure_terminal === $arrival_terminal) {
+            return 0;
+        }
+    
+        // Retrieve the extra_charges from the terminal_charges table
+        $terminalCharge = DB::table('terminal_charges')
+            ->where('departure_terminal', $departure_terminal)
+            ->where('arrival_terminal', $arrival_terminal)
+            ->where('website_id', $website_id)
+            ->first();
+    
+        // If terminal charge exists, return the extra_charges, otherwise return 0
+        return $terminalCharge ? $terminalCharge->extra_charges : 0;
+    }
+    
+
+   
+
     static function get_last_min_booking_prices($camparison_website){
         $get_last_min_booking_prices_array= [];
         $lmb = DB::table("last_minute_bookings as lmb")

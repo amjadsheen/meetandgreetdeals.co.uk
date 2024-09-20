@@ -206,12 +206,12 @@ $qrcode = $bookings->booking_id;
                                         <?php
                                         if ($bookings->bk_discount_offer_value == 0) {
                                         $carwash = $bookings->carwash_in_and_out + $bookings->carwash_out_only + $bookings->carwash_in_only;
-                                        $TOTAL_PAYABLE_AMOUNT = $bookings->bk_total_amount + $carwash + $bookings->not_working_hours + $bookings->last_min_booking + $bookings->charging_service_charges + $bookings->charging;
+                                        $TOTAL_PAYABLE_AMOUNT = $bookings->bk_total_amount + $carwash + $bookings->not_working_hours + $bookings->last_min_booking + $bookings->terminal_extra_charges + $bookings->charging_service_charges + $bookings->charging;
                                         //echo number_format($bookings->bk_total_amount, 2, '.', '');
                                         echo number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '');
                                         } else {
                                             $carwash = $bookings->carwash_in_and_out + $bookings->carwash_out_only + $bookings->carwash_in_only;
-                                            $TOTAL_PAYABLE_AMOUNT = $bookings->bk_final_amount + $carwash + $bookings->not_working_hours + $bookings->last_min_booking + $bookings->charging_service_charges + $bookings->charging;
+                                            $TOTAL_PAYABLE_AMOUNT = $bookings->bk_final_amount + $carwash + $bookings->not_working_hours + $bookings->last_min_booking + $bookings->terminal_extra_charges + $bookings->charging_service_charges + $bookings->charging;
                                             //echo number_format($bookings->bk_final_amount, 2, '.', '');
                                             echo number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '');
                                         }
@@ -749,12 +749,12 @@ $qrcode = $bookings->booking_id;
                                         <?php
                                         if ($bookings->bk_discount_offer_value == 0) {
                                         $carwash = $bookings->carwash_in_and_out + $bookings->carwash_out_only + $bookings->carwash_in_only;
-                                        $TOTAL_PAYABLE_AMOUNT = $bookings->bk_total_amount + $carwash + $bookings->not_working_hours + $bookings->last_min_booking + $bookings->charging_service_charges + $bookings->charging;
+                                        $TOTAL_PAYABLE_AMOUNT = $bookings->bk_total_amount + $carwash + $bookings->not_working_hours + $bookings->last_min_booking + $bookings->terminal_extra_charges + $bookings->charging_service_charges + $bookings->charging;
                                         //echo number_format($bookings->bk_total_amount, 2, '.', '');
                                         echo number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '');
                                         } else {
                                             $carwash = $bookings->carwash_in_and_out + $bookings->carwash_out_only + $bookings->carwash_in_only;
-                                            $TOTAL_PAYABLE_AMOUNT = $bookings->bk_final_amount + $carwash + $bookings->not_working_hours + $bookings->last_min_booking + $bookings->charging_service_charges + $bookings->charging;
+                                            $TOTAL_PAYABLE_AMOUNT = $bookings->bk_final_amount + $carwash + $bookings->not_working_hours + $bookings->last_min_booking + $bookings->terminal_extra_charges + $bookings->charging_service_charges + $bookings->charging;
                                             //echo number_format($bookings->bk_final_amount, 2, '.', '');
                                             echo number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '');
                                         }
@@ -1292,12 +1292,12 @@ $qrcode = $bookings->booking_id;
                                         <?php
                                         if ($bookings->bk_discount_offer_value == 0) {
                                         $carwash = $bookings->carwash_in_and_out + $bookings->carwash_out_only + $bookings->carwash_in_only;
-                                        $TOTAL_PAYABLE_AMOUNT = $bookings->bk_total_amount + $carwash + $bookings->not_working_hours + $bookings->last_min_booking + $bookings->charging_service_charges + $bookings->charging;
+                                        $TOTAL_PAYABLE_AMOUNT = $bookings->bk_total_amount + $carwash + $bookings->not_working_hours + $bookings->last_min_booking + $bookings->terminal_extra_charges + $bookings->charging_service_charges + $bookings->charging;
                                         //echo number_format($bookings->bk_total_amount, 2, '.', '');
                                         echo number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '');
                                         } else {
                                             $carwash = $bookings->carwash_in_and_out + $bookings->carwash_out_only + $bookings->carwash_in_only;
-                                            $TOTAL_PAYABLE_AMOUNT = $bookings->bk_final_amount + $carwash + $bookings->not_working_hours + $bookings->last_min_booking + $bookings->charging_service_charges + $bookings->charging;
+                                            $TOTAL_PAYABLE_AMOUNT = $bookings->bk_final_amount + $carwash + $bookings->not_working_hours + $bookings->last_min_booking + $bookings->terminal_extra_charges + $bookings->charging_service_charges + $bookings->charging;
                                             //echo number_format($bookings->bk_final_amount, 2, '.', '');
                                             echo number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '');
                                         }

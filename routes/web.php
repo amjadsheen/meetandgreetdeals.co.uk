@@ -115,6 +115,13 @@ Route::post('/admin/terminal/delete/{id}', ['as' => 'terminal/delete', 'uses' =>
 /* ------------ Terminals -------------- */
 
 
+/* ------------ Terminal Charges -------------- */
+Route::resource('/admin/terminal-charges', 'Admin\TerminalChargesController')->middleware('admin');
+Route::post('/admin/terminal-charges/updateinline/{id}', ['as' => 'terminal-charges/updateinline', 'uses' => 'Admin\TerminalChargesController@updateinline'])->middleware('admin');
+Route::post('/admin/terminal-charges/delete/{id}', ['as' => 'terminal-charges/delete', 'uses' => 'Admin\TerminalChargesController@delete'])->middleware('admin');
+/* ------------ Terminals Charges -------------- */
+
+
 /* ------------ Colors -------------- */
 Route::resource('/admin/color', 'Admin\ColorController')->middleware('admin');
 Route::post('/admin/color/updateinline/{id}', ['as' => 'color/updateinline', 'uses' => 'Admin\ColorController@updateinline'])->middleware('admin');
