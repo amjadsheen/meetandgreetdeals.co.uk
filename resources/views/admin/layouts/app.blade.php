@@ -198,7 +198,7 @@
             <li><a href="{{route('services.index')}}"><i class="fa fa-cubes"></i> Services </a></li>
             <li><a href="{{route('airport.index')}}"><i class="fa fa-building-o"></i> Airports</a></li>
             <li><a href="{{route('terminal.index')}}"><i class="fa fa-terminal"></i> Terminals</a></li>
-            <li><a href="{{route('terminal-charges.index')}}"><i class="fa fa-terminal"></i> Terminal Charges</a></li>
+            <li><a href="{{route('terminal-charges.index')}}"><i class="fa fa-terminal"></i> Terminal Switch Charge</a></li>
             <li><a href="{{route('color.index')}}"><i class="fa fa-spinner"></i> Color</a></li>
               <li><a href="{{route('booking-edit-fix-prices.index')}}"><i class="fa fa-th"></i> Edit Fixed Prices</a></li>
             <li><a href="{{route('regular-prices.index')}}"><i class="fa fa-th"></i> Pricing</a></li>
