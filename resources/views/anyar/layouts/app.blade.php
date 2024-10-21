@@ -142,14 +142,31 @@ label.input-group-text {
       </a>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="/">Home</a></li>
-          <li><a class="nav-link scrollto" href="/about-us">About</a></li>
-          <li><a class="nav-link scrollto" href="/services">Services</a></li>
-          <li><a class="nav-link scrollto" href="/directions">Directions</a></li>
-          <li><a class="nav-link scrollto" href="/reviews">Testimonials</a></li>
-          <li><a class="nav-link scrollto " href="/terms-conditions">Terms & Conditions</a></li>
-          <li><a class="nav-link scrollto" href="/contact-us">Contact us</a></li>
-          <li><a class="nav-link scrollto" href="/faq">FAQs</a></li>
+        <li>
+            <a class="nav-link scrollto {{ Request::is('/') ? 'active' : '' }}" href="/">Home</a>
+        </li>
+        <li>
+            <a class="nav-link scrollto {{ Request::is('about-us') ? 'active' : '' }}" href="/about-us">About</a>
+        </li>
+        <li>
+            <a class="nav-link scrollto {{ Request::is('services') ? 'active' : '' }}" href="/services">Services</a>
+        </li>
+        <li>
+            <a class="nav-link scrollto {{ Request::is('directions') ? 'active' : '' }}" href="/directions">Directions</a>
+        </li>
+        <li>
+            <a class="nav-link scrollto {{ Request::is('reviews') ? 'active' : '' }}" href="/reviews">Testimonials</a>
+        </li>
+        <li>
+            <a class="nav-link scrollto {{ Request::is('terms-conditions') ? 'active' : '' }}" href="/terms-conditions">Terms & Conditions</a>
+        </li>
+        <li>
+            <a class="nav-link scrollto {{ Request::is('contact-us') ? 'active' : '' }}" href="/contact-us">Contact Us</a>
+        </li>
+        <li>
+            <a class="nav-link scrollto {{ Request::is('faq') ? 'active' : '' }}" href="/faq">FAQs</a>
+        </li>
+
           <?php  if (isset($_COOKIE["cus_id"])) { ?>
 
           <?php } else { ?>
