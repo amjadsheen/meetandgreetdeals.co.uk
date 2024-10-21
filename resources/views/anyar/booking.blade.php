@@ -1423,9 +1423,9 @@
                 </form>
 
             </div>
-            <div class="col-lg-4" id="mcart">
+            <div class="col-lg-4" id="mcart" style="">
 
-                <div class="sidebar-content-wrap m-t-50">
+                <div class="sidebar-content-wrap m-t-50" id="ssss" style="z-index:100000000">
                     <!-- Single Sidebar Start -->
                     <div class="single-sidebar" style="background: #fff; padding: 20px;">
                         <h3 style="font-weight: 800; text-align:center;">Your Booking Summary</h3>
@@ -1541,6 +1541,21 @@ function hidebothpands(){
     hidestripe();
     hidebanktransfer()
 }
+window.addEventListener('scroll', function() {
+    var sidebar = document.getElementById('ssss');
+    var sidebarTop = sidebar.offsetTop; // Get the top offset of the sidebar
+    var scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (scrollPosition >= sidebarTop - 100) {
+        // Apply sticky effect
+        sidebar.style.position = 'fixed';
+        sidebar.style.top = '100px'; // Adjust the offset if needed (100px for the header space)
+    } else {
+        // Remove sticky effect
+        sidebar.style.position = 'relative';
+        sidebar.style.top = 'initial';
+    }
+});
 </script>
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <!--== FAQ Area End ==-->
