@@ -813,7 +813,7 @@
     </div>
     <div class="custom-description">
       <p>Londons’s ULEZ expanded on 29th August 2023 to operate city-wide
-Up to the M35. Use our ULEZ checker to find out if your car meets emissions standards and
+Up to the M25. Use our ULEZ checker to find out if your car meets emissions standards and
 What fees you may need to pay</p>
     </div>
   </div>
