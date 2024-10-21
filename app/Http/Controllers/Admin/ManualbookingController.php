@@ -319,7 +319,7 @@ class ManualbookingController  extends Controller
 
                       /* /Not Working Hours */
                       /* Not Working Hours New */
-                        $booking_update->not_working_hours = Domain::GetNotWorkingHoursPrice($website_id, $bk_date1, $bk_date2 );
+                        //$booking_update->not_working_hours = Domain::GetNotWorkingHoursPrice($website_id, $bk_date1, $bk_date2 );
                         /* /Not Working Hours New */
                       $booking_update->save();
 
