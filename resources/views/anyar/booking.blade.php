@@ -1545,15 +1545,17 @@ window.addEventListener('scroll', function() {
     var sidebar = document.getElementById('ssss');
     var sidebarTop = sidebar.offsetTop; // Get the top offset of the sidebar
     var scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-
-    if (scrollPosition >= sidebarTop - 100) {
-        // Apply sticky effect
-        sidebar.style.position = 'fixed';
-        sidebar.style.top = '100px'; // Adjust the offset if needed (100px for the header space)
-    } else {
-        // Remove sticky effect
-        sidebar.style.position = 'relative';
-        sidebar.style.top = 'initial';
+    var screenWidth = window.innerWidth; // Get the current viewport width
+    if (screenWidth >= 992) { // Only apply for desktop screens (992px and above)
+        if (scrollPosition >= sidebarTop - 100) {
+            // Apply sticky effect
+            sidebar.style.position = 'fixed';
+            sidebar.style.top = '100px'; // Adjust the offset if needed (100px for the header space)
+        } else {
+            // Remove sticky effect
+            sidebar.style.position = 'relative';
+            sidebar.style.top = 'initial';
+        }
     }
 });
 </script>
