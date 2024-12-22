@@ -473,12 +473,12 @@ $qrcode = $bookings->booking_id;
             <table style="font-size:<?php echo $tbl_font; ?>;" width="100%" border="1" cellpadding="2" cellspacing="0" bordercolor="<?php echo $color ?>">
                 <tr height="<?php echo $rh1; ?>">
                     <td style="width: 30%;text-align:center;line-height: 17px;">
-                        <span class="<?php echo $print; ?> bbbb" style="color:<?php echo $hide_label ?>;">
-                           <strong>BOOKING DAYS</strong>
-                        </span><br>
-                        <span class="<?php echo $print; ?> bbbb" style="font-size:24px;font-weight: 900; color:<?php echo $hide_label ?>;">
-                        <?php echo $bookings->bk_days; ?> 
-                        </span> <span  style="color:<?php echo $hide_label ?>;">Days</span>
+                    <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
+                            <div style="color:<?php echo $hide_label; ?>;font-size:15px">BOOKING DAYS:</div>
+                        </span>
+                        <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
+                        <div class="normal" style=""><strong><?php echo $bookings->bk_days; ?>&nbsp;Days<strong></div>
+                        </span>
                     </td>
                     <td width="30%">
                         <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
@@ -1016,12 +1016,12 @@ $qrcode = $bookings->booking_id;
             <table style="font-size:<?php echo $tbl_font; ?>;" width="100%" border="1" cellpadding="2" cellspacing="0" bordercolor="<?php echo $color ?>">
                 <tr height="<?php echo $rh1; ?>">
                     <td style="width: 30%;text-align:center;line-height: 17px;">
-                        <span class="<?php echo $print; ?> bbbb" style="color:<?php echo $hide_label ?>;">
-                           <strong>BOOKING DAYS</strong>
-                        </span><br>
-                        <span class="<?php echo $print; ?> bbbb" style="font-size:24px;font-weight: 900; color:<?php echo $hide_label ?>;">
-                        <?php echo $bookings->bk_days; ?> 
-                        </span> <span  style="color:<?php echo $hide_label ?>;">Days</span>
+                    <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
+                            <div style="color:<?php echo $hide_label; ?>;font-size:15px">BOOKING DAYS:</div>
+                        </span>
+                        <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
+                        <div class="normal" style=""><strong><?php echo $bookings->bk_days; ?>&nbsp;Days<strong></div>
+                        </span>
                     </td>
                     <td width="30%">
                         <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
@@ -1559,12 +1559,12 @@ $qrcode = $bookings->booking_id;
             <table style="font-size:<?php echo $tbl_font; ?>;" width="100%" border="1" cellpadding="2" cellspacing="0" bordercolor="<?php echo $color ?>">
                 <tr height="<?php echo $rh1; ?>">
                     <td style="width: 30%;text-align:center;line-height: 17px;">
-                        <span class="<?php echo $print; ?> bbbb" style="color:<?php echo $hide_label ?>;">
-                           <strong>BOOKING DAYS</strong>
-                        </span><br>
-                        <span class="<?php echo $print; ?> bbbb" style="font-size:24px;font-weight: 900; color:<?php echo $hide_label ?>;">
-                        <?php echo $bookings->bk_days; ?> 
-                        </span> <span  style="color:<?php echo $hide_label ?>;">Days</span>
+                    <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
+                            <div style="color:<?php echo $hide_label; ?>;font-size:15px">BOOKING DAYS:</div>
+                        </span>
+                        <span class="<?php echo $print1; ?>" style="color:<?php echo $p1c; ?>;">
+                        <div class="normal" style=""><strong><?php echo $bookings->bk_days; ?>&nbsp;Days<strong></div>
+                        </span>
                     </td>
                     <td width="30%">
                         <span class="<?php echo $print; ?>" style="color:<?php echo $color ?>;">
