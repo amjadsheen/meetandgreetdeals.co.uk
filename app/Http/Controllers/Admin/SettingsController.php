@@ -23,7 +23,8 @@ class SettingsController extends Controller
     public function index()
     {
         $title = "Setting";
-        $websites = DB::table('websites')->where('default_site', 0)->get();
+        //$websites = DB::table('websites')->where('default_site', 0)->get();
+        $websites = DB::table('websites')->get();
         $settings = Settings::all();
         $settings_array = [];
         $filter_website = $this->get_website_with_default_settings();

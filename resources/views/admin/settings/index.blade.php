@@ -238,7 +238,7 @@
                                             <!-- Horizontal Form -->
                                             <div class="box box-info">
                                                 <div class="box-header with-border">
-                                                    <h3 class="box-title">EDEN PROMO BOX</h3>
+                                                    <h3 class="box-title"> PROMO BOX</h3>
                                                 </div>
                                                 <!-- /.box-header -->
                                                 <!-- form start -->
@@ -246,7 +246,7 @@
                                                     @csrf
                                                     <div class="box-body">
                                                         <div class="form-group">
-                                                            <label for="inputEmail3" class=" left col-sm-6 control-label">HIDE EDEN PROMO BOX </label>
+                                                            <label for="inputEmail3" class=" left col-sm-6 control-label">HIDE PROMO BOX CHECKOUT PAGE</label>
                                                             <div class="col-sm-6">
                                                                 <select class="form-control speciald" style="width: 200px;" name="option_name[{{$filter_website}}][eden_promo_box]">
                                                                     <?php if(isset($settings_array['eden_promo_box'])) { ?>
@@ -260,6 +260,22 @@
                                                                 </select>
                                                             </div>
                                                         </div>
+
+                                                        <div class="form-group">
+                                                            <label for="inputEmail3" class=" left col-sm-6 control-label">HIDE PROMO BOX HOMEPAGE (select main site from filter)</label>
+                                                            <div class="col-sm-6">
+                                                                <select class="form-control speciald" style="width: 200px;" name="option_name[{{$filter_website}}][promo_box_homepage]">
+                                                                    <?php if(isset($settings_array['promo_box_homepage'])) { ?>
+                                                                        <option value="0" <?php if ($settings_array['promo_box_homepage'] == "0") {echo "selected";} ?>>No</option>
+                                                                        <option value="1" <?php if ($settings_array['promo_box_homepage'] == "1") {echo "selected";} ?>>Yes</option>
+                                                                    <?php } else { ?>
+                                                                        <option value="1">No</option>
+                                                                        <option value="0" selected >Yes</option>
+                                                                    <?php } ?>
+                                                                    
+                                                                </select>
+                                                            </div>
+                                                        </div> 
                                                     </div>
                                                     <!-- /.box-body -->
                                                     <div class="box-footer">

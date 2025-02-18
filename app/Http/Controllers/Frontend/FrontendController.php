@@ -129,7 +129,8 @@ class FrontendController extends Controller
         /* ======= /whyus ======= */
 
         /* ======= Settings ======= */
-        $settings = $this->get_website_settings($domain->id);
+        $settings = $this->get_website_settings(1);
+
         /* ======= Settings ======= */
         if (request()->has('redirect') && (!empty(request()->input('redirect')))) {
             $redirect = request()->input('redirect');

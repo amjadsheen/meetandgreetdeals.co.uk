@@ -727,8 +727,23 @@
                         </div>
 
                         <div class="row mb-3">
-                            
+                        <?php
+                        $hide_promo_box_homepage = 1; // Default value
+                        if (isset($settings['promo_box_homepage'])) {
+                            $hide_promo_box_homepage = $settings['promo_box_homepage'];
+                        }
+                        ?>
+                        @if(!$hide_promo_box_homepage)
+                    
+                        <div class="col-llg-3 col-ssm-12">
+                          <div class="input-group">
+                            <label class="input-group-text" for="discount_coupon">Promo Code</label>
+                            <input type="text" class="input-text form-control" size="20" name="discount_coupon" placeholder="Enter Promo Code" id="discount_coupon" >
+                          </div> 
+                        </div>
+                        @endif
                             <div class="col-lg-12 col-sm-12">
+                           
                                 <button id="submit" style="width: 100%;" class="btn btn-block btn-success" type="submit">Compare Airport Parking</button>
                             </div>
                         </div>
