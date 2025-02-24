@@ -861,8 +861,7 @@ class BookingController extends Controller
                 $time2 = $hour2 . ":" . $min2 . ":00";
 
                 $discount_applied = 0;
-                if (!empty($request->get('discount_coupon'))) {
-                    $discount_coupon = $this->set_input($request->get('discount_coupon'));
+                if (!empty($discount_coupon)) {
                     $discount_applied = 1;
                 } else {
                     $discount_coupon = "";
@@ -930,17 +929,17 @@ class BookingController extends Controller
                 $bk_discount_offer_amount = 0;
                 
                
-                if(!empty($request->get('promotion_code'))){
+                if(!empty($discount_coupon)){
                     $today = date("Y-m-d");
                     $promotion = DB::table("promotion_offers")
                             //->where('offer_active', 1)
                             ->where('offer_date1', '<=', $today)
                             ->where('offer_date2', '>=', $today)
-                            ->where('offer_coupon', 'LIKE', '%' . $request->get('promotion_code') . '%')
+                            ->where('offer_coupon', 'LIKE', '%' . $discount_coupon . '%')
                             ->where('website_id', $camparison_website)
                             ->first();
                     if ($promotion) {
-                        $bk_discount_offer_coupon = $request->get('promotion_code');
+                        $bk_discount_offer_coupon = $discount_coupon;
                         $bk_discount_offer_value = $promotion->offer_percentage;
                         $bk_discount_offer_amount = $gross_price * $promotion->offer_percentage / 100;
                         $net_price = $gross_price - $bk_discount_offer_amount;
