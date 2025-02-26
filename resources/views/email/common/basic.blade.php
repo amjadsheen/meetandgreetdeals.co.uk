@@ -71,7 +71,7 @@
 <body>
     <div class="container">
         <div class="header">
-        <img style="width:60%;" src="{{$website_logo}}" alt="Logo"><br>
+        <img style="width:50%; background: linear-gradient(#dc3545ed, #c6890f) !important;" src="{{$website_logo}}" alt="Logo"><br>
         <p><a href="{{ $main_website_url }}" target="_blank">{{ $main_website_url }}</a></p>
         </div>
         <div class="content">
