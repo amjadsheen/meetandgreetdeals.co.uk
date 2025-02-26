@@ -71,13 +71,29 @@
 <body>
     <div class="container">
         <div class="header">
-        <img style="width:50%; background: linear-gradient(#dc3545ed, #c6890f) !important;" src="{{$website_logo}}" alt="Logo"><br>
-        <span class="common"><i class="bi bi-envelope-fill"></i><a href="mailto:{{$campare_site_email}}">{{$campare_site_email}}</a>&nbsp;</span>
-          <span class="common"><i class="bi bi-envelope-fill"></i><a href="mailto:{{$campare_alternate_email}}">{{$campare_alternate_email}}</a></span>
-        <p>{{$campare_working_time}}</p>
+        <img style="width:60%;" src="{{$website_logo}}" alt="Logo"><br>
+        <p><a href="{{ $main_website_url }}" target="_blank">{{ $main_website_url }}</a></p>
         </div>
         <div class="content">
             <table>
+                <tr>
+                    <td  colspan="2" class="b133" style="text-align: center;">
+                        <img style="width: 100%; max-width: 300px;" src="{{$campare_website_logo}}" alt="Logo">
+                    </td>
+                </tr>
+                <tr>
+                <td colspan="2" style="text-align:center">
+                    {{ $website_name }} {{$service_name}}<br>
+                    <p style="color: rgb(237, 92, 87);">Important note (For departure)</p>
+                    <p>Upon departure for dropping your car off please call the service provider (on the number below) 40 minutes before you arrive to the terminal.</p>
+                    <p><strong><a style="color: #000;" href="tel:{{$contact_num}}">{{$contact_num}}</a></strong></p> 
+                    <p><strong><a style="color: #000;" href="tel:{{$alternate_contact_num}}">{{$alternate_contact_num}}</a></strong></p> 
+
+                </td>
+                </tr>
+                <tr>
+                    <td  colspan="2" class="b133" style="text-align: center;">&nbsp;</td>
+                </tr>
                 <tr>
                     <td class="b1" colspan="2">Booking Details</h2></td>
                 </tr>
@@ -128,21 +144,12 @@
                 <tr>
                     <td colspan="2"><span style="color:red"> We are not liable to cover any ULEZ charges. You will have to arrange yourself to pay the charge.</span></td>
                 </tr>
-                <tr>
-                    <td  colspan="2" class="b133" style="text-align: center;">
-                        <img style="width: 100%; max-width: 300px;" src="{{$campare_website_logo}}" alt="Logo">
-                    </td>
-                </tr>
+                
                 
                 <tr>
                 
                 <td colspan="2" style="text-align:center">
-                    {{ $website_name }} {{$service_name}}<br>
-                    <p style="color: rgb(237, 92, 87);">Important note (For departure)</p>
-                    <p>Upon departure for dropping your car off please call the service provider (on the number below) 40 minutes before you arrive to the terminal.</p>
-                    <p><strong><a style="color: #000;" href="tel:{{$contact_num}}">{{$contact_num}}</a></strong></p> 
-
-                    <p><strong><a style="color: #000;" href="tel:{{$alternate_contact_num}}">{{$alternate_contact_num}}</a></strong></p> 
+                   
                     
                     <p style="color: rgb(237, 92, 87);">Important note (For Arrival)</p>
                     <p>Upon arrival for picking your car please call the number above, first call when you land and the second call when you have collected all your luggage.

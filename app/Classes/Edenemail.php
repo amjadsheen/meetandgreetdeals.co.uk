@@ -198,6 +198,7 @@ class Edenemail
         //$data['website_email_banner'] = $bk_detail->website_url.'/uploads/'.$email_banner;
         
         $data['website_name_compare'] = $domain->website_name;
+        $data['main_website_url'] = $domain->website_url;
         $data['website_logo'] = $domain->website_url.'/storage/uploads/'.$site_log;
         $data['campare_website_logo'] = $domain->website_url.'/storage/uploads/'.$campare_site_log;
         $data['campare_working_time'] = $campare_working_time;
