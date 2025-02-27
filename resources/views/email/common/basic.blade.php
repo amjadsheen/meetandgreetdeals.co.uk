@@ -77,6 +77,9 @@
         <div class="content">
             <table>
                 <tr>
+                    <td  colspan="2" class="b133" style="text-align: center;padding: 0; line-height: 1px;background: #dcd8d4;"><h3 style="color: rgb(237, 92, 87);">Service Provider</h3></td>
+                </tr>
+                <tr>
                     <td  colspan="2" class="b133" style="text-align: center;">
                         <img style="width: 100%; max-width: 300px;" src="{{$campare_website_logo}}" alt="Logo">
                     </td>
@@ -95,7 +98,7 @@
                     <td  colspan="2" class="b133" style="text-align: center;">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td class="b1" colspan="2">Booking Details</h2></td>
+                    <td  colspan="2" class="b133" style="text-align: center;padding: 0; line-height: 1px;background: #dcd8d4;"><h3 style="color: rgb(237, 92, 87);">Booking Details</h3></td>
                 </tr>
                 <tr>
                     <td class="b32">Booking Code:</td>
