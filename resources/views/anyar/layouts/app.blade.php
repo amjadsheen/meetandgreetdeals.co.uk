@@ -25,6 +25,13 @@
   <link href="{{ asset('anyar/assets/css/style.css')}}?{{time()}}" rel="stylesheet">
   <link href="{{ asset('cardo/assets/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css')}}" rel="stylesheet">
   <link href="{{ asset('cardo/assets/validation/css/validationEngine.jquery.css')}}" rel="stylesheet">
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WG5MX8S7');</script>
+<!-- End Google Tag Manager -->
 </head>
 <style>
  
@@ -100,6 +107,10 @@ label.input-group-text {
 </style>
 
 <body>
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WG5MX8S7"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
   <!-- ======= Top Bar ======= -->
   <div id="topbar" class="fixed-top d-flex align-items-center topbar-inner-pages">
     <div class="container d-flex align-items-center justify-content-center justify-content-md-between">
