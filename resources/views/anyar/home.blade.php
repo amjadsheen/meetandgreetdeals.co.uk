@@ -687,12 +687,12 @@
                                   </div>
                               </div>
 
-                              <div class="col-llg-3 col-ssm-12">
+                              <div class="col-llg-3 col-ssm-12" style="display:none">
                                   <div class="input-group">
                                   @isMobile
                                       <label class="input-group-text" for="vehical_num">Vehicle</label>
                                       <select id="vehical_num" name="vehical_num" class="form-select validate[required]">
-                                          <option value="">Select @isMobile Vehicle  @endisMobile </option>
+                                          <!-- <option value="">Select @isMobile Vehicle  @endisMobile </option> -->
                                           @foreach($vehical_selction as $key=>$tso)
                                               <option value="{{$key}}">{{$tso}}</option>
                                           @endforeach
@@ -700,7 +700,7 @@
                                   @else
                                   <label class="input-group-text" for="vehical_num">Vehicle</label>
                                       <select id="vehical_num" name="vehical_num" class="form-select validate[required]">
-                                          <option value="">Select @isMobile Vehicle  @endisMobile </option>
+                                          <!-- <option value="">Select @isMobile Vehicle  @endisMobile </option> -->
                                           @foreach($vehical_selction as $key=>$tso)
                                               <option value="{{$key}}">{{$tso}}</option>
                                           @endforeach

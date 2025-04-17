@@ -619,7 +619,7 @@ a.btn.btn-success.book-btn {
                     <input type="hidden" id="terminal_parking_fee" name="terminal_parking_fee" value="N" >
                     <input type="hidden" id="website_id" name="website_id" value="0" >
                     <input type="hidden" id="all_services" name="all_services" value="{{ $requset_data['all_services'] }}" >
-                      <div class="input-group mb-3">
+                      <div class="input-group mb-3" style="display:none;">
                         <label class="input-group-text" for="vehical_num">Vehical<span id="tef"></label>
                         <select id="vehical_num" name="vehical_num" class="form-select validate[required]">
                           <option value> Select </option>
