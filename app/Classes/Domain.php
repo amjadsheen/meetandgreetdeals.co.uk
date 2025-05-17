@@ -213,6 +213,10 @@ class Domain
             $vehicles[$index] = [
                 'date1' => $value,
                 'date2' => $request_data['date2'][$key] ?? null,
+                "start_minute" => $request_data['start_minute'][$key] ?? null,
+                "start_hour" => $request_data['start_hour'][$key] ?? null,
+                "return_hour" => $request_data['return_hour'][$key] ?? null,
+                "return_minute" => $request_data['return_minute'][$key] ?? null,
                 'bk_ve_ma' => $request_data['bk_ve_ma'][$key] ?? null,
                 'bk_ve_mo' => $request_data['bk_ve_mo'][$key] ?? null,
                 'bk_ve_co' => $request_data['bk_ve_co'][$key] ?? '',
@@ -320,6 +324,7 @@ class Domain
             $requset_data['carwash_spray_only'] = 0; // default value
         }
         
+
         // Check if vehical_num is set and not empty
         if (isset($requset_data['vehical_num']) && !empty($requset_data['vehical_num'])) {
             // Get the vehical_num from the request data
@@ -330,7 +335,11 @@ class Domain
                 // Set the date1 and date2 for each vehical
                 $vehical[$i] = [
                     "date1" => $requset_data['date1'],
+                    "start_minute" => $requset_data['start_minute'],
+                    "start_hour" => $requset_data['start_hour'],
                     "date2" => $requset_data['date2'],
+                    "return_hour" => $requset_data['return_hour'],
+                    "return_minute" => $requset_data['return_minute'],
                     'bk_ve_ma' => $requset_data['bk_ve_ma'],
                     'bk_ve_mo' => $requset_data['bk_ve_mo'],
                     'bk_ve_co' => $requset_data['bk_ve_co'],

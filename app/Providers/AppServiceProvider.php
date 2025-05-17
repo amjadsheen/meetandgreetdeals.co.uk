@@ -43,6 +43,15 @@ class AppServiceProvider extends ServiceProvider
     
             return false;
         });
+
+        Blade::directive('notMobile', function () {
+            return "<?php if(!request()->isMobile()): ?>";
+        });
+        
+        Blade::directive('endnotMobile', function () {
+            return "<?php endif; ?>";
+        });
+
     }
 
     /**

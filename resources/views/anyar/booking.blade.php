@@ -734,12 +734,37 @@
     color: #fff;
 }
 #mcart{
-    padding: 0 50px;
+    /* padding: 0 50px; */
+}
+#cart-content::-webkit-scrollbar {
+    width: 8px;
+}0
+
+#cart-content::-webkit-scrollbar-track {
+    background cc : #f1f1f1;
+}
+
+#cart-content::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+#cart-content::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 @media (max-width: 575px) {
     .luggage-lable{
         width: 100%;
     }
+    .input-group-text {
+    width: 250px;
+    text-align: right;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    padding: .375rem .75rem;
+    font-weight: 900;
+}
     #mcart{
     padding: 0 20px;
 }
@@ -753,7 +778,7 @@
 <section id="faq-page-area" class="section-padding">
 
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-9">
 
                 <form method="post"  id="step_2" data-stripe-publishable-key="{{ $skey }}">
                 @csrf
@@ -988,7 +1013,7 @@
 
 
 
-                                <div id="bookingStep1" class="active" style="display: block;">
+                                <div id="bookingStep1" class="active" style="display: block; padding: 2px;">
                                     <!-- vehicle details start here -->
                                     <div class="row mt200">
                                         <div class="col-md-12  section-title">
@@ -1079,7 +1104,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-4 sm-12">
+                                        <!-- <div class="col-lg-4 sm-12">
                                             <div class="input-group mb-3">
                                                 <label class="input-group-text" for="date1-{{ $veh }}">
                                                     Drop Off Date/Time &nbsp;<strong>({{ $veh }})<span style="color:red">*</span></strong>
@@ -1098,7 +1123,127 @@
                                                 <span class="add-on"><i class="icon-remove"></i></span>
                                                 <span class="add-on"><i class="icon-calendar"></i></span>
                                             </div>
+                                        </div> -->
+                                        <div class="row mb-3" style="display: none;">
+                                        <!-- Drop Off Section -->
+                                        <div class="col-md-6">
+                                            @isMobile
+                                            <label class="form-label">Parking From</label>
+                                            <label class="form-label ml-20">Drop off Time <i class="fa fa-clock-o"></i></label>
+                                            @endisMobile
+
+                                            <div class="row row-cols-3 g-2">
+                                                <!-- Date -->
+                                                <div class="col" style="@isMobile width: 50%; @endisMobile">
+                                                    @notMobile
+                                                    <label class="form-label">Parking From</label>
+                                                    @endnotMobile
+                                                    <div class="position-relative">
+                                                        <input class="form-control form_datetime validate[required]"
+                                                            name="date1[{{ $veh }}]"
+                                                            id="date1-{{ $veh }}"
+                                                            type="text"
+                                                            placeholder="Parking From"
+                                                            value="{{ $veh_data['date1'] }}"
+                                                            onchange="VehicleDatesUpdated(this)"
+                                                            data-veh="{{ $veh }}"
+                                                            readonly>
+                                                        <i class="fa fa-calendar position-absolute" style="right: 5px; top: 50%; transform: translateY(-50%); pointer-events: none;"></i>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Hour -->
+                                                <div class="col" style="@isMobile width: 25%; @endisMobile">
+                                                    @notMobile
+                                                    <label class="form-label">Drop off Time <i class="fa fa-clock-o"></i></label>
+                                                    @endnotMobile
+                                                    <select name="start_hour[{{ $veh }}]" id="start_hour-{{ $veh }}" class="form-select small" onchange="VehicleDatesUpdated(this)" style="@isMobile width: 70px; @endisMobile">
+                                                        @for ($i = 0; $i < 24; $i++)
+                                                            <option value="{{ sprintf('%02d', $i) }}"
+                                                                {{ ($veh_data['start_hour'] === sprintf('%02d', $i)) ? 'selected' : '' }}>
+                                                                {{ sprintf('%02d', $i) }}
+                                                            </option>
+                                                        @endfor
+                                                    </select>
+                                                </div>
+
+                                                <!-- Minute -->
+                                                <div class="col" style="@isMobile width: 25%; @endisMobile">
+                                                    @notMobile
+                                                    <label class="form-label">&nbsp;</label>
+                                                    @endnotMobile
+                                                    <select name="start_minute[{{ $veh }}]" id="start_minute-{{ $veh }}" class="form-select small" onchange="VehicleDatesUpdated(this)" style="@isMobile width: 70px; @endisMobile">
+                                                        @for ($min = 0; $min < 60; $min += 5)
+                                                            <option value="{{ sprintf('%02d', $min) }}"
+                                                                {{ ($veh_data['start_minute'] === sprintf('%02d', $min)) ? 'selected' : '' }}>
+                                                                {{ sprintf('%02d', $min) }}
+                                                            </option>
+                                                        @endfor
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
+
+                                        <!-- Return Section -->
+                                        <div class="col-md-6 mt-20">
+                                            @isMobile
+                                            <label class="form-label">Return Date</label>
+                                            <label class="form-label ml-20">Return Time <i class="fa fa-clock-o"></i></label>
+                                            @endisMobile
+
+                                            <div class="row row-cols-3 g-2">
+                                                <!-- Date -->
+                                                <div class="col" style="position: relative; @isMobile width: 50%; @endisMobile">
+                                                    @notMobile
+                                                    <label class="form-label">Return Date</label>
+                                                    @endnotMobile
+                                                    <div class="position-relative">
+                                                        <input class="form-control form_datetime validate[required]"
+                                                            name="date2[{{ $veh }}]"
+                                                            id="date2-{{ $veh }}"
+                                                            type="text"
+                                                            placeholder="Return Date"
+                                                            value="{{ $veh_data['date2'] }}"
+                                                            onchange="VehicleDatesUpdated(this)"
+                                                            data-veh="{{ $veh }}"
+                                                            readonly>
+                                                        <i class="fa fa-calendar position-absolute" style="right: 5px; top: 50%; transform: translateY(-50%); pointer-events: none;"></i>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Hour -->
+                                                <div class="col" style="@isMobile width: 25%; @endisMobile">
+                                                    @notMobile
+                                                    <label class="form-label">Return Time <i class="fa fa-clock-o"></i></label>
+                                                    @endnotMobile
+                                                    <select name="return_hour[{{ $veh }}]" id="return_hour-{{ $veh }}" class="form-select small" onchange="VehicleDatesUpdated(this)" style="@isMobile width: 70px; @endisMobile">
+                                                        @for ($i = 0; $i < 24; $i++)
+                                                            <option value="{{ sprintf('%02d', $i) }}"
+                                                                {{ ($veh_data['return_hour'] === sprintf('%02d', $i)) ? 'selected' : '' }}>
+                                                                {{ sprintf('%02d', $i) }}
+                                                            </option>
+                                                        @endfor
+                                                    </select>
+                                                </div>
+
+                                                <!-- Minute -->
+                                                <div class="col" style="@isMobile width: 25%; @endisMobile">
+                                                    @notMobile
+                                                    <label class="form-label">&nbsp;</label>
+                                                    @endnotMobile
+                                                    <select name="return_minute[{{ $veh }}]" id="return_minute-{{ $veh }}" class="form-select small" onchange="VehicleDatesUpdated(this)" style="@isMobile width: 70px; @endisMobile">
+                                                        @for ($min = 0; $min < 60; $min += 5)
+                                                            <option value="{{ sprintf('%02d', $min) }}"
+                                                                {{ ($veh_data['return_minute'] === sprintf('%02d', $min)) ? 'selected' : '' }}>
+                                                                {{ sprintf('%02d', $min) }}
+                                                            </option>
+                                                        @endfor
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
 
                                     </div>
                                     <hr>
@@ -1175,7 +1320,7 @@
                         </div>
                         <!-- Single FAQ Subject End -->
                     </div>
-                    <div class="faq-details-content require-validation">
+                    <div class="faq-details-content require-validation" style="padding: 2px;">
                         <!-- contact details start here -->
                         <div class="row mt200">
                             <div class="col-md-12  section-title">
@@ -1399,7 +1544,8 @@
                         <div class="row">
                             <div class="col-sm-6 col-md-12 mt200 mb200">
                                 <div class="input-submit" style="text-align: center">
-                                    <div id="mini-cart" class="price">{!! $mini_cart !!}</div>
+                                <div id="mini-cart" class="price">{!! $mini_cart ?? '' !!}</div>
+
                                     <button type="submit" class="btn  btn btn-success btn-xs btn-block " name="continue" id="continue">
                                         Confirm and Checkout now
                                     </button>
@@ -1423,7 +1569,7 @@
                 </form>
 
             </div>
-            <div class="col-lg-4" id="mcart" style="">
+            <div class="col-lg-3" id="mcart" style="">
 
                 <div class="sidebar-content-wrap m-t-50" id="ssss" style="z-index:100000000">
                     <!-- Single Sidebar Start -->
@@ -1436,7 +1582,7 @@
                                 </div>
                                 <div class="card">
                                     <p class="box-title">{{$comparison_website->website_name}}</p>
-                                    <div id="cart-content">
+                                    <div id="cart-content" style="max-height: 550px; overflow-y: auto;">
                                     {!! $cart !!}
                                     </div>
                                 </div>

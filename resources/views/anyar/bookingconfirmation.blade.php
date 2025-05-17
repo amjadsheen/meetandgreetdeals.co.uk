@@ -104,18 +104,26 @@
         <hr/>
         <div class="single-service">
             <div class="media">
+                
                 <div class="media-body">
-                    <h6> Dear <strong> {{$bk_details->cus_name}}</strong>,<br></h6>
-                    <p><img class="alignright size-medium wp-image-3655" src="/storage/uploads/email/image_right.png" alt="off-airport-meet-n-greet-1" width="93" height="300" srcset="/storage/uploads/email/image_right.png 319w" sizes="(max-width: 93px) 100vw, 93px">Your booking has been completed<?php if(isset($_GET['payment_status']) &&  $_GET['payment_status'] == 'cancel'){ ?>, <span style="color:red;"> (not confirmed) Payment Status is Pending </span> <?php } ?> and you will receive an email or phone call shortly within 24 hours.</p>
-                    <p>If you do not receive anything in 24 hours then give us a call on our booking office numbers below:</p>
-
-                    <p style="text-align: center;">
-                    </p><h5>
+                    <h5> Dear <strong> {{$bk_details->cus_name}}</strong>,<br></h5>
+                    <h6 style="line-height: 35px;"><img id="amimag" class="alignright size-medium wp-image-3655"  src="/storage/uploads/email/image_right.png" alt="off-airport-meet-n-greet-1" width="93" height="300" srcset="/storage/uploads/email/image_right.png 319w" sizes="(max-width: 93px) 100vw, 93px">
+                    <p style="font-size:14px;">
+                    We have received your booking details. Your reference number is <strong>{{$bk_details->bk_ref}}</strong>, <span style="color:red">AFTER THE PAYMENT HAS GONE THROUGH</span> you will receive 2 confirmation emails one from us and one for the payment gateway within 24 hours.
+                    <br>If you do not receive anything, please give us a call on the number below.
+                    </p>
+                    <p style="font-size:14px;color:red"><strong>PLEASE NOTE:</strong></p>
+                    <p style="font-size:14px;color:red"><strong>IF THE PAYMENT HAS NOT GONE THROUGH OR NOT BEEN MADE, YOU WILL NOT RECEIVE ANY EMAILS</strong></p>
+                    
+                    <p style="font-size:14px;color:red">(CHECK YOUR SPAM OR JUNK FOLDERS FOR YOUR CONFIRMATION EMAILS)</p>
+                    <br><br>
+                    
+                    <h5>
                     @if (trim($domain->contact_num)  !== '' || trim($domain->alternate_contact_num)  !== '' )
                             @if (trim($domain->contact_num) !== '') <span><i class="fa fa-phone" ></i><a style="padding: 11px; font-size: 16px;" href="tel:{{$domain->contact_num}}">{{$domain->contact_num}}</a>  @endif  @if (trim($domain->alternate_contact_num) !== '')  | <i class="fa fa-phone" ></i><a style="padding: 11px; font-size: 16px;" href="tel:{{$domain->alternate_contact_num}}">{{$domain->alternate_contact_num}}</a></span>@endif
                     @endif (CALL 9AM TO 5PM)
                     </h5>
-                    <h5 style="padding: 20px;">Thank you very much for booking with us.</h5>
+                    <h5 style="padding:20px 0px; font-size: 16px;">Thank you very much for booking with us.</h5>
                 </div>
             </div>
         </div>

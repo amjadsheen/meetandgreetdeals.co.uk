@@ -133,6 +133,11 @@ class BookingController extends Controller
         $airport1 = $vehicles['airport1'];
         $terminal = $vehicles['terminal'];
         $service = $vehicles['service'];
+        //$start_hour = $vehicles['start_hour'];
+        //$start_minute = $vehicles['start_minute'];
+
+        //$return_hour = $vehicles['return_hour'];
+        //$return_minute = $vehicles['return_minute'];
         //dd($vehicles);
         foreach($vehicles['vehicles'] as $key=>$veh){
             $domain = env('APP_URL');
@@ -142,7 +147,11 @@ class BookingController extends Controller
             $settings = $this->get_website_settings($domain->id);
             /* ======= Settings ======= */
 
+            
+            
             $var_date1 = $veh['date1'];
+            $var_date1 = $var_date1 . " - " . $veh['start_hour'] . ":" . $veh['start_minute'];
+
             $var_date_exp1 = explode('-', $var_date1);
             $date = str_replace('/', '-', $var_date_exp1[0]);
             $date1 = date('Y-m-d', strtotime($date));
@@ -151,6 +160,8 @@ class BookingController extends Controller
             $min1 = $var_date_time_1[1];
 
             $var_date2 = $veh['date2'];
+            $var_date2 = $var_date2 . " - " . $veh['return_hour'] . ":" . $veh['return_minute'];
+
             $var_date_exp_2 = explode('-', $var_date2);
             $date = str_replace('/', '-', $var_date_exp_2[0]);
             $date2 = date('Y-m-d', strtotime($date));
@@ -349,9 +360,18 @@ class BookingController extends Controller
         $selected_service = $request->get('service');
         $terminal_parking_fee = $request->get('terminal_parking_fee');
         $vehical_num = $request->get('vehical_num');
+
+        $start_hour = $request->get('start_hour');
+        $start_minute = $request->get('start_minute');
+
+        $return_hour = $request->get('return_hour');
+        $return_minute = $request->get('return_minute');
+
         //$country = $request->get('country');
         $bookingeditpage = $request->get('bookingeditpage');
         $var_date1 = $request->get('date1');
+        $var_date1 = $var_date1 . " - " . $start_hour . ":" . $start_minute;
+
         $var_date_exp1 = explode('-', $var_date1);
         $date = str_replace('/', '-', $var_date_exp1[0]);
         $date1 = date('Y-m-d', strtotime($date));
@@ -360,6 +380,8 @@ class BookingController extends Controller
         $min1 = $var_date_time_1[1];
 
         $var_date2 = $request->get('date2');
+        $var_date2 = $var_date2 . " - " . $return_hour . ":" . $return_minute;
+
         $var_date_exp_2 = explode('-', $var_date2);
         $date = str_replace('/', '-', $var_date_exp_2[0]);
         $date2 = date('Y-m-d', strtotime($date));
@@ -457,7 +479,11 @@ class BookingController extends Controller
                         foreach ($prepared_session_data['vehicles'] as $key => $vehicle) {
                             $bookingPrice = $this->handleVehicleBooking(
                                 $vehicle['date1'],
+                                $vehicle['start_hour'],
+                                $vehicle['start_minute'],
                                 $vehicle['date2'],
+                                $vehicle['return_hour'],
+                                $vehicle['return_minute'],
                                 [
                                     'website_id' => $c_website->id,
                                     'country' => $prepared_session_data['country'],
@@ -689,7 +715,14 @@ class BookingController extends Controller
 
        foreach($prepared_session_data['vehicles'] as $key=>$vehical){
 
+            $start_hour = $vehical['start_hour'];
+            $start_minute = $vehical['start_minute'];
+
+            $return_hour = $vehical['return_hour'];
+            $return_minute = $vehical['return_minute'];
+
             $var_date1 = $vehical['date1'];
+            $var_date1 = $var_date1 . " - " . $start_hour . ":" . $start_minute;
             $var_date_exp1 = explode('-', $var_date1);
             $date = str_replace('/', '-', $var_date_exp1[0]);
             $date1 = date('Y-m-d', strtotime($date));
@@ -698,6 +731,7 @@ class BookingController extends Controller
             $min1 = $var_date_time_1[1];
 
             $var_date2 = $vehical['date2'];
+            $var_date2 = $var_date2 . " - " . $return_hour . ":" . $return_minute;
             $var_date_exp_2 = explode('-', $var_date2);
             $date = str_replace('/', '-', $var_date_exp_2[0]);
             $date2 = date('Y-m-d', strtotime($date));
@@ -841,7 +875,15 @@ class BookingController extends Controller
         }      
         if ($err == 0 && !empty($payment_option)) {
             foreach($prepared_session_data['vehicles'] as $key=>$vehical){
+
+                $start_hour = $vehical['start_hour'];
+                $start_minute = $vehical['start_minute'];
+
+                $return_hour = $vehical['return_hour'];
+                $return_minute = $vehical['return_minute'];
+
                 $var_date1 = $vehical['date1'];
+                $var_date1 = $var_date1 . " - " . $start_hour . ":" . $start_minute;
                 $var_date_exp1 = explode('-', $var_date1);
                 $date = str_replace('/', '-', $var_date_exp1[0]);
                 $date1 = date('Y-m-d', strtotime($date));
@@ -850,6 +892,8 @@ class BookingController extends Controller
                 $min1 = $var_date_time_1[1];
 
                 $var_date2 = $vehical['date2'];
+                $var_date2 = $var_date2 . " - " . $return_hour . ":" . $return_minute;
+
                 $var_date_exp_2 = explode('-', $var_date2);
                 $date = str_replace('/', '-', $var_date_exp_2[0]);
                 $date2 = date('Y-m-d', strtotime($date));
@@ -1515,6 +1559,7 @@ class BookingController extends Controller
     
         Domain::AddNewFiledToSession('website_id',$request['website_id']);
         $prepared_session_data = session('booking_data');
+        //print_r("Checkout");
         //dd($prepared_session_data);
         // if error return to
         $errors = [];
@@ -1539,7 +1584,11 @@ class BookingController extends Controller
                 foreach ($prepared_session_data['vehicles'] as $key => $vehicle) {
                     $bookingPrice = $this->handleVehicleBooking(
                         $vehicle['date1'],
+                        $vehicle['start_hour'],
+                        $vehicle['start_minute'],
                         $vehicle['date2'],
+                        $vehicle['return_hour'],
+                        $vehicle['return_minute'],
                         [
                             'website_id' => $prepared_session_data['website_id'],
                             'country' => $prepared_session_data['country'],
@@ -1723,15 +1772,30 @@ class BookingController extends Controller
         $vehical_num = $request->get('vehical_num');
         //$country = $request->get('country');
         $bookingeditpage = $request->get('bookingeditpage');
+        
+
+        $start_hour = $request->get('start_hour');
+        $start_minute = $request->get('start_minute');
+
+        $return_hour = $request->get('return_hour');
+        $return_minute = $request->get('return_minute');
+
+
         $var_date1 = $request->get('date1');
+        $var_date1 = $var_date1 . " - " . $start_hour . ":" . $start_minute;
+
         $var_date_exp1 = explode('-', $var_date1);
         $date = str_replace('/', '-', $var_date_exp1[0]);
         $date1 = date('Y-m-d', strtotime($date));
         $var_date_time_1 = explode(':', $var_date_exp1[1]);
+
+
         $hour1 = $var_date_time_1[0];
         $min1 = $var_date_time_1[1];
 
         $var_date2 = $request->get('date2');
+        $var_date2 = $var_date2 . " - " . $return_hour . ":" . $return_minute;
+
         $var_date_exp_2 = explode('-', $var_date2);
         $date = str_replace('/', '-', $var_date_exp_2[0]);
         $date2 = date('Y-m-d', strtotime($date));
@@ -1836,7 +1900,7 @@ class BookingController extends Controller
         return $Err;
     }
 
-    public function handleVehicleBooking($date1_s, $date2_s, $request, $multiple)
+    public function handleVehicleBooking($date1_s, $start_hour, $start_minute, $date2_s, $return_hour, $return_minute, $request, $multiple)
     {
         $domain = env('APP_URL');
         $domain = Domain::get_domain_id(1);
@@ -1856,6 +1920,7 @@ class BookingController extends Controller
         $country = $request['country'];
         $bookingeditpage = 0;
         $var_date1 = $date1_s;
+        $var_date1 = $var_date1 . " - " . $start_hour . ":" . $start_minute;
         $var_date_exp1 = explode('-', $var_date1);
         $date = str_replace('/', '-', $var_date_exp1[0]);
         $date1 = date('Y-m-d', strtotime($date));
@@ -1864,6 +1929,8 @@ class BookingController extends Controller
         $min1 = $var_date_time_1[1];
 
         $var_date2 = $date2_s;
+        $var_date2 = $var_date2 . " - " . $return_hour . ":" . $return_minute;
+
         $var_date_exp_2 = explode('-', $var_date2);
         $date = str_replace('/', '-', $var_date_exp_2[0]);
         $date2 = date('Y-m-d', strtotime($date));
@@ -2665,7 +2732,11 @@ class BookingController extends Controller
                 foreach ($prepared_session_data['vehicles'] as $key => $vehicle) {
                     $bookingPrice = $this->handleVehicleBooking(
                         $vehicle['date1'],
+                        $vehicle['start_hour'],
+                        $vehicle['start_minute'],
                         $vehicle['date2'],
+                        $vehicle['return_hour'],
+                        $vehicle['return_minute'],
                         [
                             'website_id' => $prepared_session_data['website_id'],
                             'country' => $prepared_session_data['country'],
@@ -2702,7 +2773,11 @@ class BookingController extends Controller
                     
                     $cart_data[$key] = array(
                         'bk_from_date' => $vehicle['date1'],
+                        'start_hour' => $vehicle['start_hour'],
+                        'start_minute' => $vehicle['start_minute'],
                         'bk_to_date' => $vehicle['date2'],
+                        'return_hour' => $vehicle['return_hour'],
+                        'return_minute' => $vehicle['return_minute'],
                         'net_price' => $bookingPrice['net_price'],
                         'offer_percentage' => $bookingPrice['offer_percentage'],
                         'offer_amount' => $bookingPrice['offer_amount'],
@@ -2732,78 +2807,84 @@ class BookingController extends Controller
             //print_r($cur_id);exit;
             $cur_symbol = $rs_cur_rate->cur_symbol;
 
-        
-        if (!empty($prepared_session_data)) {
+            if (!empty($prepared_session_data)) {
             
-            //dd($prepared_session_data);
+                $bk_type = "Regular";
+                $pcdone = "";
             
-            $bk_type = "Regular";
-            $pcdone = "";
-            if ( $this->is_vip_service($prepared_session_data['service'])) {
-                $bk_type = " VIP";
+                if ($this->is_vip_service($prepared_session_data['service'])) {
+                    $bk_type = " VIP";
+                }
+            
+                $linethrough = "text-decoration: line-through;";
+                if ($prepared_session_data['terminal_parking_fee'] === 'P') {
+                    $linethrough = "";
+                }
+            
+                $html .= "<div style='font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6; color: #333;'>";
+            
+                $html .= "<p><strong style='color:#007bff;'>Booking Type:</strong> $bk_type</p>";
+                $html .= "<p><strong style='color:#007bff;'>Airport:</strong> " . Domain::GetAirportNameById($prepared_session_data['airport1']) . "</p>";
+                $html .= "<p><strong style='color:#007bff;'>Departure Terminal:</strong> " . Domain::GetTerminalNameById($prepared_session_data['terminal']) . "</p>";
+                $html .= "<p><strong style='color:#007bff;'>Arrival Terminal:</strong> " . Domain::GetTerminalNameById($prepared_session_data['return_terminal']) . "</p>";
+                $html .= "<p><strong style='color:#007bff;'>Service:</strong> " . Domain::GetServiceNameById($prepared_session_data['service']) . "</p>";
+            
+                foreach ($cart_data as $key => $veh) {
+                    //$html .= "<hr style='border-top: 1px solid #ccc;'>";
+            
+                    if (count($prepared_session_data['vehicles']) > 1) {
+                        $html .= "<p><strong style='font-size: 15px;'>Vehicle ($key)</strong></p>";
+                    }
+            
+                    // Carwash title
+                    if (trim($prepared_session_data['carwash_in_and_out']) != 0) {
+                        $carwash_title = 'ADD FULL CAR WASH (IN AND OUT)';
+                    } elseif (trim($prepared_session_data['carwash_out_only']) != 0) {
+                        $carwash_title = 'ADD CAR WASH (ONLY OUTSIDE)';
+                    } elseif (trim($prepared_session_data['carwash_in_only']) != 0) {
+                        $carwash_title = 'ADD CAR WASH (ONLY INSIDE)';
+                    } else {
+                        $carwash_title = 'Car Wash';
+                    }
+            
+                    $html .= "<p><strong style='color:#555;'>Parking From Date/Time:</strong> {$veh['bk_from_date']} {$veh['start_hour']} : {$veh['start_minute']}</p>";
+                    $html .= "<p><strong style='color:#555;'>Return Date/Time:</strong> {$veh['bk_to_date']} {$veh['return_hour']} : {$veh['return_minute']}</p>";
+                    $html .= "<p><strong style='color:#555;'>Booking Interval:</strong> {$veh['days']} Days</p>";
+            
+                    $html .= "<p><strong style='color:#444;'>Parking Price:</strong> <span style='color:#28a745;'>{$cur_symbol} " . number_format($veh['gross_price'], 2, '.', '') . "</span></p>";
+                    $html .= "<p><strong style='color:#444;'>Online Payment Fee ({$veh['cal_online_fee']} %):</strong> <span style='color:#28a745;'>{$cur_symbol} " . number_format($veh['online_fee_amount'], 2, '.', '') . "</span> <small style='color:#888;'>(NRA)</small></p>";
+                    $html .= "<p><strong style='color:#444;'>Booking Fee:</strong> <span style='color:#28a745;'>{$cur_symbol} " . number_format($veh['cal_booking_fee'], 2, '.', '') . "</span> <small style='color:#888;'>(NRA)</small></p>";
+                    $html .= "<p><strong style='$linethrough color:#444;'>Airport Access Fee:</strong> <span style='$linethrough color:#28a745;'>{$cur_symbol} " . number_format($veh['cal_access_fee'], 2, '.', '') . "</span> <small style='color:#888;'>(NRA)</small></p>";
+                    $html .= "<p><strong style='color:#444;'>VAT ({$veh['cal_vat']} %):</strong> <span style='color:#28a745;'>{$cur_symbol} " . number_format($veh['vat_amount'], 2, '.', '') . "</span></p>";
+            
+                    if ($veh['car_wash'] > 0) {
+                        $html .= "<p><strong style='color:#444;'>$carwash_title:</strong> <span style='color:#28a745;'>{$cur_symbol} " . number_format($veh['car_wash'], 2, '.', '') . "</span></p>";
+                    }
+            
+                    $html .= "<p><strong style='color:#444;'>Out of Working Hours:</strong> <span style='color:#28a745;'>{$cur_symbol} " . number_format($veh['not_working_hours_price'], 2, '.', '') . "</span></p>";
+                    $html .= "<p><strong style='color:#444;'>Last Minute Booking:</strong> <span style='color:#28a745;'>{$cur_symbol} " . number_format($veh['last_minutes_booking_values'], 2, '.', '') . "</span></p>";
+                    $html .= "<p><strong style='color:#444;'>Terminal Switch Charge:</strong> <span style='color:#28a745;'>{$cur_symbol} " . number_format($veh['terminal_extra_charges_value'], 2, '.', '') . "</span></p>";
+            
+                    if ($veh['offer_percentage'] !== "") {
+                        $html .= "<p><strong style='color:#444;'>Total Amount:</strong> <span style='color:#dc3545;'>{$cur_symbol} " . number_format($totalBookingPrice + $veh['offer_amount'], 2, '.', '') . "</span></p>";
+                        $html .= "<p style='color:green;'><strong>Promotional Discount ({$veh['offer_percentage']} %):</strong> {$cur_symbol} " . number_format($veh['offer_amount'], 2, '.', '') . "</p>";
+                    }
+                }
+            
+                $html .= "</div>";
             }
-            $linethrough = "text-decoration: line-through;";
-            if($prepared_session_data['terminal_parking_fee'] == 'P'){
-                $linethrough = "";
-            }
             
-
-            $html .= "<p><strong>Booking Type</strong>: " . $bk_type . '</p>';
-            $html .= "<p><strong>Airport</strong>: " . Domain::GetAirportNameById($prepared_session_data['airport1']) . '</p>';
-            $html .= "<p><strong>Departure terminal</strong>: " . Domain::GetTerminalNameById($prepared_session_data['terminal']) . '</p>';
-            $html .= "<p><strong>Arrival terminal</strong>: " . Domain::GetTerminalNameById($prepared_session_data['return_terminal']) . '</p>';
-            $html .= "<p><strong>Service</strong>: " . Domain::GetServiceNameById($prepared_session_data['service']) . '</p>';
+            //$html .= "<hr style='border-top: 2px solid #444;'>";
             
-            foreach($cart_data as $key => $veh){
-                $html .= "<hr>";
-                if(count($prepared_session_data['vehicles']) > 1){
-                    $html .= "<p><strong>Vechical ($key) </strong></p>";
-                    
-                }
-
-                if (trim($prepared_session_data['carwash_in_and_out']) != 0) {
-                    $carwash_title = 'ADD FULL CAR WASH (IN AND OUT) ';
-                } elseif (trim($prepared_session_data['carwash_out_only']) != 0) {
-                    $carwash_title = 'ADD CAR WASH (ONLY OUTSIDE) ';
-                } elseif (trim($prepared_session_data['carwash_in_only']) != 0) {
-                    $carwash_title = 'ADD CAR WASH (ONLY INSIDE) ';
-                } else if ((trim($prepared_session_data['carwash_in_and_out']) == 0) && (trim($prepared_session_data['carwash_out_only']) == 0 && (trim($prepared_session_data['carwash_in_only']) == 0))) {
-                    $carwash_title = 'Car Wash ';
-                }
-
-                
-                
-                $html .= "<p><strong>Departure date/time</strong>: " . $veh['bk_from_date'] . '</p>';
-                $html .= "<p><strong>Landing date/time</strong>: " . $veh['bk_to_date'] . '</p>';
-                $html .= "<p><strong>Booking interval</strong>: " . $veh['days'] . " Days</p>";
-                $html .= "<p><strong>Parking price</strong>: <span>" . $cur_symbol . " " . number_format($veh['gross_price'], 2, '.', '') . "</span></p>";
-                $html .= "<p><strong>Online payment fee (" . $veh['cal_online_fee'] . " %)</strong>: <span>" . $cur_symbol . " " . number_format($veh['online_fee_amount'], 2, '.', '') . " - <small>(NRA)</small></span></p>";
-                $html .= "<p><strong>Booking fee</strong>: <span>" . $cur_symbol . " " . number_format($veh['cal_booking_fee'], 2, '.', '') . " - <samll>(NRA)</samll></span></p>";
-                $html .= "<p><strong style='$linethrough'>Airport access fee</strong>: <span style='$linethrough'>" . $cur_symbol . " " . number_format($veh['cal_access_fee'], 2, '.', '') . " - <samll>(NRA)</samll></span></p>";
-                $html .= "<p><strong>VAT ( " . $veh['cal_vat'] . " %)</strong>: <span>" . $cur_symbol . " " . number_format($veh['vat_amount'], 2, '.', '') . "</span></p>";
-                if ($veh['car_wash'] > 0) {
-                    $html .= "<p><strong> $carwash_title </strong>: <span>" . $cur_symbol . " " . number_format($veh['car_wash'], 2, '.', '') . "</span></p>";
-                }
-                $html .= "<p><strong> OUT OF WORKING HOURS </strong>: <span>" . $cur_symbol . " " . number_format($veh['not_working_hours_price'], 2, '.', '') . "</span></p>";
-                $html .= "<p><strong> Last Minute Booking </strong>: <span>" . $cur_symbol . " " . number_format($veh['last_minutes_booking_values'], 2, '.', '') . "</span></p>";
-                $html .= "<p><strong> Terminal Switch Charge </strong>: <span>" . $cur_symbol . " " . number_format($veh['terminal_extra_charges_value'], 2, '.', '') . "</span></p>";
-                if ($veh['offer_percentage'] <> "") {
-                    $html .= "<p><strong>Total Amount</strong>: <span>" . $cur_symbol . " " . number_format($totalBookingPrice +  $veh['offer_amount'], 2, '.', '') . "</span></p>";
-                    $html .= "<p><span style='green !important'>Promotional discount offered (" . $veh['offer_percentage'] . " %): " . $cur_symbol . " " . number_format($veh['offer_amount'], 2, '.', '') . "</span></p>";
-                }
-                
-            }
+            $TOTAL_PAYABLE_AMOUNT = $totalBookingPrice;
             
-        }
-        
-        $html .= "<hr>";
-        $TOTAL_PAYABLE_AMOUNT = $totalBookingPrice;
-        $html .= "<br><p class='price small'>TOTAL PAYABLE AMOUNT: <span style='color: #da0909 !important;'>" . $cur_symbol . " " . number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '') . "</span></p>";
-        
-        return array(
-            'mini_cart'=> $cur_symbol . " " . number_format($totalBookingPrice, 2, '.', ''),
-            'cart'=> $html,
-        );
+            $html .= "<p class='price small' style='font-size:16px; font-weight:bold; color:#333;'>TOTAL PAYABLE AMOUNT: <span style='color: #da0909 !important;'>{$cur_symbol} " . number_format($TOTAL_PAYABLE_AMOUNT, 2, '.', '') . "</span></p>";
+            
+            return [
+                'mini_cart' => "{$cur_symbol} " . number_format($totalBookingPrice, 2, '.', ''),
+                'cart' => $html,
+            ];
+            
         //return $totalBookingPrice ;
     }
 

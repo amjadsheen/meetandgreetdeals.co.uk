@@ -36,8 +36,8 @@ class TerminalChargesController extends Controller
                     // Check if the combination already exists for the specific website
                     $exists = DB::table('terminal_charges')->where([
                         ['airport_id', '=', $departure->airport_id],
-                        ['departure_terminal', '=', $departure->ter_name],
-                        ['arrival_terminal', '=', $arrival->ter_name],
+                        ['departure_terminal', '=', $departure->id],
+                        ['arrival_terminal', '=', $arrival->id],
                         ['website_id', '=', $website->id], // Include website_id in the check
                     ])->exists();
 
@@ -48,8 +48,8 @@ class TerminalChargesController extends Controller
                         // Insert the combination with website_id
                         DB::table('terminal_charges')->insert([
                             'airport_id' => $departure->airport_id,
-                            'departure_terminal' => $departure->ter_name,
-                            'arrival_terminal' => $arrival->ter_name,
+                            'departure_terminal' => $departure->id,
+                            'arrival_terminal' => $arrival->id,
                             'extra_charges' => $extraCharges,
                             'website_id' => $website->id, // Insert website_id
                             'created_at' => now(),
@@ -69,8 +69,8 @@ class TerminalChargesController extends Controller
         SELECT 
             tc.id,
             a.airport_name,
-            t1.ter_name AS departure_terminal_name,
-            t2.ter_name AS arrival_terminal_name,
+            t1.id AS departure_terminal_name,
+            t2.id AS arrival_terminal_name,
             tc.extra_charges,
             w.id AS website_id,
             w.website_name

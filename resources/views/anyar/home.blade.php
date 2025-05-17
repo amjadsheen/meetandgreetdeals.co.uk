@@ -83,7 +83,7 @@
   padding: 20px;
   width: 410px;
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-  z-index: 10000000;
+  z-index: 1000;
 }
 
 .custom-popup-content {
@@ -455,6 +455,9 @@
   #step_1{
       margin-top: 35px;
     }
+    select.small{
+   
+}
   @media (max-width: 991px) {
     .price-box {
       margin-bottom: 20px;
@@ -467,7 +470,18 @@
     #bookingformmobile{
       margin-top: 70px;
     }
-
+    .input-group-text {
+    width: 250px;
+    text-align: right;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    padding: .375rem .75rem;
+    font-weight: 900;
+  }
+    .icon-boxes .icon-box { padding: 0;}
+    .mt-20{margin-top: 20px;}
+    .ml-20{margin-left: 24%;}
     .main-heading {
       font-size: 21px;
     }
@@ -515,101 +529,74 @@
                                 </div>
                             </div>
                         @endif
+                        <?php
+                          $date2 = '';
+                          $return_hour = '09';
+                          $return_minute = '';
+                          
+
+                          $date1 = '';
+                          $start_hour = '09';
+                          $start_minute = '';
+                          
+                      ?>       
                         <form method="GET" action="compare-booking" id="step_1">
                         @csrf
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                              <div class="col-llg-3 col-ssm-12">
+                                  <div class="input-group">
+                                  <label class="input-group-text" for="country">Select Country</label>
+                                  <select id="country" name="country" class="form-select validate[required]" required onchange="getairports()">
+                                        <option value="">Select  </option>
+                                        @if(!$countries->isEmpty())
+                                            @foreach($countries as $country)
+                                                @if($country->disable == 1)
+                                                    <option value="{{$country->id}}" disabled="disabled">{{$country->name}} (booking closed)</option>
+                                                @else
+                                                    <option value="{{$country->id}}">{{$country->name}}</option>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                  </div>
+                              </div>
+                              
+                            </div>
+                            <div class="col-md-12">
+                              
+                              <div class="col-llg-3 col-ssm-12">
+                                <div class="input-group">
+                                  <label class="input-group-text" for="airport1">Airport</label>
+                                    <select class="form-select validate[required]" id="airport1" name="airport1" onchange="getTerminals()">
+                                        <option value="" selected>Choose </option>
+                                        @foreach($airports as $s_airport)
+                                            <option value="{{$s_airport->id}}">{{$s_airport->airport_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
                               <div class="col-llg-3 col-ssm-12">
                                   <div class="input-group">
-                                  <label class="input-group-text" for="country">Select Country</label>
-                                  @isMobile
-                                    <select id="country" name="country" class="form-select validate[required]" required onchange="getairports()">
-                                          <option value="">Select Country</option>
-                                          @if(!$countries->isEmpty())
-                                              @foreach($countries as $country)
-                                                  @if($country->disable == 1)
-                                                      <option value="{{$country->id}}" disabled="disabled">{{$country->name}} (booking closed)</option>
-                                                  @else
-                                                      <option value="{{$country->id}}">{{$country->name}}</option>
-                                                  @endif
-                                              @endforeach
-                                          @endif
-                                      </select>
-                                  @else
-                                    <select id="country" name="country" class="form-select validate[required]" required onchange="getairports()">
-                                          <option value="">Select</option>
-                                          @if(!$countries->isEmpty())
-                                              @foreach($countries as $country)
-                                                  @if($country->disable == 1)
-                                                      <option value="{{$country->id}}" disabled="disabled">{{$country->name}} (booking closed)</option>
-                                                  @else
-                                                      <option value="{{$country->id}}">{{$country->name}}</option>
-                                                  @endif
-                                              @endforeach
-                                          @endif
-                                      </select>
-                                  @endisMobile
-                                     
-                                      
+                                      <label class="input-group-text" for="terminal">Departure Terminals & Hotels</label>
+                                      <select class="form-select validate[required]" id="terminal" name="terminal">
+                                          <option value="">Select </option>
+                                      </select>   
                                   </div>
-                              </div>
-
-                              <div class="col-llg-3 col-ssm-12">
-                              <div class="input-group">
-                              @isMobile
-                                <label class="input-group-text" for="airport1">Airport</label>
-                                  <select class="form-select validate[required]" id="airport1" name="airport1" onchange="getTerminals()">
-                                      <option value="" selected>Choose @isMobile Airport  @endisMobile</option>
-                                      @foreach($airports as $s_airport)
-                                          <option value="{{$s_airport->id}}">{{$s_airport->airport_name}}</option>
-                                      @endforeach
-                                  </select>
-                              @else
-                                  <label class="input-group-text" for="terminal">Departure Terminals & Hotels</label>
-                                  <select class="form-select validate[required]" id="terminal" name="terminal">
-                                      <option value="">Select  @isMobile Departure Terminals & Hotels  @endisMobile</option>
-                                  </select>
-                              @endisMobile
-                              </div>
-                                  
                               </div>
                             </div>
                             <div class="col-md-6">
                               <div class="col-llg-3 col-ssm-12">
                                   <div class="input-group">
-                                  @isMobile
-                                      <label class="input-group-text" for="terminal">Departure Terminals & Hotels</label>
-                                      <select class="form-select validate[required]" id="terminal" name="terminal">
-                                          <option value="">Select  @isMobile Departure Terminals & Hotels  @endisMobile</option>
-                                      </select>
-                                  @else
-
-                                      <label class="input-group-text" for="airport1">Airport</label>
-                                      <select class="form-select validate[required]" id="airport1" name="airport1" onchange="getTerminals()">
-                                          <option value="" selected>Choose @isMobile Airport  @endisMobile</option>
-                                          @foreach($airports as $s_airport)
-                                              <option value="{{$s_airport->id}}">{{$s_airport->airport_name}}</option>
-                                          @endforeach
-                                      </select>
-                                  @endisMobile
-                                      
-                                  </div>
-                              </div>
-
-                              <div class="col-llg-3 col-ssm-12">
-                                  <div class="input-group">
                                   
-                                  @isMobile
-                                      <label class="input-group-text" for="return_terminal">Return Terminals & Hotels</label>
+                                  <label class="input-group-text" for="return_terminal">Return Terminals & Hotels</label>
                                       <select class="form-select validate[required]" id="return_terminal" name="return_terminal" onchange="calculatePrice();">
-                                          <option value="">Select @isMobile Return Terminals & Hotels  @endisMobile</option>
+                                          <option value="">Select </option>
                                       </select>
-                                  @else
-                                    <label class="input-group-text" for="return_terminal">Return Terminals & Hotels</label>
-                                      <select class="form-select validate[required]" id="return_terminal" name="return_terminal" onchange="calculatePrice();">
-                                          <option value="">Select @isMobile Return Terminals & Hotels  @endisMobile</option>
-                                      </select>
-                                  @endisMobile
                                      
                                   </div>
                               </div>
@@ -617,97 +604,112 @@
                         </div>
 
                         <div class="row mb-3">
-                            <div class="col-md-6">
-                              <div class="col-llg-3 col-ssm-12">
-                                  <div class="input-group">
-                                  
-                                  @isMobile
-                                  <label class="input-group-text" for="service">Service</label>
-                                  <select class="form-select validate[required]" id="service" name="service" onchange="calculatePrice();">
-                                          <option value="">Select @isMobile Service  @endisMobile</option>
-                                          @foreach($services as $service)
-                                              @if($service->disable == 1)
-                                                  <option disabled="disabled" style="color: orangered" value="{{$service->id}}">{{$service->service_name}} (Not Available)</option>
-                                              @else
-                                                  <option value="{{$service->id}}">{{$service->service_name}}</option>
-                                              @endif
-                                          @endforeach
-                                  </select>
-                                  @else
-                                  
-                                  <label class="input-group-text" for="date1">Drop Off Date/Time</label>
-                                      <input class="datetime form-control validate[required] form_datetime" name="date1" id="date1" type="text" placeholder="Drop off date/time" value onchange="calculatePrice()" readonly>
-                                      <span class="add-on"><i class="icon-remove"></i></span>
-                                      <span class="add-on"><i class="icon-calendar"></i></span>
-                                  @endisMobile
-                                      
-                                      
-                                  </div>
-                              </div>
+                              <!-- Drop Off Section -->
+                              <div class="col-md-6">
+                                @isMobile 
+                                <label class="form-label">Parking From </i></label>
+                                <label class="form-label ml-20">Drop off Time  <i class="fa fa-clock-o"></i></label>
+                                @endisMobile
+                                <div class="row row-cols-3 g-2">
+                                    
+                                  <!-- Date -->
+                                  <div class="col" style="@isMobile  width: 50%; @endisMobile">
+                                  @notMobile 
+                                    <label class="form-label">Parking From </i></label>
+                                    @endnotMobile
+                                    <div class="position-relative">
 
-                              <div class="col-llg-3 col-ssm-12">
-                                  <div class="input-group">
-                                  @isMobile
-                                      <label class="input-group-text" for="date1">Drop Off Date/Time</label>
-                                      <input class="datetime form-control validate[required] form_datetime" name="date1" id="date1" type="text" placeholder="Drop off date/time" value onchange="calculatePrice()" readonly>
-                                      <span class="add-on"><i class="icon-remove"></i></span>
-                                      <span class="add-on"><i class="icon-calendar"></i></span>
-                                  @else
-                                  <label class="input-group-text" for="service">Service</label>
-                                  <select class="form-select validate[required]" id="service" name="service" onchange="calculatePrice();">
-                                          <option value="">Select @isMobile Service  @endisMobile</option>
-                                          @foreach($services as $service)
-                                              @if($service->disable == 1)
-                                                  <option disabled="disabled" style="color: orangered" value="{{$service->id}}">{{$service->service_name}} (Not Available)</option>
-                                              @else
-                                                  <option value="{{$service->id}}">{{$service->service_name}}</option>
-                                              @endif
-                                          @endforeach
-                                  </select>
-                                  @endisMobile
-                                      
+                                    <input class="form-control form_datetime validate[required] " name="date1" id="date1" type="text"
+                                        placeholder="Parking From"
+                                        value="<?php echo $date1; ?>"
+                                        onchange="calculatePrice()" readonly>
+
+                                    <i class="fa fa-calendar position-absolute" style="right: 5px; top: 50%; transform: translateY(-50%); pointer-events: none;"></i>
+                                </div>
                                   </div>
-                              </div>
+                                  <!-- Hour -->
+                                  <div class="col" style="@isMobile  width: 25%; @endisMobile">
+                                    @notMobile 
+                                    <label class="form-label">Drop off Time  <i class="fa fa-clock-o"></i></label>
+                                    @endnotMobile
+                                    
+                                    <select name="start_hour" id="start_hour" class="form-select small" onchange="calculatePrice();" style="@isMobile width: 70px; @endisMobile">
+                                      @for ($i = 0; $i < 24; $i++)
+                                          <option value="{{ sprintf('%02d', $i) }}"
+                                              {{ ($start_hour === sprintf('%02d', $i)) ? 'selected' : '' }}>
+                                              {{ sprintf('%02d', $i) }}
+                                          </option>
+                                      @endfor
+                                  </select>
+                                  </div>
+                                  <!-- Minute -->
+                                  <div class="col" style="@isMobile  width: 25%; @endisMobile">
+                                    @notMobile 
+                                    <label class="form-label">&nbsp;</label>
+                                    @endnotMobile
+                                    <select name="start_minute" id="start_minute" class="form-select small" onchange="calculatePrice();" style="@isMobile width: 70px; @endisMobile">
+                                      @for ($min = 0; $min < 60; $min += 5)
+                                          <option value="{{ sprintf('%02d', $min) }}"
+                                              {{ ($start_minute === sprintf('%02d', $min)) ? 'selected' : '' }}>
+                                              {{ sprintf('%02d', $min) }}
+                                          </option>
+                                      @endfor
+                                  </select>
+                                  </div>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                              <div class="col-llg-3 col-ssm-12">
-                                  <div class="input-group">
-                                  @isMobile
-                                      <label class="input-group-text" for="date2">Pick-Up Date/Time</label>
-                                      <input class="datetime form-control validate[required] form_datetime" name="date2" id="date2" type="text" placeholder="Pick-Up date/time" value onchange="calculatePrice()" readonly>
-                                      <span class="add-on"><i class="icon-remove"></i></span>
-                                      <span class="add-on"><i class="icon-calendar"></i></span>
-                                  @else
-                                  <label class="input-group-text" for="date2">Pick-Up Date/Time</label>
-                                      <input class="datetime form-control validate[required] form_datetime" name="date2" id="date2" type="text" placeholder="Pick-Up date/time" value onchange="calculatePrice()" readonly>
-                                      <span class="add-on"><i class="icon-remove"></i></span>
-                                      <span class="add-on"><i class="icon-calendar"></i></span>
-                                  @endisMobile
-                                     
-                                  </div>
-                              </div>
+                            <!-- Return Section -->
+                            <div class="col-md-6 mt-20">
+                              @isMobile 
+                              <label class="form-label" label-for="date2">Return Date </label>
+                              <label class="form-label ml-20">Return Time <i class="fa fa-clock-o"></i></label>
+                              @endisMobile
+                              <div class="row row-cols-3 g-2">
+                                <!-- Date -->
+                                <div class="col" style="position: relative; @isMobile  width: 50%; @endisMobile">
+                                @notMobile 
+                                <label class="form-label">Return Date</i></label>
+                                @endnotMobile
+                                
+                                <div class="position-relative">
+                                  <input class="form-control form_datetime validate[required] " name="date2" id="date2" type="text"
+                                      placeholder="Return Date"
+                                      value="<?php echo $date2; ?>"
+                                      onchange="calculatePrice()" readonly>
 
-                              <div class="col-llg-3 col-ssm-12" style="display:none">
-                                  <div class="input-group">
-                                  @isMobile
-                                      <label class="input-group-text" for="vehical_num">Vehicle</label>
-                                      <select id="vehical_num" name="vehical_num" class="form-select validate[required]">
-                                          <!-- <option value="">Select @isMobile Vehicle  @endisMobile </option> -->
-                                          @foreach($vehical_selction as $key=>$tso)
-                                              <option value="{{$key}}">{{$tso}}</option>
-                                          @endforeach
-                                      </select>
-                                  @else
-                                  <label class="input-group-text" for="vehical_num">Vehicle</label>
-                                      <select id="vehical_num" name="vehical_num" class="form-select validate[required]">
-                                          <!-- <option value="">Select @isMobile Vehicle  @endisMobile </option> -->
-                                          @foreach($vehical_selction as $key=>$tso)
-                                              <option value="{{$key}}">{{$tso}}</option>
-                                          @endforeach
-                                      </select>
-                                  @endisMobile
-                                      
-                                  </div>
+                                  <i class="fa fa-calendar position-absolute" style="right: 5px; top: 50%; transform: translateY(-50%); pointer-events: none;"></i>
+                                </div>
+
+                                
+                                </div>
+                                <!-- Hour -->
+                                <div class="col" style="@isMobile  width: 25%; @endisMobile">
+                                  @notMobile 
+                                  <label class="form-label">Return Time <i class="fa fa-clock-o"></i></label>
+                                  @endnotMobile
+                                  <select name="return_hour" id="return_hour" class="form-select small" onchange="calculatePrice();" style="@isMobile width: 70px; @endisMobile">
+                                    @for ($i = 0; $i < 24; $i++)
+                                        <option value="{{ sprintf('%02d', $i) }}"
+                                            {{ ($return_hour === sprintf('%02d', $i)) ? 'selected' : '' }}>
+                                            {{ sprintf('%02d', $i) }}
+                                        </option>
+                                    @endfor
+                                </select>
+                                </div>
+                                <!-- Minute -->
+                                <div class="col" style="@isMobile  width: 25%; @endisMobile">
+                                  @notMobile 
+                                  <label class="form-label">&nbsp;</label>
+                                  @endnotMobile
+                                  <select name="return_minute" id="return_minute" class="form-select small" onchange="calculatePrice();" style="@isMobile width: 70px; @endisMobile">
+                                    @for ($min = 0; $min < 60; $min += 5)
+                                        <option value="{{ sprintf('%02d', $min) }}"
+                                            {{ ($return_minute === sprintf('%02d', $min)) ? 'selected' : '' }}>
+                                            {{ sprintf('%02d', $min) }}
+                                        </option>
+                                    @endfor
+                                </select>
+                                </div>
                               </div>
                             </div>
                         </div>
@@ -716,6 +718,12 @@
                             @foreach($currencies as $currency)
                                 <input name="currency1" id="currency1" type="hidden" value="{{$currency->id}}">
                             @endforeach
+                            <select id="vehical_num" name="vehical_num" class="form-select validate[required]">
+                                          <!-- <option value="">Select @isMobile Vehicle  @endisMobile </option> -->
+                                          @foreach($vehical_selction as $key=>$tso)
+                                              <option value="{{$key}}">{{$tso}}</option>
+                                          @endforeach
+                                      </select>
                             <input style="border: transparent; background-color: #fff;" class="datetime" id="discount_coupon" name="discount_coupon" type="hidden" value="" readonly>
                             <input type="hidden" id="terminal_parking_fee" name="terminal_parking_fee" value="N">
                             <input type="hidden" id="website_id" name="website_id" value="0">
@@ -727,6 +735,29 @@
                         </div>
 
                         <div class="row mb-3">
+                        <div class="col-md-6">
+                              <div class="col-llg-3 col-ssm-12">
+                                  <div class="input-group">
+                                  
+                                    
+                                    <label class="input-group-text" for="service">Service</label>
+                                    <select class="form-select validate[required]" id="service" name="service" onchange="calculatePrice();">
+                                            <option value="">Select </option>
+                                            @foreach($services as $service)
+                                                @if($service->disable == 1)
+                                                    <option disabled="disabled" style="color: orangered" value="{{$service->id}}">{{$service->service_name}} (Not Available)</option>
+                                                @else
+                                                    <option value="{{$service->id}}">{{$service->service_name}}</option>
+                                                @endif
+                                            @endforeach
+                                    </select>
+                                    
+                                  
+                                      
+                                      
+                                  </div>
+                              </div>
+                            </div>
                         <?php
                         $hide_promo_box_homepage = 1; // Default value
                         if (isset($settings['promo_box_homepage'])) {
@@ -734,12 +765,13 @@
                         }
                         ?>
                         @if(!$hide_promo_box_homepage)
-                    
+                        <div class="col-md-6">
                         <div class="col-llg-3 col-ssm-12">
                           <div class="input-group">
                             <label class="input-group-text" for="discount_coupon">Promo Code</label>
                             <input type="text" class="input-text form-control" size="20" name="discount_coupon" placeholder="Enter Promo Code" id="discount_coupon" >
                           </div> 
+                        </div>
                         </div>
                         @endif
                             <div class="col-lg-12 col-sm-12">
@@ -755,10 +787,6 @@
                     </div>
                 </div>
             
-              <!----------------------- NEW BOOKING ----------------->
-              
-
-<!----------------------- /NEW BOOKING ----------------->
 
   </div>
   </div>

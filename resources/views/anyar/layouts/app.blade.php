@@ -32,7 +32,9 @@
   <link href="{{ asset('cardo/assets/css/font-awesome.css')}}" rel="stylesheet">
   <!-- Template Main CSS File -->
   <link href="{{ asset('anyar/assets/css/style.css')}}?{{time()}}" rel="stylesheet">
-  <link href="{{ asset('cardo/assets/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css')}}" rel="stylesheet">
+  <!-- <link href="{{ asset('cardo/assets/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css')}}" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pickadate/lib/themes/default.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pickadate/lib/themes/default.date.css">
   <link href="{{ asset('cardo/assets/validation/css/validationEngine.jquery.css')}}" rel="stylesheet">
     <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -75,7 +77,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       font-size: calc(0.9rem + .6vw) !important;
     }
     #bookingformmobile label.input-group-text {
-      display: none;
+      /* display: none; */
     }
 
     #hero {
@@ -112,6 +114,10 @@ label.input-group-text {
     width: 100%;
     border-radius: 0;
 }
+.picker__holder, .picker__frame {
+      bottom: 171px;
+      z-index: 1000000;
+    }
 @endisMobile
 </style>
 
@@ -345,7 +351,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!--=== Jquery Migrate Min Js ===-->
   <script src="{{ asset('cardo/assets/js/jquery-migrate.min.js')}}"></script>
   <script src="{{ asset('cardo/assets/js/plugins/gijgo.js')}}"></script>
-  <script src="{{ asset('cardo/assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
+  <!-- <script src="{{ asset('cardo/assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js')}}"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/pickadate/lib/picker.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pickadate/lib/picker.date.js"></script>
   <script src="{{ asset('cardo/assets/validation/js/languages/jquery.validationEngine-en.js')}}"></script>
   <script src="{{ asset('cardo/assets/validation/js/jquery.validationEngine.min.js')}}"></script>
   <script src="{{ asset('cardo/assets/js/validate.js')}}"></script>

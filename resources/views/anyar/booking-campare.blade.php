@@ -55,7 +55,7 @@
   padding: 20px;
   width: 410px;
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-  z-index: 10000000;
+  z-index: 1000;
 }
 
 .custom-popup-content {
@@ -430,7 +430,18 @@
     #bookingformmobile{
       margin-top: 70px;
     }
-
+    .input-group-text {
+    width: 250px;
+    text-align: right;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    padding: .375rem .75rem;
+    font-weight: 900;
+  }
+    .icon-boxes .icon-box { padding: 10px;}
+    .mt-20{margin-top: 20px;}
+    .ml-20{margin-left: 24%;}
     .main-heading {
       font-size: 21px;
     }
@@ -517,7 +528,7 @@ a.btn.btn-success.book-btn {
                     <div class="input-group mb-3">
                       <label class="input-group-text" for="airport1">Airport</label>
                       <select class="form-select validate[required]" id="airport1" name="airport1" onchange="getTerminals()">
-                        <option value="" selected>Choose @isMobile Airport  @endisMobile</option>
+                        <option value="" selected>Select</option>
                         @foreach($airports as $s_airport)
                         <option {{($requset_data['airport1'] == $s_airport->id) ? 'selected':'' }} value="{{$s_airport->id}}">{{$s_airport->airport_name}}</option>
                         @endforeach
@@ -529,7 +540,7 @@ a.btn.btn-success.book-btn {
                     <div class="input-group mb-3">
                       <label class="input-group-text" for="terminal">Departure Terminals & Hotels</label>
                       <select class="form-select validate[required]" id="terminal" name="terminal">
-                        <option value=""> Select @isMobile Departure Terminals & Hotels  @endisMobile</option>
+                        <option value=""> Select</option>
                         @foreach($selected_terminals as
                         $selected_terminal)
                         @if($selected_terminal->ter_disable
@@ -551,8 +562,8 @@ a.btn.btn-success.book-btn {
                   <div class="col-lg-3 sm-12">
                     <div class="input-group mb-3">
                       <label class="input-group-text" for="return_terminal">Return Terminals & Hotels</label>
-                      <select class="form-select validate[required]" id="return_terminal" name="return_terminal" onchange="calculatePrice();">
-                        <option value=""> Select @isMobile Return Terminals & Hotels  @endisMobile</option>
+                      <select class="form-select validate[required]" id="return_terminal" name="return_terminal" >
+                        <option value=""> Select</option>
                         @foreach($selected_terminals as $selected_terminal)
                         @if($selected_terminal->ter_disable
                         == 1)
@@ -569,14 +580,135 @@ a.btn.btn-success.book-btn {
                       </select>
                     </div>
                   </div>
-
                 </div>
 
+                <?php
+                    // Initialize defaults
+                    $date1 = $requset_data['date1'] ?? ''; // e.g., "18/04/2025 - 01:05"
+                    $return_hour = $requset_data['return_hour'] ?? '09';
+                    $return_minute = $requset_data['return_minute'] ?? '';
+
+                    $date2 = $requset_data['date2'] ?? ''; // e.g., "18/04/2025 - 01:05"
+                    $start_hour = $requset_data['start_hour'] ?? '09';
+                    $start_minute = $requset_data['start_minute'] ?? '';
+                ?>
+
+
+                  <div class="row mb-3">
+                      <!-- Drop Off Section -->
+                      <div class="col-md-6">
+                        @isMobile 
+                        <label class="form-label">Parking From </i></label>
+                        <label class="form-label ml-20">Drop off Time  <i class="fa fa-clock-o"></i></label>
+                        @endisMobile
+                        <div class="row row-cols-3 g-2">
+                            
+                          <!-- Date -->
+                          <div class="col" style="@isMobile  width: 50%; @endisMobile">
+                          @notMobile 
+                            <label class="form-label">Parking From </i></label>
+                            @endnotMobile
+                            <div class="position-relative">
+
+                            <input class="form-control form_datetime validate[required] " name="date1" id="date1" type="text"
+                                placeholder="Parking From"
+                                value="<?php echo $date1; ?>"
+                                 readonly>
+
+                            <i class="fa fa-calendar position-absolute" style="right: 5px; top: 50%; transform: translateY(-50%); pointer-events: none;"></i>
+                        </div>
+                          </div>
+                          <!-- Hour -->
+                          <div class="col" style="@isMobile  width: 25%; @endisMobile">
+                            @notMobile 
+                            <label class="form-label">Drop off Time  <i class="fa fa-clock-o"></i></label>
+                            @endnotMobile
+                            
+                            <select name="start_hour" id="start_hour" class="form-select small"  style="@isMobile width: 70px; @endisMobile">
+                              @for ($i = 0; $i < 24; $i++)
+                                  <option value="{{ sprintf('%02d', $i) }}"
+                                      {{ ($start_hour === sprintf('%02d', $i)) ? 'selected' : '' }}>
+                                      {{ sprintf('%02d', $i) }}
+                                  </option>
+                              @endfor
+                          </select>
+                          </div>
+                          <!-- Minute -->
+                          <div class="col" style="@isMobile  width: 25%; @endisMobile">
+                            @notMobile 
+                            <label class="form-label">&nbsp;</label>
+                            @endnotMobile
+                            <select name="start_minute" id="start_minute" class="form-select small"  style="@isMobile width: 70px; @endisMobile">
+                              @for ($min = 0; $min < 60; $min += 5)
+                                  <option value="{{ sprintf('%02d', $min) }}"
+                                      {{ ($start_minute === sprintf('%02d', $min)) ? 'selected' : '' }}>
+                                      {{ sprintf('%02d', $min) }}
+                                  </option>
+                              @endfor
+                          </select>
+                          </div>
+                        </div>
+                    </div>
+                    <!-- Return Section -->
+                    <div class="col-md-6 mt-20">
+                      @isMobile 
+                      <label class="form-label" label-for="date2">Return Date </label>
+                      <label class="form-label ml-20">Return Time <i class="fa fa-clock-o"></i></label>
+                      @endisMobile
+                      <div class="row row-cols-3 g-2">
+                        <!-- Date -->
+                        <div class="col" style="position: relative; @isMobile  width: 50%; @endisMobile">
+                        @notMobile 
+                        <label class="form-label">Return Date</i></label>
+                        @endnotMobile
+                        
+                        <div class="position-relative">
+                          <input class="form-control form_datetime validate[required] " name="date2" id="date2" type="text"
+                              placeholder="Return Date"
+                              value="<?php echo $date2; ?>"
+                              readonly>
+
+                          <i class="fa fa-calendar position-absolute" style="right: 5px; top: 50%; transform: translateY(-50%); pointer-events: none;"></i>
+                        </div>
+
+                        
+                        </div>
+                        <!-- Hour -->
+                        <div class="col" style="@isMobile  width: 25%; @endisMobile">
+                          @notMobile 
+                          <label class="form-label">Return Time <i class="fa fa-clock-o"></i></label>
+                          @endnotMobile
+                          <select name="return_hour" id="return_hour" class="form-select small"  style="@isMobile width: 70px; @endisMobile">
+                            @for ($i = 0; $i < 24; $i++)
+                                <option value="{{ sprintf('%02d', $i) }}"
+                                    {{ ($return_hour === sprintf('%02d', $i)) ? 'selected' : '' }}>
+                                    {{ sprintf('%02d', $i) }}
+                                </option>
+                            @endfor
+                        </select>
+                        </div>
+                        <!-- Minute -->
+                        <div class="col" style="@isMobile  width: 25%; @endisMobile">
+                          @notMobile 
+                          <label class="form-label">&nbsp;</label>
+                          @endnotMobile
+                          <select name="return_minute" id="return_minute" class="form-select small"  style="@isMobile width: 70px; @endisMobile">
+                            @for ($min = 0; $min < 60; $min += 5)
+                                <option value="{{ sprintf('%02d', $min) }}"
+                                    {{ ($return_minute === sprintf('%02d', $min)) ? 'selected' : '' }}>
+                                    {{ sprintf('%02d', $min) }}
+                                </option>
+                            @endfor
+                        </select>
+                        </div>
+                      </div>
+                    </div>
+                </div>
                 <div class="row">
                   <div class="col-lg-4 sm-12 ">
                     <div class="input-group mb-3">
                       <label class="input-group-text" for="service">Service</label>
-                      <select class="form-select validate[required]" id="service" name="service" onchange="calculatePrice();">
+                      <select class="form-select validate[required]" id="service" name="service" >
                         <option value> Select Service </option>
                         @foreach($services as $service)
                           @if($service->disable == 1)
@@ -593,24 +725,9 @@ a.btn.btn-success.book-btn {
                       </select>
                     </div>
                   </div>
-                  <div class="col-lg-4 sm-12">
-                    <div class="input-group mb-3">
-                      <label class="input-group-text" for="date1">Drop Off Date/Time</label>
-                      <input class="datetime form-control validate[required] form_datetime" name="date1" id="date1" type="text" placeholder="Drop off date/time" value="{{$requset_data['date1']}}" onchange="calculatePrice()" readonly>
-                      <span class="add-on"><i class="icon-remove"></i></span>
-                      <span class="add-on"><i class="icon-calendar"></i></span>
-                    </div>
-                  </div>
-                  <div class="col-lg-4 sm-12">
-                    <div class="input-group mb-3">
-                      <label class="input-group-text" for="date2">Arrival Date/Time</label>
-                      <input class="datetime form-control validate[required] form_datetime" name="date2" id="date2" type="text" placeholder="Arrival date/time" value="{{$requset_data['date2']}}" onchange="calculatePrice()" readonly>
-                      <span class="add-on"><i class="icon-remove"></i></span>
-                      <span class="add-on"><i class="icon-calendar"></i></span>
-                    </div>
-                  </div>
                 </div>
-               <div class="row">
+
+                <div class="row">
                   @foreach($currencies as $currency)
                           <input name="currency1" id="currency1" type="hidden" value="{{$requset_data['currency1']}}">
                     @endforeach
@@ -629,6 +746,8 @@ a.btn.btn-success.book-btn {
                         </select>
                       </div>
                   </div>
+
+
                   <div class="col-lg-4 sm-12">
                     <div id="displayprice" style=" text-align:center;  color: red;">{!! $Err !!} </div>
                     <div id="submit-errors" style=" color: red;">
@@ -638,7 +757,7 @@ a.btn.btn-success.book-btn {
                   <div class="col-lg-4 sm-12">
                     <button id="submitfrom" style="width: 100%;" class="btn btn-block btn-success" type="submit">Update Search</button>
                   </div>
-                </div>
+              </div>
               </form>
               <!----------------------- /NEW BOOKING ----------------->
             <!-- ======= Services Section ======= -->
@@ -658,18 +777,7 @@ a.btn.btn-success.book-btn {
     </div>
     <div class="row" id="ajaxservicehd">
 
-      <!-- @foreach($services_terminals_prices as $service)
-      <div class="col-md-3 d-flex align-items-stretch mt-4 mt-md-0">
-          <div class="icon-box" style="background: {{ $service['bg_color'] }};">
-              <h4>{{ $service['website_name'] }} 
-                <span style="font-size: 30px; margin-left: 4px;">{{ $service['terminal_name'] }} -- {{ $service['service_name'] }}</span>
-              </h4>
-              <a style="cursor:pointer;" onclick="updatedservice({{ $service['terminal_id'] }}, {{ $service['website_id'] }});" class="plan-btn">
-                  <span style="color:#fff; font-size:15px;">Select {{ $service['cur_symbol'] }} {{ $service['net_price'] }}</span>
-              </a>
-          </div>
-      </div>
-    @endforeach -->
+      
 
     @foreach($services_terminals_prices as $service)
             <div class="col-md-4 mb-4">

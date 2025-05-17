@@ -503,6 +503,16 @@ function calculatePrice() {
     var terminal = document.getElementById("terminal").value;
     var date1 = document.getElementById("date1").value;
     var date2 = document.getElementById("date2").value;
+
+    var start_hour = document.getElementById("start_hour").value;
+    var start_minute = document.getElementById("start_minute").value;
+
+    var return_hour = document.getElementById("return_hour").value;
+    var return_minute = document.getElementById("return_minute").value;
+
+    date1 = date1 + " - " + start_hour + ":" + start_minute;
+    date2 = date2 + " - " + return_hour + ":" + return_minute;
+
     var discount_coupon = document.getElementById("discount_coupon").value;
     //var vip = $('input[name="vip"]:checked').val();
     var currency1 = document.getElementById("currency1").value;
