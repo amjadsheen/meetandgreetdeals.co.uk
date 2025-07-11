@@ -236,18 +236,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!------------- /page content start end --------------->
   </main>
   <!-- End #main -->
-  <div class="container d-flex align-items-center align-items-start" id="footer-container" style="padding-bottom: 10px;">
-      <div class="row row-cols-lg-12" style="padding-top: 15px;">
-        <div class="col-md-6 col-sm-12 col-12">
-          <img style="" src="{{ asset('anyar/assets/img/gb/13.png')}}" alt="" class="img-fluid">
-          
-        </div>
-        <div class="col-md-6 col-sm-12 col-12">
-
-          <img style="" src="{{ asset('anyar/assets/img/gb/new-cards.png')}}" alt="" class="img-fluid">
-        </div>
-      </div>
+ <div class="container" id="footer-container" style="padding-bottom: 10px;">
+  <div class="row w-100" style="padding-top: 15px;">
+    <div class="col-12 d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3">
+      <img src="{{ asset('anyar/assets/img/gb/13.png') }}" alt="" class="img-fluid" style="max-height: 60px;">
+      <img src="{{ asset('anyar/assets/img/gb/new-cards.png') }}" alt="" class="img-fluid" style="max-height: 60px;">
+    </div>
   </div>
+</div>
+
   <!-- ======= Footer ======= -->
   <footer id="footer">
     <!-- <div class="container d-flex align-items-center align-items-start" id="footer-container" style="padding-bottom: 10px;">
